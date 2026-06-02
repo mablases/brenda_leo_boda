@@ -56,22 +56,51 @@ document.addEventListener('DOMContentLoaded', () => {
 
     window.addEventListener('scroll', revealOnScroll);
 
-    // 5. MANEJO DEL FORMULARIO RSVP
-    const form = document.getElementById('wedding-form');
-    form.addEventListener('submit', (e) => {
-        e.preventDefault();
-        
-        const name = document.getElementById('name').value;
-        const status = document.getElementById('attendance').value;
-        
-        if (status === 'si') {
-            alert(`¡Gracias ${name}! Brenda y Leo te esperan con mucha alegría.`);
-        } else {
-            alert(`Gracias por avisarnos ${name}. Te extrañaremos en la celebración.`);
-        }
-        
-        form.reset();
-    });
+// 5. MANEJO DEL FORMULARIO RSVP + SUPABASE
+
+const supabaseUrl = "https://wqzavjzfoxzjrijccteh.supabase.co";
+const supabaseKey = "sb_publishable_fTYkp41FOfaaVFRI1dSZRQ_dXjPstB7";
+
+const supabaseClient = supabase.createClient(
+    supabaseUrl,
+    supabaseKey
+);
+
+const form = document.getElementById('rsvp-form');
+
+form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const nombre = document.getElementById('name').value;
+    const asistencia = document.getElementById('attendance').value;
+    const acompanantes = parseInt(document.getElementById('guests').value) || 0;
+    const mensaje = document.getElementById('message').value;
+
+    const { error } = await supabaseClient
+        .from('invitados')
+        .insert([
+            {
+                nombre,
+                asistencia,
+                acompanantes,
+                mensaje
+            }
+        ]);
+
+    if (error) {
+        console.error(error);
+        alert('Error al guardar la confirmación');
+        return;
+    }
+
+    if (asistencia === 'si') {
+        alert(`¡Gracias ${nombre}! Brenda y Leo te esperan con mucha alegría.`);
+    } else {
+        alert(`Gracias por avisarnos ${nombre}. Te extrañaremos en la celebración.`);
+    }
+
+    form.reset();
+});
 
     // 6. SCROLL SUAVE
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
