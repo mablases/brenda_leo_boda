@@ -1,0 +1,163 @@
+code
+Html
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brenda & Leo | Nuestra Boda</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Fuentes Premium -->
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- 1. PANTALLA DE BIENVENIDA -->
+    <div id="welcome-screen" class="overlay">
+        <div class="overlay-content">
+            <h4 class="fade-in-up">NUESTRA BODA</h4>
+            <h1 class="fade-in-up">Brenda & Leo</h1>
+            <div class="gold-line fade-in-up"></div>
+            <p class="fade-in-up date-placeholder">PRÓXIMAMENTE</p>
+            <button id="open-invitation" class="btn-gold fade-in-up">ABRIR INVITACIÓN</button>
+        </div>
+    </div>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main id="main-content" class="hidden">
+        
+        <!-- HEADER / PORTADA -->
+        <header class="hero-section reveal">
+            <div class="hero-image">
+                <div class="hero-text">
+                    <span class="save-the-date">Save the Date</span>
+                    <h2>Brenda & Leo</h2>
+                    <p class="hero-quote">"Por siempre y para siempre"</p>
+                </div>
+            </div>
+        </header>
+
+        <!-- 2. CUENTA REGRESIVA -->
+        <section class="section reveal">
+            <h3 class="section-title">Faltan Solo</h3>
+            <div id="countdown" class="countdown-grid">
+                <div class="time-unit">
+                    <span id="days">00</span>
+                    <small>Días</small>
+                </div>
+                <div class="time-unit">
+                    <span id="hours">00</span>
+                    <small>Hrs</small>
+                </div>
+                <div class="time-unit">
+                    <span id="minutes">00</span>
+                    <small>Min</small>
+                </div>
+                <div class="time-unit">
+                    <span id="seconds">00</span>
+                    <small>Seg</small>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. MENSAJE DE BIENVENIDA -->
+        <section class="section reveal beige-bg">
+            <div class="container small-container">
+                <h3 class="section-title">Bienvenidos</h3>
+                <p class="welcome-msg">Queremos compartir con ustedes el inicio de nuestra nueva aventura. Su presencia es el mejor regalo que podríamos recibir.</p>
+            </div>
+        </section>
+
+        <!-- 4. HISTORIA -->
+        <section class="section reveal">
+            <div class="container">
+                <h3 class="section-title">Nuestra Historia</h3>
+                <div class="story-layout">
+                    <p class="romantic-text">Todo comenzó como un sueño y hoy Brenda y Leo deciden hacerlo realidad. Acompañanos a celebrar un amor que no conoce límites.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. GALERÍA -->
+        <section class="section reveal">
+            <h3 class="section-title">Nuestra Galería</h3>
+            <div class="gallery-container">
+                <div class="gallery-item"><img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=800" alt="Boda 1"></div>
+                <div class="gallery-item"><img src="https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=800" alt="Boda 2"></div>
+                <div class="gallery-item"><img src="https://images.unsplash.com/photo-1519225495810-7517312ece51?q=80&w=800" alt="Boda 3"></div>
+            </div>
+        </section>
+
+        <!-- 6 & 7. CEREMONIA Y RECEPCIÓN -->
+        <section class="section reveal beige-bg">
+            <div class="container info-grid">
+                <div class="info-card">
+                    <h4 class="card-title">Ceremonia</h4>
+                    <p>[NOMBRE DEL LUGAR]</p>
+                    <p>[HORA] HRS</p>
+                    <p>[DIRECCIÓN COMPLETA]</p>
+                </div>
+                <div class="info-card">
+                    <h4 class="card-title">Recepción</h4>
+                    <p>[NOMBRE DEL LUGAR]</p>
+                    <p>[HORA] HRS</p>
+                    <p>[DIRECCIÓN COMPLETA]</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 8. DRESS CODE -->
+        <section class="section reveal">
+            <div class="container">
+                <h3 class="section-title">Código de Vestimenta</h3>
+                <p class="dress-style">ETIQUETA RIGUROSA</p>
+                <p>Caballeros: Traje oscuro / Smoking</p>
+                <p>Damas: Vestido largo</p>
+            </div>
+        </section>
+
+        <!-- 9. UBICACIÓN -->
+        <section class="section reveal no-padding">
+            <h3 class="section-title">Ubicación</h3>
+            <div class="map-wrapper">
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15050.470535384!2d-99.1718!3d19.4326!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTnCsDI1JzU3LjQiTiA5OcKwMTAnMTguNSJX!5e0!3m2!1ses!2smx!4v1620000000000" 
+                    width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy">
+                </iframe>
+            </div>
+        </section>
+
+        <!-- 10. RSVP -->
+        <section class="section reveal beige-bg" id="rsvp">
+            <div class="container rsvp-box">
+                <h3 class="section-title">Confirmar Asistencia</h3>
+                <form id="rsvp-form" class="elegant-form">
+                    <input type="text" id="name" placeholder="Tu Nombre Completo" required>
+                    
+                    <select id="attendance" required>
+                        <option value="">¿Asistirás?</option>
+                        <option value="si">Sí, con mucho gusto</option>
+                        <option value="no">Lamentablemente no puedo</option>
+                    </select>
+
+                    <input type="number" id="guests" placeholder="Número de acompañantes" min="0" max="10">
+
+                    <textarea id="message" placeholder="Mensaje para Brenda y Leo" rows="4"></textarea>
+
+                    <button type="submit" class="btn-dark">ENVIAR CONFIRMACIÓN</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- 11. MENSAJE FINAL -->
+        <footer class="section reveal final-message">
+            <h2 class="playfair">¡Te esperamos!</h2>
+            <p class="names-footer">Brenda & Leo</p>
+            <p class="hashtag">#BodaBrendaYLeo</p>
+        </footer>
+
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
