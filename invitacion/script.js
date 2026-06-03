@@ -1,114 +1,286 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    // 1. CONFIGURACIÓN DE LA FECHA (Brenda & Leo)
-    // Cambia esta fecha por la real del evento
-    const weddingDate = new Date('November 15, 2025 18:00:00').getTime();
+```
+/* ==========================
+   CONFIGURACIÓN FECHA BODA
+========================== */
 
-    // 2. ABRIR INVITACIÓN
-    const openBtn = document.getElementById('open-invitation');
-    const welcomeScreen = document.getElementById('welcome-screen');
-    const mainContent = document.getElementById('main-content');
+const weddingDate = new Date('November 15, 2026 18:00:00').getTime();
+
+/* ==========================
+   ABRIR INVITACIÓN
+========================== */
+
+const openBtn = document.getElementById('open-invitation');
+const welcomeScreen = document.getElementById('welcome-screen');
+const mainContent = document.getElementById('main-content');
+
+const bgMusic = document.getElementById('bg-music');
+const musicBtn = document.getElementById('music-btn');
+
+if(openBtn){
 
     openBtn.addEventListener('click', () => {
+
         welcomeScreen.style.transform = 'translateY(-100%)';
-        
-        // Esperamos a que la cortina suba para mostrar el contenido
+
         setTimeout(() => {
+
             mainContent.classList.remove('hidden');
-            revealOnScroll(); // Disparar primera animación
-        }, 600);
-    });
 
-    // 3. CUENTA REGRESIVA
-    const timer = setInterval(() => {
-        const now = new Date().getTime();
-        const diff = weddingDate - now;
+            revealOnScroll();
 
-        if (diff <= 0) {
-            clearInterval(timer);
-            document.getElementById('countdown').innerHTML = "¡ES HOY!";
-            return;
+        },600);
+
+        if(bgMusic){
+
+            bgMusic.play().catch(() => {});
+
+            if(musicBtn){
+                musicBtn.innerHTML = '⏸ Música';
+            }
+
         }
 
-        const d = Math.floor(diff / (1000 * 60 * 60 * 24));
-        const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-        const s = Math.floor((diff % (1000 * 60)) / 1000);
+    });
 
-        document.getElementById('days').innerText = d < 10 ? '0' + d : d;
-        document.getElementById('hours').innerText = h < 10 ? '0' + h : h;
-        document.getElementById('minutes').innerText = m < 10 ? '0' + m : m;
-        document.getElementById('seconds').innerText = s < 10 ? '0' + s : s;
-    }, 1000);
+}
 
-    // 4. ANIMACIONES AL HACER SCROLL (FADE IN)
-    const revealOnScroll = () => {
-        const reveals = document.querySelectorAll('.reveal');
-        const triggerBottom = window.innerHeight * 0.85;
+/* ==========================
+   BOTÓN MÚSICA
+========================== */
 
-        reveals.forEach(reveal => {
-            const revealTop = reveal.getBoundingClientRect().top;
-            if (revealTop < triggerBottom) {
-                reveal.classList.add('active');
-            }
-        });
-    };
+if(musicBtn && bgMusic){
 
-    window.addEventListener('scroll', revealOnScroll);
+    musicBtn.addEventListener('click', () => {
 
-// 5. MANEJO DEL FORMULARIO RSVP + SUPABASE
+        if(bgMusic.paused){
 
-const supabaseUrl = "https://wqzavjzfoxzjrijccteh.supabase.co";
-const supabaseKey = "sb_publishable_fTYkp41FOfaaVFRI1dSZRQ_dXjPstB7";
+            bgMusic.play();
 
-const supabaseClient = supabase.createClient(
+            musicBtn.innerHTML = '⏸ Música';
+
+        }else{
+
+            bgMusic.pause();
+
+            musicBtn.innerHTML = '🎵 Música';
+
+        }
+
+    });
+
+}
+
+/* ==========================
+   CUENTA REGRESIVA
+========================== */
+
+const timer = setInterval(() => {
+
+    const now = new Date().getTime();
+
+    const diff = weddingDate - now;
+
+    if(diff <= 0){
+
+        clearInterval(timer);
+
+        const countdown = document.getElementById('countdown');
+
+        if(countdown){
+
+            countdown.innerHTML = `
+                <h2>¡Llegó el gran día!</h2>
+            `;
+
+        }
+
+        return;
+    }
+
+    const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+
+    const h = Math.floor(
+        (diff % (1000 * 60 * 60 * 24))
+        / (1000 * 60 * 60)
+    );
+
+    const m = Math.floor(
+        (diff % (1000 * 60 * 60))
+        / (1000 * 60)
+    );
+
+    const s = Math.floor(
+        (diff % (1000 * 60))
+        / 1000
+    );
+
+    const days = document.getElementById('days');
+    const hours = document.getElementById('hours');
+    const minutes = document.getElementById('minutes');
+    const seconds = document.getElementById('seconds');
+
+    if(days) days.innerText = d;
+    if(hours) hours.innerText = h;
+    if(minutes) minutes.innerText = m;
+    if(seconds) seconds.innerText = s;
+
+},1000);
+
+/* ==========================
+   REVEAL ANIMATION
+========================== */
+
+function revealOnScroll(){
+
+    const reveals = document.querySelectorAll('.reveal');
+
+    const triggerBottom =
+        window.innerHeight * 0.85;
+
+    reveals.forEach(reveal => {
+
+        const revealTop =
+            reveal.getBoundingClientRect().top;
+
+        if(revealTop < triggerBottom){
+
+            reveal.classList.add('active');
+
+        }
+
+    });
+
+}
+
+revealOnScroll();
+
+window.addEventListener(
+    'scroll',
+    revealOnScroll
+);
+
+/* ==========================
+   SUPABASE
+========================== */
+
+const supabaseUrl =
+"https://wqzavjzfoxzjrijccteh.supabase.co";
+
+const supabaseKey =
+"sb_publishable_fTYkp41FOfaaVFRI1dSZRQ_dXjPstB7";
+
+const supabaseClient =
+supabase.createClient(
     supabaseUrl,
     supabaseKey
 );
 
-const form = document.getElementById('rsvp-form');
+/* ==========================
+   RSVP
+========================== */
 
-form.addEventListener('submit', async (e) => {
-    e.preventDefault();
+const form =
+document.getElementById('rsvp-form');
 
-    const nombre = document.getElementById('name').value;
-    const asistencia = document.getElementById('attendance').value;
-    const acompanantes = parseInt(document.getElementById('guests').value) || 0;
-    const mensaje = document.getElementById('message').value;
+if(form){
 
-    const { error } = await supabaseClient
-        .from('invitados')
-        .insert([
-            {
-                nombre,
-                asistencia,
-                acompanantes,
-                mensaje
-            }
-        ]);
+    form.addEventListener(
+        'submit',
+        async (e) => {
 
-    if (error) {
-        console.error(error);
-        alert('Error al guardar la confirmación');
-        return;
-    }
-
-    if (asistencia === 'si') {
-        alert(`¡Gracias ${nombre}! Brenda y Leo te esperan con mucha alegría.`);
-    } else {
-        alert(`Gracias por avisarnos ${nombre}. Te extrañaremos en la celebración.`);
-    }
-
-    form.reset();
-});
-
-    // 6. SCROLL SUAVE
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
             e.preventDefault();
-            document.querySelector(this.getAttribute('href')).scrollIntoView({
-                behavior: 'smooth'
-            });
-        });
-    });
+
+            const nombre =
+            document.getElementById('name').value;
+
+            const asistencia =
+            document.getElementById('attendance').value;
+
+            const acompanantes =
+            parseInt(
+                document.getElementById('guests').value
+            ) || 0;
+
+            const mensaje =
+            document.getElementById('message').value;
+
+            const { error } =
+            await supabaseClient
+            .from('invitados')
+            .insert([
+                {
+                    nombre,
+                    asistencia,
+                    acompanantes,
+                    mensaje
+                }
+            ]);
+
+            if(error){
+
+                console.error(error);
+
+                alert(
+                    'Error al guardar la confirmación'
+                );
+
+                return;
+            }
+
+            if(asistencia === 'si'){
+
+                alert(
+                    `¡Gracias ${nombre}! Tu asistencia ha sido confirmada.`
+                );
+
+            }else{
+
+                alert(
+                    `Gracias por avisarnos ${nombre}.`
+                );
+
+            }
+
+            form.reset();
+
+        }
+    );
+
+}
+
+/* ==========================
+   SCROLL SUAVE
+========================== */
+
+document
+.querySelectorAll('a[href^="#"]')
+.forEach(anchor => {
+
+    anchor.addEventListener(
+        'click',
+        function(e){
+
+            e.preventDefault();
+
+            const target =
+            document.querySelector(
+                this.getAttribute('href')
+            );
+
+            if(target){
+
+                target.scrollIntoView({
+                    behavior:'smooth'
+                });
+
+            }
+
+        }
+    );
+
+});
+```
+
 });
