@@ -1,162 +1,319 @@
 <!DOCTYPE html>
+
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Brenda & Leo | Nuestra Boda</title>
-    <link rel="stylesheet" href="style.css">
-    <!-- Fuentes Premium -->
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <title>Brenda & Leo | Nos Casamos</title>
+
+```
+<link rel="stylesheet" href="style.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+```
+
 </head>
 <body>
 
-    <!-- 1. PANTALLA DE BIENVENIDA -->
-    <div id="welcome-screen" class="overlay">
-        <div class="overlay-content">
-            <h4 class="fade-in-up">NUESTRA BODA</h4>
-            <h1 class="fade-in-up">Brenda & Leo</h1>
-            <div class="gold-line fade-in-up"></div>
-            <p class="fade-in-up date-placeholder">PRÓXIMAMENTE</p>
-            <button id="open-invitation" class="btn-gold fade-in-up">ABRIR INVITACIÓN</button>
-        </div>
+```
+<!-- PANTALLA INICIAL -->
+<div id="welcome-screen" class="overlay">
+    <div class="overlay-content">
+        <p class="mini-title">SAVE THE DATE</p>
+        <h1>Brenda & Leo</h1>
+        <div class="line"></div>
+        <p class="date-text">15 · NOV · 2026</p>
+
+        <button id="open-invitation" class="btn-gold">
+            ABRIR INVITACIÓN
+        </button>
     </div>
+</div>
 
-    <!-- CONTENIDO PRINCIPAL -->
-    <main id="main-content" class="hidden">
-        
-        <!-- HEADER / PORTADA -->
-        <header class="hero-section reveal">
-            <div class="hero-image">
-                <div class="hero-text">
-                    <span class="save-the-date">Save the Date</span>
-                    <h2>Brenda & Leo</h2>
-                    <p class="hero-quote">"Por siempre y para siempre"</p>
-                </div>
+<!-- CONTENIDO -->
+<main id="main-content" class="hidden">
+
+    <!-- HERO -->
+    <header class="hero-section">
+
+        <div class="hero-image">
+
+            <div class="hero-overlay">
+
+                <p class="hero-small">
+                    NOS CASAMOS
+                </p>
+
+                <h1 class="hero-title">
+                    Brenda <span>&</span> Leo
+                </h1>
+
+                <p class="hero-date">
+                    15 NOVIEMBRE 2026
+                </p>
+
             </div>
-        </header>
 
-        <!-- 2. CUENTA REGRESIVA -->
-        <section class="section reveal">
-            <h3 class="section-title">Faltan Solo</h3>
-            <div id="countdown" class="countdown-grid">
-                <div class="time-unit">
-                    <span id="days">00</span>
-                    <small>Días</small>
-                </div>
-                <div class="time-unit">
-                    <span id="hours">00</span>
-                    <small>Hrs</small>
-                </div>
-                <div class="time-unit">
-                    <span id="minutes">00</span>
-                    <small>Min</small>
-                </div>
-                <div class="time-unit">
-                    <span id="seconds">00</span>
-                    <small>Seg</small>
-                </div>
+        </div>
+
+    </header>
+
+    <!-- CARTA -->
+    <section class="section welcome-section">
+
+        <div class="paper-card">
+
+            <h2>Con Mucho Amor</h2>
+
+            <p>
+                Queremos compartir con ustedes uno de los días más
+                importantes de nuestras vidas.
+            </p>
+
+            <p>
+                Nos sentimos felices de celebrar nuestro amor junto a
+                nuestra familia y amigos.
+            </p>
+
+            <p>
+                Esperamos contar con su presencia en este momento tan
+                especial.
+            </p>
+
+        </div>
+
+    </section>
+
+    <!-- HISTORIA -->
+    <section class="section">
+
+        <div class="container">
+
+            <h2 class="section-title">
+                Nuestra Historia
+            </h2>
+
+            <p class="story-text">
+
+                Dos caminos que se encontraron por casualidad y decidieron
+                caminar juntos para siempre.
+
+                Hoy celebran el inicio de una nueva aventura rodeados de
+                las personas que más aman.
+
+            </p>
+
+        </div>
+
+    </section>
+
+    <!-- FECHA -->
+    <section class="section date-section">
+
+        <div class="date-card">
+
+            <span>15</span>
+
+            <h3>NOVIEMBRE</h3>
+
+            <p>2026</p>
+
+        </div>
+
+    </section>
+
+    <!-- CEREMONIA -->
+    <section class="section">
+
+        <div class="info-card">
+
+            <h2>Ceremonia</h2>
+
+            <p>Jardines de Ensueño</p>
+
+            <p>6:00 PM</p>
+
+            <p>Dirección de ejemplo</p>
+
+            <a href="#" class="btn-outline">
+                VER UBICACIÓN
+            </a>
+
+        </div>
+
+    </section>
+
+    <!-- RECEPCIÓN -->
+    <section class="section">
+
+        <div class="info-card">
+
+            <h2>Recepción</h2>
+
+            <p>Salón Imperial</p>
+
+            <p>8:00 PM</p>
+
+            <p>Dirección de ejemplo</p>
+
+            <a href="#" class="btn-outline">
+                VER UBICACIÓN
+            </a>
+
+        </div>
+
+    </section>
+
+    <!-- GALERÍA -->
+    <section class="section">
+
+        <h2 class="section-title">
+            Nuestra Galería
+        </h2>
+
+        <div class="gallery">
+
+            <img src="https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=1000">
+
+            <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=1000">
+
+            <img src="https://images.unsplash.com/photo-1519225495810-7517312ece51?q=80&w=1000">
+
+            <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?q=80&w=1000">
+
+        </div>
+
+    </section>
+
+    <!-- DRESS CODE -->
+    <section class="section">
+
+        <div class="paper-card">
+
+            <h2>Dress Code</h2>
+
+            <p class="dress">
+                ETIQUETA FORMAL
+            </p>
+
+            <p>
+                Caballeros: Traje oscuro
+            </p>
+
+            <p>
+                Damas: Vestido largo
+            </p>
+
+        </div>
+
+    </section>
+
+    <!-- CUENTA REGRESIVA -->
+    <section class="section">
+
+        <h2 class="section-title">
+            Faltan Solo
+        </h2>
+
+        <div id="countdown" class="countdown-grid">
+
+            <div class="time-unit">
+                <span id="days">00</span>
+                <small>Días</small>
             </div>
-        </section>
 
-        <!-- 3. MENSAJE DE BIENVENIDA -->
-        <section class="section reveal beige-bg">
-            <div class="container small-container">
-                <h3 class="section-title">Bienvenidos</h3>
-                <p class="welcome-msg">Queremos compartir con ustedes el inicio de nuestra nueva aventura. Su presencia es el mejor regalo que podríamos recibir.</p>
+            <div class="time-unit">
+                <span id="hours">00</span>
+                <small>Horas</small>
             </div>
-        </section>
 
-        <!-- 4. HISTORIA -->
-        <section class="section reveal">
-            <div class="container">
-                <h3 class="section-title">Nuestra Historia</h3>
-                <div class="story-layout">
-                    <p class="romantic-text">Todo comenzó como un sueño y hoy Brenda y Leo deciden hacerlo realidad. Acompañanos a celebrar un amor que no conoce límites.</p>
-                </div>
+            <div class="time-unit">
+                <span id="minutes">00</span>
+                <small>Min</small>
             </div>
-        </section>
 
-        <!-- 5. GALERÍA -->
-        <section class="section reveal">
-            <h3 class="section-title">Nuestra Galería</h3>
-            <div class="gallery-container">
-                <div class="gallery-item"><img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=800" alt="Boda 1"></div>
-                <div class="gallery-item"><img src="https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=800" alt="Boda 2"></div>
-                <div class="gallery-item"><img src="https://images.unsplash.com/photo-1519225495810-7517312ece51?q=80&w=800" alt="Boda 3"></div>
+            <div class="time-unit">
+                <span id="seconds">00</span>
+                <small>Seg</small>
             </div>
-        </section>
 
-        <!-- 6 & 7. CEREMONIA Y RECEPCIÓN -->
-        <section class="section reveal beige-bg">
-            <div class="container info-grid">
-                <div class="info-card">
-                    <h4 class="card-title">Ceremonia</h4>
-                    <p>[NOMBRE DEL LUGAR]</p>
-                    <p>[HORA] HRS</p>
-                    <p>[DIRECCIÓN COMPLETA]</p>
-                </div>
-                <div class="info-card">
-                    <h4 class="card-title">Recepción</h4>
-                    <p>[NOMBRE DEL LUGAR]</p>
-                    <p>[HORA] HRS</p>
-                    <p>[DIRECCIÓN COMPLETA]</p>
-                </div>
-            </div>
-        </section>
+        </div>
 
-        <!-- 8. DRESS CODE -->
-        <section class="section reveal">
-            <div class="container">
-                <h3 class="section-title">Código de Vestimenta</h3>
-                <p class="dress-style">ETIQUETA RIGUROSA</p>
-                <p>Caballeros: Traje oscuro / Smoking</p>
-                <p>Damas: Vestido largo</p>
-            </div>
-        </section>
+    </section>
 
-        <!-- 9. UBICACIÓN -->
-        <section class="section reveal no-padding">
-            <h3 class="section-title">Ubicación</h3>
-            <div class="map-wrapper">
-                <iframe 
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15050.470535384!2d-99.1718!3d19.4326!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTnCsDI1JzU3LjQiTiA5OcKwMTAnMTguNSJX!5e0!3m2!1ses!2smx!4v1620000000000" 
-                    width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy">
-                </iframe>
-            </div>
-        </section>
+    <!-- RSVP -->
+    <section class="section" id="rsvp">
 
-        <!-- 10. RSVP -->
-        <section class="section reveal beige-bg" id="rsvp">
-            <div class="container rsvp-box">
-                <h3 class="section-title">Confirmar Asistencia</h3>
-                <form id="rsvp-form" class="elegant-form">
-                    <input type="text" id="name" placeholder="Tu Nombre Completo" required>
-                    
-                    <select id="attendance" required>
-                        <option value="">¿Asistirás?</option>
-                        <option value="si">Sí, con mucho gusto</option>
-                        <option value="no">Lamentablemente no puedo</option>
-                    </select>
+        <div class="paper-card">
 
-                    <input type="number" id="guests" placeholder="Número de acompañantes" min="0" max="10">
+            <h2>Confirmar Asistencia</h2>
 
-                    <textarea id="message" placeholder="Mensaje para Brenda y Leo" rows="4"></textarea>
+            <form id="rsvp-form">
 
-                    <button type="submit" class="btn-dark">ENVIAR CONFIRMACIÓN</button>
-                </form>
-            </div>
-        </section>
+                <input
+                    type="text"
+                    id="name"
+                    placeholder="Nombre Completo"
+                    required
+                >
 
-        <!-- 11. MENSAJE FINAL -->
-        <footer class="section reveal final-message">
-            <h2 class="playfair">¡Te esperamos!</h2>
-            <p class="names-footer">Brenda & Leo</p>
-            <p class="hashtag">#BodaBrendaYLeo</p>
-        </footer>
+                <select id="attendance" required>
 
-    </main>
+                    <option value="">
+                        ¿Asistirás?
+                    </option>
+
+                    <option value="si">
+                        Sí, asistiré
+                    </option>
+
+                    <option value="no">
+                        No podré asistir
+                    </option>
+
+                </select>
+
+                <input
+                    type="number"
+                    id="guests"
+                    placeholder="Acompañantes"
+                >
+
+                <textarea
+                    id="message"
+                    placeholder="Mensaje para los novios"
+                ></textarea>
+
+                <button type="submit" class="btn-dark">
+                    ENVIAR CONFIRMACIÓN
+                </button>
+
+            </form>
+
+        </div>
+
+    </section>
+
+    <!-- FINAL -->
+    <footer class="footer">
+
+        <h2>¡Te Esperamos!</h2>
+
+        <p>
+            Brenda & Leo
+        </p>
+
+        <p>
+            #BrendaYLeo2026
+        </p>
+
+    </footer>
+
+</main>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="script.js"></script>
+```
+
 </body>
 </html>
