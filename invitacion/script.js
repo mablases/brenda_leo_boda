@@ -1,286 +1,96 @@
-document.addEventListener('DOMContentLoaded', () => {
+// CONFIGURACIÓN SUPABASE (Reemplaza con tus datos reales)
+const SUPABASE_URL = 'https://TU_PROYECTO.supabase.co';
+const SUPABASE_KEY = 'TU_ANON_KEY';
+const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-```
-/* ==========================
-   CONFIGURACIÓN FECHA BODA
-========================== */
-
-const weddingDate = new Date('November 15, 2026 18:00:00').getTime();
-
-/* ==========================
-   ABRIR INVITACIÓN
-========================== */
-
-const openBtn = document.getElementById('open-invitation');
+// ELEMENTOS DEL DOM
 const welcomeScreen = document.getElementById('welcome-screen');
+const btnOpen = document.getElementById('btn-open');
 const mainContent = document.getElementById('main-content');
+const rsvpForm = document.getElementById('rsvp-form');
+const formResponse = document.getElementById('form-response');
 
-const bgMusic = document.getElementById('bg-music');
-const musicBtn = document.getElementById('music-btn');
+// 1. MANEJO DE PANTALLA DE BIENVENIDA
+btnOpen.addEventListener('click', () => {
+    welcomeScreen.style.opacity = '0';
+    setTimeout(() => {
+        welcomeScreen.classList.add('hidden');
+        mainContent.classList.remove('hidden');
+        window.scrollTo(0, 0);
+        initAnimations();
+    }, 1000);
+});
 
-if(openBtn){
+// 2. CUENTA REGRESIVA
+const weddingDate = new Date('October 12, 2024 17:00:00').getTime();
 
-    openBtn.addEventListener('click', () => {
-
-        welcomeScreen.style.transform = 'translateY(-100%)';
-
-        setTimeout(() => {
-
-            mainContent.classList.remove('hidden');
-
-            revealOnScroll();
-
-        },600);
-
-        if(bgMusic){
-
-            bgMusic.play().catch(() => {});
-
-            if(musicBtn){
-                musicBtn.innerHTML = '⏸ Música';
-            }
-
-        }
-
-    });
-
-}
-
-/* ==========================
-   BOTÓN MÚSICA
-========================== */
-
-if(musicBtn && bgMusic){
-
-    musicBtn.addEventListener('click', () => {
-
-        if(bgMusic.paused){
-
-            bgMusic.play();
-
-            musicBtn.innerHTML = '⏸ Música';
-
-        }else{
-
-            bgMusic.pause();
-
-            musicBtn.innerHTML = '🎵 Música';
-
-        }
-
-    });
-
-}
-
-/* ==========================
-   CUENTA REGRESIVA
-========================== */
-
-const timer = setInterval(() => {
-
+const countdown = setInterval(() => {
     const now = new Date().getTime();
+    const distance = weddingDate - now;
 
-    const diff = weddingDate - now;
+    const d = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const h = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const s = Math.floor((distance % (1000 * 60)) / 1000);
 
-    if(diff <= 0){
+    document.getElementById('days').innerText = d < 10 ? '0' + d : d;
+    document.getElementById('hours').innerText = h < 10 ? '0' + h : h;
+    document.getElementById('minutes').innerText = m < 10 ? '0' + m : m;
+    document.getElementById('seconds').innerText = s < 10 ? '0' + s : s;
 
-        clearInterval(timer);
-
-        const countdown = document.getElementById('countdown');
-
-        if(countdown){
-
-            countdown.innerHTML = `
-                <h2>¡Llegó el gran día!</h2>
-            `;
-
-        }
-
-        return;
+    if (distance < 0) {
+        clearInterval(countdown);
+        document.getElementById('countdown').innerHTML = "<h3>¡HOY ES EL GRAN DÍA!</h3>";
     }
+}, 1000);
 
-    const d = Math.floor(diff / (1000 * 60 * 60 * 24));
-
-    const h = Math.floor(
-        (diff % (1000 * 60 * 60 * 24))
-        / (1000 * 60 * 60)
-    );
-
-    const m = Math.floor(
-        (diff % (1000 * 60 * 60))
-        / (1000 * 60)
-    );
-
-    const s = Math.floor(
-        (diff % (1000 * 60))
-        / 1000
-    );
-
-    const days = document.getElementById('days');
-    const hours = document.getElementById('hours');
-    const minutes = document.getElementById('minutes');
-    const seconds = document.getElementById('seconds');
-
-    if(days) days.innerText = d;
-    if(hours) hours.innerText = h;
-    if(minutes) minutes.innerText = m;
-    if(seconds) seconds.innerText = s;
-
-},1000);
-
-/* ==========================
-   REVEAL ANIMATION
-========================== */
-
-function revealOnScroll(){
-
+// 3. ANIMACIONES AL HACER SCROLL (Reveal)
+function initAnimations() {
     const reveals = document.querySelectorAll('.reveal');
-
-    const triggerBottom =
-        window.innerHeight * 0.85;
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, { threshold: 0.1 });
 
     reveals.forEach(reveal => {
-
-        const revealTop =
-            reveal.getBoundingClientRect().top;
-
-        if(revealTop < triggerBottom){
-
-            reveal.classList.add('active');
-
-        }
-
+        observer.observe(reveal);
     });
-
 }
 
-revealOnScroll();
+// 4. RSVP A SUPABASE
+rsvpForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    const submitBtn = document.getElementById('submit-btn');
+    submitBtn.innerText = 'ENVIANDO...';
+    submitBtn.disabled = true;
 
-window.addEventListener(
-    'scroll',
-    revealOnScroll
-);
+    const formData = {
+        nombre: document.getElementById('name').value,
+        asistencia: document.getElementById('attendance').value,
+        acompanantes: parseInt(document.getElementById('guests').value) || 0,
+        mensaje: document.getElementById('message').value,
+        fecha_registro: new Date()
+    };
 
-/* ==========================
-   SUPABASE
-========================== */
+    try {
+        // Asegúrate de crear una tabla llamada 'confirmaciones' en Supabase
+        const { data, error } = await supabase
+            .from('confirmaciones')
+            .insert([formData]);
 
-const supabaseUrl =
-"https://wqzavjzfoxzjrijccteh.supabase.co";
+        if (error) throw error;
 
-const supabaseKey =
-"sb_publishable_fTYkp41FOfaaVFRI1dSZRQ_dXjPstB7";
-
-const supabaseClient =
-supabase.createClient(
-    supabaseUrl,
-    supabaseKey
-);
-
-/* ==========================
-   RSVP
-========================== */
-
-const form =
-document.getElementById('rsvp-form');
-
-if(form){
-
-    form.addEventListener(
-        'submit',
-        async (e) => {
-
-            e.preventDefault();
-
-            const nombre =
-            document.getElementById('name').value;
-
-            const asistencia =
-            document.getElementById('attendance').value;
-
-            const acompanantes =
-            parseInt(
-                document.getElementById('guests').value
-            ) || 0;
-
-            const mensaje =
-            document.getElementById('message').value;
-
-            const { error } =
-            await supabaseClient
-            .from('invitados')
-            .insert([
-                {
-                    nombre,
-                    asistencia,
-                    acompanantes,
-                    mensaje
-                }
-            ]);
-
-            if(error){
-
-                console.error(error);
-
-                alert(
-                    'Error al guardar la confirmación'
-                );
-
-                return;
-            }
-
-            if(asistencia === 'si'){
-
-                alert(
-                    `¡Gracias ${nombre}! Tu asistencia ha sido confirmada.`
-                );
-
-            }else{
-
-                alert(
-                    `Gracias por avisarnos ${nombre}.`
-                );
-
-            }
-
-            form.reset();
-
-        }
-    );
-
-}
-
-/* ==========================
-   SCROLL SUAVE
-========================== */
-
-document
-.querySelectorAll('a[href^="#"]')
-.forEach(anchor => {
-
-    anchor.addEventListener(
-        'click',
-        function(e){
-
-            e.preventDefault();
-
-            const target =
-            document.querySelector(
-                this.getAttribute('href')
-            );
-
-            if(target){
-
-                target.scrollIntoView({
-                    behavior:'smooth'
-                });
-
-            }
-
-        }
-    );
-
-});
-```
-
+        rsvpForm.classList.add('hidden');
+        formResponse.classList.remove('hidden');
+    } catch (error) {
+        console.error('Error:', error);
+        alert('Hubo un error al enviar tu respuesta. Por favor intenta de nuevo.');
+        submitBtn.innerText = 'ENVIAR CONFIRMACIÓN';
+        submitBtn.disabled = false;
+    }
 });
