@@ -1,391 +1,193 @@
 <!DOCTYPE html>
-
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Brenda & Leo | Nos Casamos</title>
-
-<link rel="stylesheet" href="style.css">
-
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Cormorant+Garamond:wght@300;400;500;600&display=swap" rel="stylesheet">
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brenda & Leo | Nuestra Boda</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,500;1,300&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@200;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <!-- Supabase Library -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
 
-<!-- PANTALLA DE APERTURA -->
-
-<div id="welcome-screen" class="overlay">
-
-```
-<div class="overlay-content">
-
-    <span class="welcome-small">
-        SAVE THE DATE
-    </span>
-
-    <h1>
-        Brenda & Leo
-    </h1>
-
-    <div class="divider"></div>
-
-    <p>
-        15 NOVIEMBRE 2026
-    </p>
-
-    <button id="open-invitation" class="btn-gold">
-        ABRIR INVITACIÓN
-    </button>
-
-</div>
-```
-
-</div>
-
-<!-- CONTENIDO -->
-
-<main id="main-content" class="hidden">
-
-```
-<!-- HERO -->
-
-<section class="luxury-hero">
-
-    <div class="hero-board">
-
-        <div class="envelope-card">
-
-            <span class="save-date">
-                SAVE THE DATE
-            </span>
-
-            <h1>
-                Brenda & Leo
-            </h1>
-
-            <p class="hero-subtitle">
-                Nos Casamos
-            </p>
-
-            <p class="hero-date">
-                15 · NOVIEMBRE · 2026
-            </p>
-
+    <!-- PANTALLA DE BIENVENIDA -->
+    <div id="welcome-screen">
+        <div class="welcome-content">
+            <h2 class="pre-title">Nuestra Boda</h2>
+            <h1>Brenda & Leo</h1>
+            <p class="welcome-date">12 . 10 . 2024</p>
+            <button id="btn-open" class="btn-premium">ABRIR INVITACIÓN</button>
         </div>
-
-        <div class="photo-card photo-1">
-            <img src="https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=1200" alt="">
-        </div>
-
-        <div class="photo-card photo-2">
-            <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?q=80&w=1200" alt="">
-        </div>
-
-        <div class="seal">
-            ❤
-        </div>
-
     </div>
 
-</section>
-
-<!-- CARTA -->
-
-<section class="section reveal">
-
-    <div class="paper-card">
-
-        <h2>
-            Con Mucho Amor
-        </h2>
-
-        <p>
-            Queremos compartir con ustedes uno de los días más importantes de nuestras vidas.
-        </p>
-
-        <p>
-            Nos sentimos felices de celebrar nuestro amor junto a nuestra familia y amigos.
-        </p>
-
-        <p>
-            Esperamos contar con su presencia en este momento tan especial.
-        </p>
-
-    </div>
-
-</section>
-
-<!-- HISTORIA -->
-
-<section class="section reveal">
-
-    <h2 class="section-title">
-        Nuestra Historia
-    </h2>
-
-    <div class="paper-card">
-
-        <p class="story-text">
-
-            Dos caminos se encontraron y descubrieron que estaban destinados
-            a caminar juntos.
-
-            Hoy celebramos el comienzo de una nueva aventura,
-            rodeados de quienes más queremos.
-
-        </p>
-
-    </div>
-
-</section>
-
-<!-- FECHA -->
-
-<section class="section reveal">
-
-    <div class="date-circle">
-
-        <span class="day">
-            15
-        </span>
-
-        <span class="month">
-            NOV
-        </span>
-
-        <span class="year">
-            2026
-        </span>
-
-    </div>
-
-</section>
-
-<!-- CEREMONIA -->
-
-<section class="section reveal">
-
-    <div class="info-card">
-
-        <h2>
-            Ceremonia
-        </h2>
-
-        <p>
-            Jardines de Ensueño
-        </p>
-
-        <p>
-            6:00 PM
-        </p>
-
-        <p>
-            Dirección de ejemplo
-        </p>
-
-        <a href="#" class="btn-outline">
-            VER UBICACIÓN
-        </a>
-
-    </div>
-
-</section>
-
-<!-- RECEPCIÓN -->
-
-<section class="section reveal">
-
-    <div class="info-card">
-
-        <h2>
-            Recepción
-        </h2>
-
-        <p>
-            Salón Imperial
-        </p>
-
-        <p>
-            8:00 PM
-        </p>
-
-        <p>
-            Dirección de ejemplo
-        </p>
-
-        <a href="#" class="btn-outline">
-            VER UBICACIÓN
-        </a>
-
-    </div>
-
-</section>
-
-<!-- GALERÍA -->
-
-<section class="section reveal">
-
-    <h2 class="section-title">
-        Nuestra Galería
-    </h2>
-
-    <div class="gallery-grid">
-
-        <img src="https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=1200">
-
-        <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=1200">
-
-        <img src="https://images.unsplash.com/photo-1519225495810-7517312ece51?q=80&w=1200">
-
-        <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?q=80&w=1200">
-
-    </div>
-
-</section>
-
-<!-- DRESS CODE -->
-
-<section class="section reveal">
-
-    <div class="paper-card">
-
-        <h2>
-            Dress Code
-        </h2>
-
-        <p class="dress-main">
-            ETIQUETA FORMAL
-        </p>
-
-        <p>
-            Caballeros: Traje oscuro
-        </p>
-
-        <p>
-            Damas: Vestido largo
-        </p>
-
-    </div>
-
-</section>
-
-<!-- CUENTA REGRESIVA -->
-
-<section class="section reveal">
-
-    <h2 class="section-title">
-        Faltan Solo
-    </h2>
-
-    <div id="countdown" class="countdown-grid">
-
-        <div class="time-unit">
-            <span id="days">00</span>
-            <small>Días</small>
-        </div>
-
-        <div class="time-unit">
-            <span id="hours">00</span>
-            <small>Horas</small>
-        </div>
-
-        <div class="time-unit">
-            <span id="minutes">00</span>
-            <small>Min</small>
-        </div>
-
-        <div class="time-unit">
-            <span id="seconds">00</span>
-            <small>Seg</small>
-        </div>
-
-    </div>
-
-</section>
-
-<!-- RSVP -->
-
-<section class="section reveal" id="rsvp">
-
-    <div class="rsvp-card">
-
-        <h2>
-            Confirmar Asistencia
-        </h2>
-
-        <form id="rsvp-form">
-
-            <input
-                type="text"
-                id="name"
-                placeholder="Nombre Completo"
-                required
-            >
-
-            <select id="attendance" required>
-
-                <option value="">
-                    ¿Asistirás?
-                </option>
-
-                <option value="si">
-                    Sí asistiré
-                </option>
-
-                <option value="no">
-                    No podré asistir
-                </option>
-
-            </select>
-
-            <input
-                type="number"
-                id="guests"
-                placeholder="Número de acompañantes"
-            >
-
-            <textarea
-                id="message"
-                rows="4"
-                placeholder="Mensaje para los novios"
-            ></textarea>
-
-            <button type="submit" class="btn-dark">
-                CONFIRMAR ASISTENCIA
-            </button>
-
-        </form>
-
-    </div>
-
-</section>
-
-<!-- FINAL -->
-
-<footer class="footer">
-
-    <h2>
-        ¡Te Esperamos!
-    </h2>
-
-    <p>
-        Brenda & Leo
-    </p>
-
-    <span>
-        #BrendaYLeo2026
-    </span>
-
-</footer>
-```
-
-</main>
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-<script src="script.js"></script>
-
+    <main id="main-content" class="hidden">
+        
+        <!-- HERO SECTION -->
+        <section class="hero" id="inicio">
+            <div class="hero-image-container">
+                <img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?q=80&w=1974&auto=format&fit=crop" alt="Brenda y Leo" class="hero-img">
+                <div class="hero-overlay"></div>
+            </div>
+            <div class="hero-text reveal">
+                <span class="save-the-date">SAVE THE DATE</span>
+                <h2>Brenda & Leo</h2>
+                <p class="frase-romantica">"En el amor no hay distancias, porque el corazón siempre encuentra el camino."</p>
+                <div class="hero-divider"></div>
+                <p class="hero-date">12 DE OCTUBRE, 2024</p>
+            </div>
+        </section>
+
+        <!-- HISTORIA -->
+        <section class="story section-padding">
+            <div class="container">
+                <h3 class="section-title reveal">Nuestra Historia</h3>
+                <div class="story-content reveal">
+                    <p>Desde aquel primer café fortuito, supimos que nuestras vidas cambiarían para siempre. Lo que comenzó como una amistad se transformó en el amor más profundo y sincero que jamás imaginamos.</p>
+                    <p>Hoy, tras años de risas, viajes y crecimiento mutuo, decidimos dar el paso más importante de nuestras vidas frente a las personas que más amamos.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CUENTA REGRESIVA -->
+        <section class="countdown-section section-padding">
+            <div class="container">
+                <div id="countdown">
+                    <div class="timer-unit">
+                        <span id="days">00</span>
+                        <p>Días</p>
+                    </div>
+                    <div class="timer-unit">
+                        <span id="hours">00</span>
+                        <p>Hs</p>
+                    </div>
+                    <div class="timer-unit">
+                        <span id="minutes">00</span>
+                        <p>Min</p>
+                    </div>
+                    <div class="timer-unit">
+                        <span id="seconds">00</span>
+                        <p>Seg</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- EVENTOS -->
+        <section class="events section-padding">
+            <div class="container grid-2">
+                <!-- CEREMONIA -->
+                <div class="card reveal">
+                    <div class="card-icon">💍</div>
+                    <h3>Ceremonia Religiosa</h3>
+                    <p class="event-time">17:00 HRS</p>
+                    <p class="event-place">Catedral Metropolitana de la Inmaculada</p>
+                    <p class="event-address">Calle de las Rosas #123, Centro Histórico</p>
+                    <a href="https://maps.google.com" target="_blank" class="btn-outline">VER MAPA</a>
+                </div>
+
+                <!-- RECEPCIÓN -->
+                <div class="card reveal">
+                    <div class="card-icon">🥂</div>
+                    <h3>Recepción</h3>
+                    <p class="event-time">19:30 HRS</p>
+                    <p class="event-place">Hacienda Santa Mónica</p>
+                    <p class="event-address">Antiguo Camino Real #500, Valle Alto</p>
+                    <a href="https://maps.google.com" target="_blank" class="btn-outline">VER MAPA</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- GALERÍA -->
+        <section class="gallery section-padding">
+            <div class="container">
+                <h3 class="section-title reveal">Momentos Favoritos</h3>
+                <div class="gallery-grid">
+                    <div class="gallery-item reveal"><img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=2069&auto=format&fit=crop" alt="Foto 1"></div>
+                    <div class="gallery-item reveal"><img src="https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=2070&auto=format&fit=crop" alt="Foto 2"></div>
+                    <div class="gallery-item reveal"><img src="https://images.unsplash.com/photo-1465495910483-0d6745778503?q=80&w=2070&auto=format&fit=crop" alt="Foto 3"></div>
+                    <div class="gallery-item reveal"><img src="https://images.unsplash.com/photo-1532712938310-34cb3982ef74?q=80&w=2070&auto=format&fit=crop" alt="Foto 4"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- DRESS CODE -->
+        <section class="dress-code section-padding">
+            <div class="container reveal">
+                <div class="premium-box">
+                    <h3>Código de Vestimenta</h3>
+                    <p class="dc-style">Formal / Black Tie</p>
+                    <div class="dc-icons">
+                        <div class="dc-item">
+                            <p>Mujeres: Vestido largo (Evitar blanco y crema)</p>
+                        </div>
+                        <div class="dc-item">
+                            <p>Hombres: Esmoquin o Traje oscuro</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- REGALOS -->
+        <section class="gifts section-padding">
+            <div class="container reveal">
+                <h3 class="section-title">Mesa de Regalos</h3>
+                <p>Vuestra presencia es nuestro mejor regalo, pero si desean tener un detalle con nosotros:</p>
+                <div class="gift-options">
+                    <div class="gift-card">
+                        <p>Aportación para nuestra Luna de Miel</p>
+                        <p><strong>IBAN: ES12 3456 7890 1234 5678</strong></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- RSVP FORM -->
+        <section class="rsvp section-padding" id="rsvp-section">
+            <div class="container">
+                <div class="rsvp-card reveal">
+                    <h3 class="section-title">Confirmar Asistencia</h3>
+                    <p>Por favor, confirma antes del 15 de Septiembre</p>
+                    
+                    <form id="rsvp-form">
+                        <div class="form-group">
+                            <input type="text" id="name" placeholder="Nombre completo" required>
+                        </div>
+                        <div class="form-group">
+                            <select id="attendance" required>
+                                <option value="" disabled selected>¿Asistirás?</option>
+                                <option value="si">Sí, con gusto</option>
+                                <option value="no">No podré asistir</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <input type="number" id="guests" placeholder="Número de acompañantes" min="0" max="5">
+                        </div>
+                        <div class="form-group">
+                            <textarea id="message" placeholder="Mensaje para los novios (opcional)"></textarea>
+                        </div>
+                        <button type="submit" id="submit-btn" class="btn-premium">ENVIAR CONFIRMACIÓN</button>
+                    </form>
+                    <div id="form-response" class="hidden">
+                        <p>¡Gracias por confirmar! Hemos recibido tu respuesta.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="footer">
+            <div class="container">
+                <h2>Brenda & Leo</h2>
+                <p>#BodaBrendayLeo</p>
+                <p class="made-by">Con amor, 2024</p>
+            </div>
+        </footer>
+
+    </main>
+
+    <script src="script.js"></script>
 </body>
 </html>
