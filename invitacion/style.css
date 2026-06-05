@@ -170,13 +170,156 @@ p {
 }
 
 /* 1. PANTALLA INICIAL / COVER (OVERLAY) */
-:root {
-    /* ... tus variables existentes ... */
-    
-    /* Actualización de colores para sobreimage_0.png */
-    --color-olive-dark: #37463A; /* El verde profundo del sobre en image_0.png */
-    --color-gold: #D2A85F;      /* Un oro más rico para el sello y el interior de image_0.png */
-    --color-white: #FFFFFF;
+#invitation-cover {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--color-ivory); /* Mismo fondo */
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 1.5s cubic-bezier(0.76, 0, 0.24, 1), opacity 1.5s ease;
+    padding: 20px;
+}
+
+/* La clase para el sobre clicable */
+.clickable-envelope {
+    cursor: pointer;
+    overflow: hidden; /* Asegura que la solapa no se salga al transicionar */
+}
+
+/* El contenedor principal que simula el sobre Abiertoimage_0.png */
+.envelope-outer {
+    position: relative;
+    max-width: 500px; /* Tamaño máximo del sobre */
+    width: 100%;
+    aspect-ratio: 4/5; /* Proporción para la tarjeta insertada, ver image_0.png */
+    background: transparent; /* El sobre se construye con sus hijos */
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+}
+
+/* Solapa superior abierta, color oroimage_0.png */
+.envelope-flap-gold {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 35%; /* Ocupa el 35% superior */
+    background-color: var(--color-gold); /* El oro interior de image_0.png */
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 80%, 0 100%); /* Forma de solapa triangular abierta */
+    z-index: 2;
+    border: 2px solid rgba(0,0,0,0.05); /* Límite muy sutil */
+}
+
+/* Cuerpo del sobre, color verde olivaimage_0.png */
+.envelope-body-green {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 80%; /* Ocupa el 80% inferior (se superpone un poco a la solapa) */
+    background-color: var(--color-olive-dark); /* El verde profundo de image_0.png */
+    border: 2px solid rgba(0,0,0,0.1);
+    z-index: 3;
+    padding: 10% 8%; /* Espaciado interno */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Contenido de la tarjeta insertada dentro del sobre */
+.envelope-card-content {
+    text-align: center;
+    background-color: var(--color-white); /* Tarjeta blanca insertada, ver image_0.png */
+    border: 1px solid var(--color-beige-dark);
+    padding: 20px;
+    width: 90%;
+    height: 70%; /* Ocupa el 70% de la zona visible del cuerpo */
+    position: relative;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Ajustes tipográficos para el interior del sobre */
+.cover-crest {
+    font-family: var(--font-serif-title);
+    font-size: 2.2rem;
+    color: var(--color-gold);
+    margin-bottom: 15px;
+    padding: 0;
+}
+.cover-crest::before, .cover-crest::after {
+    display: none; /* Elimina las líneas decorativas para que se parezca más a image_0.png */
+}
+
+.cover-names {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+    color: var(--color-olive);
+}
+
+.cover-date {
+    font-family: var(--font-sans);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--color-olive-light);
+    margin-bottom: 5px;
+}
+
+.cover-location {
+    font-family: var(--font-sans);
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #888;
+}
+
+.click-instruction {
+    font-family: var(--font-sans);
+    font-size: 0.55rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #ccc;
+    margin-top: 15px;
+    opacity: 0.7;
+}
+
+/* Sello de lacre dorado con iniciales, ver image_0.png */
+.wax-seal {
+    position: absolute;
+    bottom: -15px; /* Se superpone ligeramente al borde inferior del cuerpo green */
+    width: 60px;
+    height: 60px;
+    background-color: var(--color-gold);
+    border-radius: 50%;
+    border: 4px solid var(--color-gold);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    z-index: 4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: rotate(-10deg); /* Ligeramente inclinado */
+}
+
+.wax-initials {
+    font-family: var(--font-serif-title);
+    font-size: 1.2rem;
+    color: var(--color-white);
+    font-weight: 600;
+}
+
+/* Transición cuando se abre, misma lógica */
+#invitation-cover.opened {
+    transform: translateY(-100%);
+    opacity: 0;
+    pointer-events: none;
 }
 
 /* Música Control */
