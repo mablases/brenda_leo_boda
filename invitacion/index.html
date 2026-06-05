@@ -3,110 +3,129 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Brenda & Leo | Wedding Experience</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300&family=Playfair+Display:ital,wght@0,400;1,400&family=Montserrat:wght@200;300&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <title>Brenda & Leo | La Boda</title>
+    
+    <!-- Librerías de Alto Nivel -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-</head>
-<body>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,500;1,300&family=Playfair+Display:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
 
-    <!-- Música de fondo (Reemplaza el link por tu mp3) -->
-    <audio id="bg-music" loop>
-        <source src="https://www.bensound.com/bensound-music/bensound-love.mp3" type="audio/mpeg">
-    </audio>
-
-    <div id="music-control" class="hidden">
-        <div class="music-icon">♪</div>
-    </div>
-
-    <!-- Pantalla de Bienvenida Estilo "Sobre" -->
-    <div id="welcome-screen">
-        <div class="floating-leaves"></div>
-        <div class="welcome-content">
-            <span class="top-label">NUESTRA CELEBRACIÓN</span>
-            <h1>B <span class="ampersand">&</span> L</h1>
-            <p class="welcome-date">12 DE OCTUBRE DE 2024</p>
-            <button id="btn-open" class="btn-premium">ENTRAR A LA EXPERIENCIA</button>
-        </div>
-    </div>
-
-    <main id="main-content" class="hidden">
+    <style>
+        :root {
+            --color-oliva: #556B2F;
+            --color-oro: #B8860B;
+            --color-crema: #FAF9F6;
+        }
+        body {
+            background-color: var(--color-crema);
+            font-family: 'Cormorant Garamond', serif;
+            overflow-x: hidden;
+        }
+        .font-playfair { font-family: 'Playfair Display', serif; }
         
-        <!-- Hero Section con Efecto Parallax -->
-        <section class="hero">
-            <div class="hero-overlay"></div>
-            <div class="hero-content reveal">
-                <p class="pre-title">SAVE THE DATE</p>
-                <h2>Brenda & Leo</h2>
-                <div class="divider-gold"></div>
-                <p class="hero-quote">"El amor es el camino, la meta y el viaje mismo."</p>
+        /* Efecto de Revelación Premium */
+        .reveal-text {
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+            transform: translateY(100px);
+            opacity: 0;
+        }
+        
+        /* Cursor Personalizado (Detalle de Lujo) */
+        #custom-cursor {
+            width: 20px;
+            height: 20px;
+            background: var(--color-oro);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            mix-blend-mode: difference;
+            transition: transform 0.1s;
+        }
+
+        .hero-img-zoom {
+            transform: scale(1.1);
+            transition: transform 10s linear;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <div id="custom-cursor" class="hidden md:block"></div>
+
+    <!-- PANTALLA DE ENTRADA (Lujo Editorial) -->
+    <section id="welcome-screen" class="fixed inset-0 z-[100] bg-[#FAF9F6] flex flex-col items-center justify-center text-center">
+        <div class="mb-8 opacity-0 welcome-anim">
+            <span class="tracking-[0.3em] text-sm text-gray-500">NUESTRA INVITACIÓN</span>
+        </div>
+        <h1 class="font-playfair text-6xl md:text-8xl mb-6 welcome-anim opacity-0 text-[#556B2F]">B & L</h1>
+        <button id="btn-start" class="welcome-anim opacity-0 border border-[#B8860B] px-10 py-4 text-xs tracking-[0.2em] hover:bg-[#B8860B] hover:text-white transition-all duration-500">
+            ENTRAR AL EVENTO
+        </button>
+    </section>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main id="main-content" class="hidden opacity-0">
+        
+        <!-- HERO -->
+        <section class="relative h-screen overflow-hidden">
+            <div class="absolute inset-0">
+                <img src="https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=2070" class="w-full h-full object-cover hero-img-zoom" id="hero-image">
+                <div class="absolute inset-0 bg-black/30"></div>
+            </div>
+            <div class="relative z-10 flex flex-col items-center justify-center h-full text-white text-center">
+                <p class="font-light tracking-[0.5em] mb-4 reveal-text">12 DE OCTUBRE 2024</p>
+                <h2 class="font-playfair text-7xl md:text-9xl mb-8 reveal-text italic">Brenda & Leo</h2>
+                <div class="w-px h-24 bg-white/50 reveal-text"></div>
             </div>
         </section>
 
-        <!-- Historia con Línea de Tiempo -->
-        <section class="story section-padding">
-            <div class="container">
-                <h3 class="section-title reveal">Nuestra Historia</h3>
-                <div class="timeline">
-                    <div class="timeline-item reveal">
-                        <span class="year">2019</span>
-                        <h4>El primer encuentro</h4>
-                        <p>Donde todo comenzó, entre risas y un café.</p>
-                    </div>
-                    <div class="timeline-item reveal">
-                        <span class="year">2022</span>
-                        <h4>El "Sí"</h4>
-                        <p>Bajo las estrellas, prometimos caminar juntos.</p>
-                    </div>
+        <!-- HISTORIA (Layout Maison Olive) -->
+        <section class="py-32 px-6">
+            <div class="max-w-4xl mx-auto flex flex-col md:flex-row items-center gap-12">
+                <div class="md:w-1/2 reveal-text">
+                    <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=2069" class="rounded-t-full shadow-2xl">
+                </div>
+                <div class="md:w-1/2 text-center md:text-left reveal-text">
+                    <span class="text-[#B8860B] tracking-widest text-sm uppercase">Nuestra Historia</span>
+                    <h3 class="font-playfair text-4xl mt-4 mb-6 text-[#556B2F]">Un viaje que apenas comienza</h3>
+                    <p class="text-gray-600 leading-relaxed font-light italic">
+                        "Lo que comenzó con una mirada cómplice, se convirtió en nuestra mayor aventura. Hoy decidimos unir nuestras vidas para siempre."
+                    </p>
                 </div>
             </div>
         </section>
 
-        <!-- Información de Eventos -->
-        <section class="events section-padding">
-            <div class="container">
-                <div class="event-box reveal">
-                    <span class="event-type">CEREMONIA</span>
-                    <h3>Iglesia de San José</h3>
-                    <p>Sábado, 12 de Octubre | 17:00 hrs</p>
-                    <p class="event-location">Calle Real #45, Centro</p>
-                    <a href="#" class="btn-minimal">CÓMO LLEGAR</a>
-                </div>
-                
-                <div class="event-box reveal" style="margin-top: 50px;">
-                    <span class="event-type">RECEPCIÓN</span>
-                    <h3>Hacienda Los Olivos</h3>
-                    <p>Sábado, 12 de Octubre | 19:30 hrs</p>
-                    <p class="event-location">Km 12.5 Carretera al Valle</p>
-                    <a href="#" class="btn-minimal">CÓMO LLEGAR</a>
-                </div>
-            </div>
-        </section>
-
-        <!-- RSVP Form (Mismo estilo que Maison Olive) -->
-        <section class="rsvp section-padding">
-            <div class="container">
-                <div class="rsvp-container reveal">
-                    <h3>Confirmar Asistencia</h3>
-                    <form id="rsvp-form">
-                        <input type="text" id="name" placeholder="Tu Nombre" required>
-                        <select id="attendance" required>
-                            <option value="" disabled selected>¿Asistirás?</option>
-                            <option value="si">Confirmado</option>
+        <!-- SECCIÓN RSVP (Conectada a Supabase) -->
+        <section class="bg-white py-24 px-6 border-y border-gray-100">
+            <div class="max-w-2xl mx-auto text-center">
+                <h3 class="font-playfair text-5xl mb-12 reveal-text text-[#556B2F]">¿Nos acompañas?</h3>
+                <form id="rsvp-form" class="space-y-6 reveal-text">
+                    <input type="text" id="name" placeholder="Nombre completo" required class="w-full border-b border-gray-300 py-4 focus:border-[#B8860B] outline-none transition-colors bg-transparent italic">
+                    
+                    <div class="flex flex-col md:flex-row gap-6">
+                        <select id="attendance" class="w-full border-b border-gray-300 py-4 bg-transparent outline-none italic">
+                            <option value="si">Confirmar Asistencia</option>
                             <option value="no">No podré asistir</option>
                         </select>
-                        <input type="number" id="guests" placeholder="Acompañantes">
-                        <button type="submit" id="submit-btn" class="btn-premium">ENVIAR</button>
-                    </form>
-                    <div id="form-response" class="hidden">¡Gracias por confirmar!</div>
+                        <input type="number" id="guests" placeholder="Número de invitados" class="w-full border-b border-gray-300 py-4 bg-transparent outline-none italic">
+                    </div>
+                    
+                    <textarea id="message" placeholder="Mensaje para los novios" class="w-full border-b border-gray-300 py-4 bg-transparent outline-none italic"></textarea>
+                    
+                    <button type="submit" id="submit-btn" class="w-full bg-[#556B2F] text-white py-5 mt-8 tracking-[0.3em] text-xs hover:bg-[#B8860B] transition-all duration-700">
+                        ENVIAR CONFIRMACIÓN
+                    </button>
+                </form>
+                <div id="success-msg" class="hidden mt-10">
+                    <p class="font-playfair text-2xl text-[#B8860B]">¡Gracias por ser parte de nuestra historia!</p>
                 </div>
             </div>
         </section>
 
-        <footer class="footer">
-            <p>Hecho con amor para Brenda & Leo</p>
-            <span>2024</span>
-        </footer>
     </main>
 
     <script src="script.js"></script>
