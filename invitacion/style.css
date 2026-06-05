@@ -170,85 +170,13 @@ p {
 }
 
 /* 1. PANTALLA INICIAL / COVER (OVERLAY) */
-#invitation-cover {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: var(--color-ivory);
-    z-index: 9999;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: transform 1.2s cubic-bezier(0.76, 0, 0.24, 1), opacity 1.2s ease;
-}
-
-#invitation-cover.opened {
-    transform: translateY(-100%);
-    opacity: 0;
-    pointer-events: none;
-}
-
-.cover-card {
-    text-align: center;
-    padding: 40px;
-    max-width: 450px;
-    width: 90%;
-    background: var(--color-white);
-    border: 1px solid var(--color-beige-dark);
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.03);
-    position: relative;
-}
-
-.cover-card::after {
-    content: '';
-    position: absolute;
-    top: 8px;
-    left: 8px;
-    right: 8px;
-    bottom: 8px;
-    border: 1px solid var(--color-beige);
-    pointer-events: none;
-}
-
-.cover-crest {
-    font-family: var(--font-serif-title);
-    font-size: 2.8rem;
-    color: var(--color-gold);
-    margin-bottom: 20px;
-    position: relative;
-    display: inline-block;
-    padding: 0 15px;
-}
-
-.cover-crest::before, .cover-crest::after {
-    content: '';
-    position: absolute;
-    width: 40px;
-    height: 1px;
-    background-color: var(--color-beige-dark);
-    top: 50%;
-}
-
-.cover-crest::before { left: -40px; }
-.cover-crest::after { right: -40px; }
-
-.cover-names {
-    font-family: var(--font-serif-title);
-    font-size: 2.2rem;
-    letter-spacing: 0.1em;
-    margin-bottom: 15px;
-    color: var(--color-olive);
-}
-
-.cover-sub {
-    font-family: var(--font-sans);
-    font-size: 0.7rem;
-    text-transform: uppercase;
-    letter-spacing: 0.25em;
-    color: var(--color-olive-light);
-    margin-bottom: 35px;
+:root {
+    /* ... tus variables existentes ... */
+    
+    /* Actualización de colores para sobreimage_0.png */
+    --color-olive-dark: #37463A; /* El verde profundo del sobre en image_0.png */
+    --color-gold: #D2A85F;      /* Un oro más rico para el sello y el interior de image_0.png */
+    --color-white: #FFFFFF;
 }
 
 /* Música Control */
