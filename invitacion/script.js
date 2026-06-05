@@ -1,48 +1,101 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const btnOpen = document.getElementById('btn-open');
-    const welcome = document.getElementById('welcome-screen');
-    const main = document.getElementById('main-content');
-    const audio = document.getElementById('bg-music');
-    const musicControl = document.getElementById('music-control');
+// 1. CONFIGURACIÓN SUPABASE
+const _URL = 'https://TU_PROYECTO.supabase.co';
+const _KEY = 'TU_ANON_KEY';
+const supabaseClient = (typeof supabase !== 'undefined') ? supabase.createClient(_URL, _KEY) : null;
 
-    // Al abrir la invitación
-    btnOpen.addEventListener('click', () => {
-        // 1. Iniciar música (Muchos navegadores bloquean audio si no hay interacción)
-        audio.play().catch(e => console.log("Audio bloqueado por navegador"));
-        
-        // 2. Transición visual
-        welcome.style.opacity = '0';
-        setTimeout(() => {
-            welcome.classList.add('hidden');
-            main.classList.remove('hidden');
-            musicControl.classList.remove('hidden');
-            initScrollReveal();
-        }, 800);
+// 2. ANIMACIÓN DE ENTRADA (GSAP)
+window.onload = () => {
+    const tl = gsap.timeline();
+    
+    tl.to(".welcome-anim", {
+        opacity: 1,
+        y: -20,
+        duration: 1.2,
+        stagger: 0.3,
+        ease: "power2.out"
     });
+};
 
-    // Control de música manual
-    let isPlaying = true;
-    musicControl.addEventListener('click', () => {
-        if (isPlaying) {
-            audio.pause();
-            musicControl.style.opacity = '0.5';
-        } else {
-            audio.play();
-            musicControl.style.opacity = '1';
+// 3. BOTÓN INICIO EXPERIENCIA
+document.getElementById('btn-start').addEventListener('click', () => {
+    gsap.to("#welcome-screen", {
+        y: "-100%",
+        duration: 1.5,
+        ease: "expo.inOut",
+        onComplete: () => {
+            document.getElementById('welcome-screen').classList.add('hidden');
+            document.getElementById('main-content').classList.remove('hidden');
+            startMainAnimations();
         }
-        isPlaying = !isPlaying;
+    });
+    
+    gsap.to("#main-content", { opacity: 1, duration: 2 });
+});
+
+// 4. ANIMACIONES DE SCROLL (MAISON OLIVE STYLE)
+function startMainAnimations() {
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Animación de los textos que suben
+    gsap.utils.toArray(".reveal-text").forEach(text => {
+        gsap.to(text, {
+            scrollTrigger: {
+                trigger: text,
+                start: "top 90%",
+            },
+            opacity: 1,
+            y: 0,
+            duration: 1.5,
+            ease: "power4.out"
+        });
     });
 
-    // Observer para animaciones al bajar
-    function initScrollReveal() {
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, { threshold: 0.1 });
+    // Efecto Zoom en la foto principal
+    gsap.to("#hero-image", {
+        scale: 1,
+        duration: 20,
+        ease: "none"
+    });
+}
 
-        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+// 5. CURSOR PERSONALIZADO
+const cursor = document.getElementById('custom-cursor');
+document.addEventListener('mousemove', (e) => {
+    gsap.to(cursor, {
+        x: e.clientX,
+        y: e.clientY,
+        duration: 0.5,
+        ease: "power2.out"
+    });
+});
+
+// 6. ENVÍO RSVP A SUPABASE
+document.getElementById('rsvp-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const btn = document.getElementById('submit-btn');
+    btn.innerHTML = "PROCESANDO...";
+    btn.disabled = true;
+
+    const data = {
+        nombre: document.getElementById('name').value,
+        asistencia: document.getElementById('attendance').value,
+        acompanantes: document.getElementById('guests').value,
+        mensaje: document.getElementById('message').value
+    };
+
+    if (supabaseClient) {
+        const { error } = await supabaseClient.from('confirmaciones').insert([data]);
+        if (error) {
+            alert("Error al enviar. Inténtalo de nuevo.");
+            btn.innerHTML = "ENVIAR CONFIRMACIÓN";
+            btn.disabled = false;
+            return;
+        }
+    } else {
+        // Simulación si no hay Supabase
+        console.log("Simulación de envío:", data);
     }
+
+    gsap.to("#rsvp-form", { opacity: 0, height: 0, duration: 1 });
+    document.getElementById('success-msg').classList.remove('hidden');
 });
