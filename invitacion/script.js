@@ -344,48 +344,4 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   });
 });
 
-/*gaaaaaaaaaaaaaa
-/* ============================================================
-   FUNCIÓN: COPIAR PORTAPAPELES (MESA DE REGALOS)
-   ============================================================ */
-function copyToClipboard(text, btnElement) {
-  if (navigator.clipboard && window.isSecureContext) {
-    // API moderna de portapapeles
-    navigator.clipboard.writeText(text).then(() => {
-      showCopySuccess(btnElement);
-    }).catch(err => console.error('Error al copiar: ', err));
-  } else {
-    // Fallback para navegadores antiguos
-    let textArea = document.createElement("textarea");
-    textArea.value = text;
-    textArea.style.position = "fixed";
-    textArea.style.left = "-999999px";
-    textArea.style.top = "-999999px";
-    document.body.appendChild(textArea);
-    textArea.focus();
-    textArea.select();
-    try {
-      document.execCommand('copy');
-      showCopySuccess(btnElement);
-    } catch (err) {
-      console.error('Error al copiar: ', err);
-    }
-    textArea.remove();
-  }
-}
 
-function showCopySuccess(btnElement) {
-  const originalText = btnElement.innerText;
-  
-  // Cambiamos el estado visual del botón
-  btnElement.innerText = "¡CLABE Copiada!";
-  btnElement.style.background = "var(--olive)";
-  btnElement.style.color = "var(--ivory)";
-  
-  // Restauramos después de 3 segundos
-  setTimeout(() => {
-    btnElement.innerText = originalText;
-    btnElement.style.background = "transparent";
-    btnElement.style.color = "var(--olive)";
-  }, 3000);
-}
