@@ -343,5 +343,54 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     target.scrollIntoView({ behavior: 'smooth', block: 'start' });
   });
 });
+/* ============================================================
+   FUNCIÓN: COPIAR PORTAPAPELES (MESA DE REGALOS)
+   ============================================================ */
 
+function copyToClipboard(text, btnElement) {
+  // Verifica si el navegador soporta la API moderna del portapapeles
+  if (navigator.clipboard && window.isSecureContext) {
+    navigator.clipboard.writeText(text).then(() => {
+      showCopySuccess(btnElement);
+    }).catch(err => console.error('Error al copiar: ', err));
+  } else {
+    // Fallback seguro para navegadores o celulares más antiguos
+    let textArea = document.createElement("textarea");
+    textArea.value = text;
+    textArea.style.position = "fixed";
+    textArea.style.left = "-999999px";
+    textArea.style.top = "-999999px";
+    document.body.appendChild(textArea);
+    textArea.focus();
+    textArea.select();
+    try {
+      document.execCommand('copy');
+      showCopySuccess(btnElement);
+    } catch (err) {
+      console.error('Error al copiar usando fallback: ', err);
+    }
+    textArea.remove();
+  }
+}
+
+function showCopySuccess(btnElement) {
+  // Guardamos el icono original de copiar
+  const originalHTML = btnElement.innerHTML;
+  
+  // Cambiamos el icono a una palomita (Checkmark) animada con color de éxito
+  btnElement.innerHTML = `
+    <svg viewBox="0 0 24 24" fill="none" stroke="var(--olive)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="transform: scale(1.2); transition: all 0.3s ease;">
+      <polyline points="20 6 9 17 4 12"></polyline>
+    </svg>
+  `;
+  
+  // Deshabilitamos el botón temporalmente para evitar clics dobles
+  btnElement.style.pointerEvents = "none";
+  
+  // Restauramos el icono original después de 2.5 segundos
+  setTimeout(() => {
+    btnElement.innerHTML = originalHTML;
+    btnElement.style.pointerEvents = "auto";
+  }, 2500);
+}
 
