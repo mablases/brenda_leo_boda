@@ -1197,3 +1197,178 @@ textarea.form-control {
         padding: 40px 20px;
     }
 }
+/* ==========================================================================
+   AGREGADO: SOBRE INTERACTIVO (TERRACOTA, OCRE Y OLIVA)
+   ========================================================================== */
+:root {
+    --color-olive-envelope: #4A5D4E;
+    --color-olive-dark-envelope: #323F35;
+    --color-terracota-envelope: #A64B2A;
+    --color-terracota-dark-envelope: #82351B;
+    --color-ocre-envelope: #D49B45;
+    --color-ocre-light-envelope: #EAD0A8;
+}
+
+#invitation-cover {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #EFEBE4;
+    z-index: 99999; /* Por encima de todo */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 1s cubic-bezier(0.76, 0, 0.24, 1), opacity 1s ease;
+    perspective: 1000px;
+}
+
+.envelope-container {
+    position: relative;
+    width: 90%;
+    max-width: 400px;
+    aspect-ratio: 3 / 4;
+}
+
+.envelope-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: var(--color-olive-dark-envelope);
+    border-radius: 4px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+    z-index: 1;
+}
+
+.envelope-flap-top {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 50%;
+    background-color: var(--color-olive-envelope);
+    clip-path: polygon(0 0, 100% 0, 50% 100%);
+    z-index: 4;
+    transform-origin: top center;
+    transition: transform 0.8s ease-in-out, z-index 0.2s 0.4s;
+}
+
+.envelope-front-body {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 60%;
+    background-color: var(--color-olive-dark-envelope);
+    clip-path: polygon(0 30%, 50% 0, 100% 30%, 100% 100%, 0 100%);
+    z-index: 3;
+}
+
+.envelope-card {
+    position: absolute;
+    bottom: 4%;
+    left: 5%;
+    width: 90%;
+    height: 90%;
+    background-color: #FFFFFF;
+    z-index: 2;
+    padding: 15px;
+    transition: transform 0.8s 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.card-inner-border {
+    border: 1px solid var(--color-ocre-light-envelope);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+}
+
+.cover-crest {
+    font-family: serif;
+    font-size: 2.5rem;
+    color: var(--color-ocre-envelope);
+}
+.cover-names {
+    font-family: serif;
+    font-size: 2.2rem;
+    color: var(--color-terracota-envelope);
+    margin: 15px 0;
+    line-height: 1.2;
+}
+.cover-date {
+    font-size: 0.8rem;
+    letter-spacing: 0.2em;
+    color: var(--color-olive-envelope);
+}
+.cover-location {
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    color: var(--color-ocre-envelope);
+    margin-top: 5px;
+}
+
+.wax-seal-click {
+    position: absolute;
+    bottom: 35%;
+    left: 50%;
+    transform: translate(-50%, 0);
+    z-index: 5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    transition: opacity 0.4s ease;
+}
+
+.wax-seal-body {
+    width: 60px;
+    height: 60px;
+    background: radial-gradient(circle, var(--color-terracota-envelope) 0%, var(--color-terracota-dark-envelope) 100%);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    border: 2px solid var(--color-ocre-envelope);
+}
+
+.wax-initials {
+    font-family: serif;
+    font-size: 1.2rem;
+    color: var(--color-ocre-light-envelope);
+    font-weight: bold;
+}
+
+.click-instruction {
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: #ffffff;
+    margin-top: 10px;
+    white-space: nowrap;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+}
+
+/* Clases de animación aplicadas por JS */
+#invitation-cover.step-1 .envelope-flap-top {
+    transform: rotateX(180deg);
+    z-index: 1;
+}
+#invitation-cover.step-1 .wax-seal-click {
+    opacity: 0;
+    pointer-events: none;
+}
+#invitation-cover.step-2 .envelope-card {
+    transform: translateY(-50%);
+}
+#invitation-cover.finalized {
+    transform: translateY(-100%);
+    opacity: 0;
+    pointer-events: none;
+}
