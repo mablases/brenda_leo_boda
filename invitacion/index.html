@@ -4,16 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Brenda & Leo — Nuestra Invitación de Boda</title>
+    <!-- Tipografías Premium -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+    <!-- Supabase CDN -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
+    <!-- TEXTURA GLOBAL DE PAPEL ARTESANAL -->
     <div class="paper-overlay"></div>
 
+    <!-- REPRODUCTOR DE MÚSICA SUTIL -->
     <audio id="bg-music" loop preload="auto">
         <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
     </audio>
@@ -22,17 +26,9 @@
         <svg class="icon-pause hidden" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
     </button>
 
+    <!-- EXPERIENCIA DE ENTRADA: EL SOBRE -->
     <div id="envelope-wrapper" class="envelope-wrapper">
         <div class="envelope" id="envelope">
-            <div class="envelope-back"></div>
-            <div class="envelope-paper">
-                <div class="paper-preview-content">
-                    <p class="envelope-brand">Maison de L'amour</p>
-                    <h2 class="envelope-names">Brenda & Leo</h2>
-                    <p class="envelope-date">10 . 10 . 2026</p>
-                </div>
-            </div>
-            <div class="envelope-front"></div>
             <div class="envelope-top" id="envelope-top"></div>
             <div class="wax-seal" id="wax-seal">
                 <svg viewBox="0 0 100 100" class="seal-svg">
@@ -41,12 +37,23 @@
                     <text x="50" y="58" font-family="'Cormorant Garamond', serif" font-size="24" fill="#f3e9dc" text-anchor="middle" font-style="italic">B&L</text>
                 </svg>
             </div>
+            <div class="envelope-paper">
+                <div class="paper-preview-content">
+                    <p class="envelope-brand">Maison de L'amour</p>
+                    <h2 class="envelope-names">Brenda & Leo</h2>
+                    <p class="envelope-date">10 . 10 . 2026</p>
+                </div>
+            </div>
+            <div class="envelope-front"></div>
+            <div class="envelope-back"></div>
         </div>
         <p class="envelope-instruction">Toca el sello para abrir</p>
     </div>
 
+    <!-- CONTENIDO PRINCIPAL DE LA INVITACIÓN -->
     <main id="main-content" class="main-content hidden-content">
         
+        <!-- SECCIÓN 1: PORTADA PREMIUM -->
         <section class="section section-hero">
             <div class="botanical-left">
                 <svg viewBox="0 0 100 200" width="100%" height="100%"><path d="M10,190 Q30,120 20,50 Q40,90 80,30" fill="none" stroke="#d4a373" stroke-width="1" opacity="0.4"/></svg>
@@ -63,6 +70,7 @@
 
         <hr class="editorial-divider">
 
+        <!-- SECCIÓN 2: MENSAJE DE BIENVENIDA & HISTORIA -->
         <section class="section section-story">
             <div class="card-artesanal">
                 <p class="quote">"Hay momentos en la vida que son inolvidables, y compartirlos con quienes más amamos los hace eternos."</p>
@@ -74,6 +82,7 @@
             </div>
         </section>
 
+        <!-- SECCIÓN 3: CUENTA REGRESIVA ELEGANTE -->
         <section class="section section-countdown">
             <h3 class="section-subtitle">El Gran Día Se Aproxima</h3>
             <div class="countdown-container">
@@ -87,6 +96,7 @@
             </div>
         </section>
 
+        <!-- SECCIÓN 4: CEREMONIA Y RECEPCIÓN -->
         <section class="section section-details">
             <div class="details-grid">
                 <div class="detail-block">
@@ -107,6 +117,7 @@
             </div>
         </section>
 
+        <!-- SECCIÓN 5: GALERÍA -->
         <section class="section section-gallery">
             <h3 class="section-subtitle">Momentos Compartidos</h3>
             <div class="gallery-stack">
@@ -119,6 +130,7 @@
             </div>
         </section>
 
+        <!-- SECCIÓN 6: DRESS CODE -->
         <section class="section section-dresscode">
             <div class="botanical-right design-bottom">
                 <svg viewBox="0 0 100 100" width="60" height="60"><circle cx="50" cy="50" r="40" fill="none" stroke="#d4a373" stroke-width="0.5" stroke-dasharray="2,2"/></svg>
@@ -133,6 +145,7 @@
             </div>
         </section>
 
+        <!-- SECCIÓN 7: RSVP CONECTADO A SUPABASE -->
         <section class="section section-rsvp">
             <div class="rsvp-card">
                 <h3 class="section-subtitle">Confirmación de Asistencia</h3>
@@ -174,6 +187,7 @@
             </div>
         </section>
 
+        <!-- SECCIÓN 8: MENSAJE FINAL -->
         <section class="section section-footer">
             <p class="footer-bless">Con la bendición de Dios y nuestros padres.</p>
             <h2 class="footer-names">Brenda & Leo</h2>
