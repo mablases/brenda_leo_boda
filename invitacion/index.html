@@ -10,33 +10,35 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-   <!-- 1. PANTALLA DE BIENVENIDA / COVER -->
-    <!-- El sobre completo ahora actúa como un gran botón clicable -->
-<div id="invitation-cover" class="clickable-envelope" aria-label="Haga clic en el sobre para abrir la invitación">
-        <div class="envelope-wrapper">
+<!-- 1. PANTALLA DE BIENVENIDA / SOBRE INTERACTIVO CERRADO -->
+    <div id="invitation-cover">
+        <div class="envelope-container">
+            <!-- Cuerpo/atrás del sobre (Color Verde Oliva) -->
+            <div class="envelope-back"></div>
             
-            <div class="envelope-back">
-                <div class="envelope-gold-lining"></div>
-            </div>
-            
+            <!-- Tarjeta interna (Oculta al principio, se revela al abrir) -->
             <div class="envelope-card">
                 <div class="card-inner-border">
                     <div class="cover-crest">B & L</div>
-                    <h1 class="cover-names">Brenda & Leo</h1>
+                    <h1 class="cover-names">Brenda <br>& Leo</h1>
                     <p class="cover-date">17 . 10 . 2026</p>
                     <p class="cover-location">Valle de Guadalupe, México</p>
-                    <p class="click-instruction">Toque para abrir</p>
-                </div>
-            </div>
-            
-            <div class="envelope-front-body"></div>
-            
-            <div class="wax-seal-center">
-                <div class="wax-seal-body">
-                    <span class="wax-initials">B&L</span>
                 </div>
             </div>
 
+            <!-- Solapa inferior y laterales del sobre -->
+            <div class="envelope-front-body"></div>
+
+            <!-- Solapa superior que SE ABRE (Animada con CSS) -->
+            <div class="envelope-flap-top"></div>
+            
+            <!-- Sello de Lacre (Terracota con letras Ocre) -->
+            <div class="wax-seal-click">
+                <div class="wax-seal-body">
+                    <span class="wax-initials">B&L</span>
+                </div>
+                <p class="click-instruction">Toca el sello para abrir</p>
+            </div>
         </div>
     </div>
     <!-- 2. HERO PRINCIPAL -->
