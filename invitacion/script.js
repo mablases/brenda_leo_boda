@@ -11,28 +11,26 @@ const supabaseKey = "MI_KEY";
 // Asegurar que todo el código se ejecute cuando el DOM esté completamente cargado
 document.addEventListener('DOMContentLoaded', () => {
     console.log("Iniciando script de la invitación...");
-// ==========================================
+    // ==========================================
     // 2. APERTURA DE INVITACIÓN Y MÚSICA
     // ==========================================
-    // Cambiamos el selector: Buscamos el contenedor del sobre completo
-    const coverEnvelope = document.getElementById('invitation-cover');
+    const btnOpenInvitation = document.getElementById('btn-open-invitation');
+    const coverOverlay = document.getElementById('invitation-cover');
     const backgroundMusic = document.getElementById('background-music');
     const btnMusicToggle = document.getElementById('btn-music-toggle');
     const iconMusicOn = document.getElementById('icon-music-on');
     const iconMusicOff = document.getElementById('icon-music-off');
-
-    // Verificar si el elemento básico de apertura existe
-    if (!coverEnvelope) {
-        console.error("Error crítico: No se encontró la pantalla de cover (sobre) en el HTML.");
+    // Verificar si los elementos básicos de apertura existen
+    if (!btnOpenInvitation || !coverOverlay) {
+        console.error("Error crítico: No se encontró el botón de apertura o la pantalla de cover en el HTML.");
         return;
     }
-
-    // Evento al abrir la invitación: Ahora el clic es en el sobre completo
-    coverEnvelope.addEventListener('click', () => {
-        console.log("Abriendo invitación (clic en sobre)...");
+    // Evento al abrir la invitación
+    btnOpenInvitation.addEventListener('click', () => {
+        console.log("Abriendo invitación...");
         
         // 1. Añadir clase para la transición hacia arriba
-        coverEnvelope.classList.add('opened');
+        coverOverlay.classList.add('opened');
         
         // 2. Mostrar el botón flotante de música si existe
         if (btnMusicToggle) {
