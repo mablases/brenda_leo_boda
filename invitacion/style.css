@@ -1312,3 +1312,56 @@ footer {
   display: inline-block;
 }
 @keyframes spin { to { transform: rotate(360deg); } }
+
+/* ============================================================
+   DETALLES BOTÁNICOS ILUSTRADOS (Rosas y Ramas)
+   ============================================================ */
+
+/* 1. Ramas en las esquinas de las secciones claras */
+.section::before,
+.section::after {
+  content: '';
+  position: absolute;
+  width: 140px; /* Ajusta el tamaño de la ramita */
+  height: 140px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  pointer-events: none; /* Para que no estorbe al hacer clic */
+  opacity: 0.85; /* Sutil integración con el fondo */
+  z-index: 1;
+}
+
+/* Esquina superior izquierda (Solo en algunas secciones decoradas) */
+.section-decorated::before {
+  top: 0;
+  left: 0;
+  background-image: url('ramita-esquina.png'); /* Ruta de tu imagen */
+}
+
+/* Esquina inferior derecha */
+.section-decorated::after {
+  bottom: 0;
+  right: 0;
+  background-image: url('ramita-esquina.png');
+  transform: rotate(180deg); /* Invierte la rama para la esquina opuesta */
+}
+
+/* 2. Modificación del Separador Ornamental (Reemplaza el antiguo .ornament) */
+.ornament-floral {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 40px auto;
+  width: 100%;
+  max-width: 320px; /* Ancho de la guirnalda de rosas */
+  height: 60px;
+  background-image: url('separador-rosas.png'); /* Tu imagen tipo image_37e1ad.png */
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+/* 3. Salpicado de brillos/puntos dorados de fondo (Como se ve en la referencia) */
+.bg-splatter {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cg fill='%23D4B373' fill-opacity='0.15'%3E%3Ccircle cx='10' cy='10' r='1'/%3E%3Ccircle cx='40' cy='25' r='1.5'/%3E%3Ccircle cx='70' cy='15' r='0.8'/%3E%3Ccircle cx='25' cy='60' r='1.2'/%3E%3Ccircle cx='55' cy='70' r='1.8'/%3E%3C/g%3E%3C/svg%3E");
+}
