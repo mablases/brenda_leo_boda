@@ -1,879 +1,515 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <!-- ============================================================
-       BRENDA & LEO — Invitación de Boda Premium
-       index.html
-       ============================================================ -->
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <meta name="theme-color" content="#3E4E30" />
-  <meta name="description" content="Brenda & Leo — Los invitamos a celebrar el inicio de nuestra historia juntos." />
-
-  <!-- Open Graph (para compartir en redes) -->
-  <meta property="og:title"       content="Brenda & Leo — Nuestra Boda" />
-  <meta property="og:description" content="Acompáñanos a celebrar este momento especial." />
-  <meta property="og:type"        content="website" />
-
-  <title>Brenda &amp; Leo — Nuestra Boda</title>
-
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&display=swap" rel="stylesheet" />
-
-  <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brenda & Leo — Invitación de Boda</title>
+    <!-- Vinculación del archivo de estilos unificado -->
+    <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-  <!-- ══════════════════════════════════════════════════════════
-       PANTALLA DE APERTURA — SOBRE ANIMADO
-       ══════════════════════════════════════════════════════════ -->
-  <div id="envelope-screen" aria-label="Toca para abrir la invitación">
-
-    <!-- Partículas flotantes decorativas -->
-    <div class="envelope-particles"></div>
-
-    <div class="envelope-wrap">
-
-      <!-- SVG del sobre con animación de tapa -->
-      <svg class="envelope-svg" viewBox="0 0 340 240" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <!-- Sombra -->
-        <defs>
-          <filter id="drop-shadow" x="-10%" y="-10%" width="120%" height="140%">
-            <feDropShadow dx="0" dy="12" stdDeviation="16" flood-color="rgba(0,0,0,0.35)" />
-          </filter>
-          <linearGradient id="envGrad" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%"   stop-color="#EDE4D3" />
-            <stop offset="100%" stop-color="#D6C9B0" />
-          </linearGradient>
-          <linearGradient id="goldGrad" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0%"   stop-color="#B89A5A" />
-            <stop offset="50%"  stop-color="#EDD9A3" />
-            <stop offset="100%" stop-color="#B89A5A" />
-          </linearGradient>
-        </defs>
-
-        <!-- Cuerpo del sobre -->
-        <rect x="0" y="40" width="340" height="200" rx="4" fill="url(#envGrad)" filter="url(#drop-shadow)" />
-
-        <!-- Borde dorado del sobre -->
-        <rect x="1" y="41" width="338" height="198" rx="3" fill="none" stroke="url(#goldGrad)" stroke-width="0.8" opacity="0.7" />
-
-        <!-- Pliegues laterales inferiores (triángulos) -->
-        <path d="M 0 80 L 170 165 L 340 80 L 340 240 L 0 240 Z" fill="#C8B89A" opacity="0.35" />
-
-        <!-- Tapa del sobre (se animará con JS/CSS) -->
-        <g id="envelope-flap" style="transform-origin: 170px 40px; transform: rotateX(0deg);">
-          <path d="M 0 40 L 170 145 L 340 40 Z" fill="#D6C9B0" />
-          <path d="M 0 40 L 170 145 L 340 40" fill="none" stroke="url(#goldGrad)" stroke-width="0.8" opacity="0.6" />
-        </g>
-
-        <!-- Sello central con monograma -->
-        <circle cx="170" cy="155" r="28" fill="#3E4E30" />
-        <circle cx="170" cy="155" r="25" fill="none" stroke="url(#goldGrad)" stroke-width="0.8" />
-        <text x="170" y="161" font-family="'Playfair Display', serif" font-size="14" font-style="italic"
-              fill="#EDD9A3" text-anchor="middle" letter-spacing="2">B&amp;L</text>
-      </svg>
-
-      <!-- Tagline superior -->
-      <p class="envelope-tagline">Una invitación especial</p>
-
-      <!-- Botón de apertura -->
-      <div class="envelope-open-btn">
-        <span>Toca para abrir</span>
-        <div class="pulse-ring" aria-hidden="true">
-          <!-- Icono de dedo / toque -->
-          <svg viewBox="0 0 24 24" stroke-width="1.5">
-            <path stroke-linecap="round" stroke-linejoin="round"
-              d="M15.042 21.672 13.684 16.6m0 0-2.51 2.225.569-9.47 5.227 7.917-3.286-.672ZM12 2.25V4.5m5.834.166-1.591 1.591M20.25 10.5H18M7.757 14.743l-1.59 1.59M6 10.5H3.75m4.007-4.243-1.59-1.59" />
-          </svg>
-        </div>
-      </div>
-
-    </div>
-  </div>
-  <!-- /envelope-screen -->
-
-
-  <!-- ══════════════════════════════════════════════════════════
-       HERO PRINCIPAL
-       ══════════════════════════════════════════════════════════ -->
-  <section id="hero" aria-label="Portada de la invitación">
-
-    <!-- Fondo con efecto parallax -->
-    <div class="hero-bg loaded" aria-hidden="true">
-      <!-- Imagen de fondo: agrega aquí la URL de tu foto de pareja -->
-      <!-- Ejemplo: style="background-image: url('fotos/hero.jpg')" -->
-      <!-- Si no tienes imagen, se usará el color de fondo verde oliva -->
-    </div>
-
-    <!-- Overlay con gradiente -->
-    <div class="hero-overlay" aria-hidden="true"></div>
-
-    <!-- Marco decorativo dorado -->
-    <div class="hero-frame" aria-hidden="true"></div>
-
-    <!-- Contenido principal del hero -->
-    <div class="hero-content">
-      <p class="hero-pre">Con amor &amp; alegría</p>
-
-      <h1 class="hero-names">
-        <em>Brenda</em>
-        <span class="hero-ampersand">&amp;</span>
-        <em>Leo</em>
-      </h1>
-
-      <p class="hero-date">15 · Noviembre · 2025</p>
-
-      <div class="hero-divider"></div>
-
-      <p class="hero-location">Ciudad de México, México</p>
-    </div>
-
-    <!-- Indicador de scroll -->
-    <div class="scroll-indicator" aria-hidden="true">
-      <span>Descubre</span>
-      <div class="scroll-line"></div>
-    </div>
-
-  </section>
-  <!-- /hero -->
-
-
-  <!-- ══════════════════════════════════════════════════════════
-       INTRODUCCIÓN / INVITACIÓN
-       ══════════════════════════════════════════════════════════ -->
-  <section class="section" id="intro" aria-labelledby="intro-title">
-    <div class="section-inner text-center">
-
-      <p class="section-tag reveal" style="justify-content:center">
-        Queridos amigos &amp; familia
-      </p>
-
-      <h2 class="section-title reveal reveal-delay-1" id="intro-title">
-        Juntos para siempre,<br>
-        <em>juntos para siempre.</em>
-      </h2>
-
-      <div class="ornament reveal reveal-delay-2" aria-hidden="true">
-        <div class="ornament-line"></div>
-        <div class="ornament-diamond"></div>
-        <div class="ornament-line"></div>
-      </div>
-
-      <p class="section-subtitle reveal reveal-delay-3" style="max-width:500px;margin:0 auto">
-        Con el corazón lleno de alegría, nos complace invitarte a celebrar
-        el inicio de nuestra vida juntos. Tu presencia es el regalo más
-        valioso que podríamos recibir en este día tan especial.
-      </p>
-
-    </div>
-  </section>
-  <!-- /intro -->
-
-
-  <!-- ══════════════════════════════════════════════════════════
-       CUENTA REGRESIVA
-       ══════════════════════════════════════════════════════════ -->
-  <section class="section" id="countdown" aria-labelledby="countdown-title">
-    <div class="section-inner text-center">
-
-      <p class="section-tag reveal">Faltan</p>
-
-      <h2 class="section-title reveal reveal-delay-1" id="countdown-title">
-        El gran día se <em>acerca</em>
-      </h2>
-
-      <!-- Grid de la cuenta regresiva (valores inyectados por script.js) -->
-      <div class="countdown-grid" role="timer" aria-label="Cuenta regresiva para la boda">
-
-        <div class="countdown-item reveal reveal-delay-1">
-          <span class="countdown-number" id="cd-days">00</span>
-          <span class="countdown-label">Días</span>
-        </div>
-
-        <div class="countdown-item reveal reveal-delay-2">
-          <span class="countdown-number" id="cd-hours">00</span>
-          <span class="countdown-label">Horas</span>
-        </div>
-
-        <div class="countdown-item reveal reveal-delay-3">
-          <span class="countdown-number" id="cd-mins">00</span>
-          <span class="countdown-label">Min</span>
-        </div>
-
-        <div class="countdown-item reveal reveal-delay-4">
-          <span class="countdown-number" id="cd-secs">00</span>
-          <span class="countdown-label">Seg</span>
-        </div>
-
-      </div>
-    </div>
-  </section>
-  <!-- /countdown -->
-
-
-  <!-- ══════════════════════════════════════════════════════════
-       FOTOGRAFÍA EDITORIAL
-       ══════════════════════════════════════════════════════════ -->
-  <section id="editorial" aria-label="Galería editorial">
-    <div class="editorial-grid">
-
-      <!-- Foto grande superior (ocupa 2 columnas) -->
-      <!-- Reemplaza .photo-placeholder con una etiqueta <img> real -->
-      <div class="editorial-photo wide">
-        <div class="photo-placeholder">
-          <span class="photo-num">01</span>
-        </div>
-        <p class="photo-caption">El momento en que todo cambió</p>
-      </div>
-
-      <!-- Foto secundaria izquierda -->
-      <div class="editorial-photo tall">
-        <div class="photo-placeholder">
-          <span class="photo-num">02</span>
-        </div>
-        <p class="photo-caption">Nuestra primera foto juntos</p>
-      </div>
-
-      <!-- Foto secundaria derecha -->
-      <div class="editorial-photo tall">
-        <div class="photo-placeholder">
-          <span class="photo-num">03</span>
-        </div>
-        <p class="photo-caption">Un instante eterno</p>
-      </div>
-
-    </div>
-  </section>
-  <!-- /editorial -->
-
-
-  <!-- ══════════════════════════════════════════════════════════
-       HISTORIA DE AMOR
-       ══════════════════════════════════════════════════════════ -->
-  <section class="section" id="story" aria-labelledby="story-title">
-    <div class="section-inner">
-
-      <p class="section-tag reveal">Nuestra historia</p>
-
-      <h2 class="section-title reveal reveal-delay-1" id="story-title">
-        El camino que<br>
-        <em>nos trajo aquí</em>
-      </h2>
-
-      <div class="ornament reveal reveal-delay-2" aria-hidden="true">
-        <div class="ornament-line"></div>
-        <div class="ornament-diamond"></div>
-        <div class="ornament-line"></div>
-      </div>
-
-      <!-- Línea de tiempo de la historia -->
-      <div class="story-timeline">
-
-        <div class="story-item reveal">
-          <div class="story-year-wrap">
-            <div class="story-dot" aria-hidden="true"></div>
-            <span class="story-year">2019</span>
-          </div>
-          <div class="story-content">
-            <h3>El primer encuentro</h3>
-            <p>
-              Fue en una tarde de octubre cuando nuestros caminos se cruzaron
-              por primera vez. Una mirada, una sonrisa tímida y el universo
-              supo antes que nosotros que algo extraordinario estaba comenzando.
-            </p>
-          </div>
-        </div>
-
-        <div class="story-item reveal reveal-delay-1">
-          <div class="story-year-wrap">
-            <div class="story-dot" aria-hidden="true"></div>
-            <span class="story-year">2020</span>
-          </div>
-          <div class="story-content">
-            <h3>El primer "te quiero"</h3>
-            <p>
-              Entre conversaciones interminables y aventuras compartidas,
-              descubrimos que éramos el hogar del otro. Aquellas tres palabras
-              llegaron en el momento más inesperado y más perfecto posible.
-            </p>
-          </div>
-        </div>
-
-        <div class="story-item reveal reveal-delay-2">
-          <div class="story-year-wrap">
-            <div class="story-dot" aria-hidden="true"></div>
-            <span class="story-year">2022</span>
-          </div>
-          <div class="story-content">
-            <h3>Nuestro primer viaje juntos</h3>
-            <p>
-              Descubrimos que viajar juntos es la forma más auténtica
-              de conocer a alguien. Aprendimos a navegar mapas y
-              desacuerdos con la misma gracia, y eso nos enamoró aún más.
-            </p>
-          </div>
-        </div>
-
-        <div class="story-item reveal reveal-delay-3">
-          <div class="story-year-wrap">
-            <div class="story-dot" aria-hidden="true"></div>
-            <span class="story-year">2024</span>
-          </div>
-          <div class="story-content">
-            <h3>La propuesta</h3>
-            <p>
-              Bajo un cielo estrellado, con el corazón a punto de salir
-              del pecho, Leo le preguntó a Brenda si quería ser su compañera
-              de vida. La respuesta llegó antes de que él terminara la pregunta.
-            </p>
-          </div>
-        </div>
-
-        <div class="story-item reveal reveal-delay-4">
-          <div class="story-year-wrap">
-            <div class="story-dot" aria-hidden="true"></div>
-            <span class="story-year">2025</span>
-          </div>
-          <div class="story-content">
-            <h3>El comienzo del para siempre</h3>
-            <p>
-              Hoy queremos celebrar ese amor con las personas que más amamos.
-              Gracias por ser parte de este capítulo tan hermoso de nuestra
-              historia.
-            </p>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-  <!-- /story -->
-
-
-  <!-- ══════════════════════════════════════════════════════════
-       CEREMONIA & RECEPCIÓN
-       ══════════════════════════════════════════════════════════ -->
-  <section class="section" id="ceremony" aria-labelledby="ceremony-title">
-    <div class="section-inner">
-
-      <p class="section-tag reveal">El gran día</p>
-
-      <h2 class="section-title reveal reveal-delay-1" id="ceremony-title">
-        Información de la<br>
-        <em>celebración</em>
-      </h2>
-
-      <div class="ornament reveal reveal-delay-2" aria-hidden="true">
-        <div class="ornament-line"></div>
-        <div class="ornament-diamond"></div>
-        <div class="ornament-line"></div>
-      </div>
-
-      <div class="event-cards">
-
-        <!-- Ceremonia -->
-        <div class="event-card reveal reveal-delay-2">
-          <p class="event-type">
-            <!-- Icono flor/iglesia -->
-            <svg viewBox="0 0 24 24" stroke-width="1.2" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round"
-                d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446A9 9 0 1 1 12 3Z" />
-            </svg>
-            Ceremonia
-          </p>
-          <h3>Ceremonia Religiosa</h3>
-          <div class="event-details">
-            <div class="event-detail-row">
-              <!-- Icono calendario -->
-              <svg viewBox="0 0 24 24" stroke-width="1.3" aria-hidden="true">
-                <path stroke-linecap="round" stroke-linejoin="round"
-                  d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5" />
-              </svg>
-              <span>Sábado 15 de noviembre, 2025</span>
+    <!-- ============================================================
+       PANTALLA DE APERTURA (ENVELOPE / SOBRE VIRTUAL)
+       ============================================================ -->
+    <div id="envelope-screen" onclick="openInvitation()">
+        <div class="envelope-wrap">
+            <p class="envelope-tagline">Nuestra Unión</p>
+            
+            <!-- Icono del sobre con sello de lacre central -->
+            <div class="envelope-svg">
+                <svg viewBox="0 0 400 300" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Cuerpo del sobre -->
+                    <rect width="400" height="300" rx="4" fill="#8E432A"/>
+                    <!-- Solapas internas -->
+                    <path d="M0,300 L200,160 L400,300 Z" fill="#A34F34" opacity="0.9"/>
+                    <path d="M0,0 L160,150 L0,300 Z" fill="#96482F" opacity="0.8"/>
+                    <path d="M400,0 L240,150 L400,300 Z" fill="#96482F" opacity="0.8"/>
+                    <!-- Solapa superior triangular -->
+                    <path d="M0,0 L200,150 L400,0 Z" fill="#7A3922"/>
+                    <!-- Sello de Lacre Virtual con Monograma -->
+                    <circle cx="200" cy="150" r="32" fill="#C26D4D" stroke="#D4B373" stroke-width="1.5"/>
+                    <circle cx="200" cy="150" r="28" fill="none" stroke="#FAF6EE" stroke-width="1" stroke-dasharray="2,2"/>
+                    <text x="200" y="156" font-family="'Playfair Display', serif" font-size="20" fill="#FAF6EE" font-style="italic" text-anchor="middle">B&L</text>
+                </svg>
             </div>
-            <div class="event-detail-row">
-              <!-- Icono reloj -->
-              <svg viewBox="0 0 24 24" stroke-width="1.3" aria-hidden="true">
-                <path stroke-linecap="round" stroke-linejoin="round"
-                  d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-              </svg>
-              <span>5:00 PM</span>
+
+            <div class="envelope-open-btn">
+                <div class="pulse-ring">
+                    <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" stroke-width="1.5" stroke-linecap="round"/></svg>
+                </div>
+                <span>Abrir Invitación</span>
             </div>
-            <div class="event-detail-row">
-              <!-- Icono ubicación -->
-              <svg viewBox="0 0 24 24" stroke-width="1.3" aria-hidden="true">
-                <path stroke-linecap="round" stroke-linejoin="round"
-                  d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-                <path stroke-linecap="round" stroke-linejoin="round"
-                  d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
-              </svg>
-              <span>Parroquia de Santa María<br>Av. Reforma 450, Col. Juárez, CDMX</span>
+        </div>
+        
+        <!-- Partículas flotantes de fondo sutiles -->
+        <div class="envelope-particles">
+            <div class="particle" style="left: 10%; animation-duration: 6s; animation-delay: 0s;"></div>
+            <div class="particle" style="left: 30%; animation-duration: 8s; animation-delay: 1s;"></div>
+            <div class="particle" style="left: 55%; animation-duration: 7s; animation-delay: 0.5s;"></div>
+            <div class="particle" style="left: 80%; animation-duration: 9s; animation-delay: 2s;"></div>
+        </div>
+    </div>
+
+
+    <!-- ============================================================
+       HERO PRINCIPAL (PORTADA ELEGANTE)
+       ============================================================ -->
+    <header id="hero">
+        <div class="hero-bg">
+            <!-- La imagen de fondo se carga vía CSS inline o variables para flexibilidad -->
+            <div class="hero-photo" style="--hero-img: url('tu-foto-hero.jpg');"></div>
+            <div class="hero-overlay"></div>
+        </div>
+        <div class="hero-frame"></div>
+        
+        <div class="hero-content">
+            <p class="hero-pre">Nuestra Celebración</p>
+            <h1 class="hero-names">Brenda <span class="hero-ampersand">&</span> <em>Leo</em></h1>
+            <p class="hero-date">Sábado, 30 de Octubre de 2026</p>
+            <div class="hero-divider"></div>
+            <p class="hero-location">Lima, Perú</p>
+        </div>
+
+        <div class="scroll-indicator">
+            <span>Desliza</span>
+            <div class="scroll-line"></div>
+        </div>
+    </header>
+
+
+    <!-- ============================================================
+       SECCIÓN: CUENTA REGRESIVA
+       ============================================================ -->
+    <section id="countdown" class="section bg-splatter">
+        <div class="section-inner reveal">
+            <p class="section-tag">El Momento se Acerca</p>
+            <h2 class="section-title">Cada día cuenta para el <em>SÍ</em></h2>
+            
+            <div class="countdown-grid">
+                <div class="countdown-item">
+                    <span class="countdown-number" id="days">00</span>
+                    <span class="countdown-label">Días</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-number" id="hours">00</span>
+                    <span class="countdown-label">Horas</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-number" id="minutes">00</span>
+                    <span class="countdown-label">Min</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-number" id="seconds">00</span>
+                    <span class="countdown-label">Seg</span>
+                </div>
             </div>
-          </div>
         </div>
+    </section>
 
-        <!-- Recepción -->
-        <div class="event-card reveal reveal-delay-3">
-          <p class="event-type">
-            <!-- Icono copa/celebración -->
-            <svg viewBox="0 0 24 24" stroke-width="1.2" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round"
-                d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09Z" />
-            </svg>
-            Recepción
-          </p>
-          <h3>Cena &amp; Baile</h3>
-          <div class="event-details">
-            <div class="event-detail-row">
-              <svg viewBox="0 0 24 24" stroke-width="1.3" aria-hidden="true">
-                <path stroke-linecap="round" stroke-linejoin="round"
-                  d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5" />
-              </svg>
-              <span>Sábado 15 de noviembre, 2025</span>
+
+    <!-- ============================================================
+       SECCIÓN: HISTORIA DE AMOR (Decorada con Ramas y Rosas)
+       ============================================================ -->
+    <section id="story" class="section section-decorated bg-splatter">
+        <div class="section-inner">
+            <div class="reveal text-center">
+                <p class="section-tag">Nuestra Historia</p>
+                <h2 class="section-title">El camino hacia este <em>viaje</em></h2>
+                <!-- Separador de guirnalda de rosas de tu referencia -->
+                <div class="ornament-floral"></div>
             </div>
-            <div class="event-detail-row">
-              <svg viewBox="0 0 24 24" stroke-width="1.3" aria-hidden="true">
-                <path stroke-linecap="round" stroke-linejoin="round"
-                  d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-              </svg>
-              <span>7:30 PM — hasta el amanecer</span>
+
+            <div class="story-timeline">
+                <div class="story-item reveal-left">
+                    <div class="story-year-wrap">
+                        <div class="story-dot"></div>
+                        <span class="story-year">2021</span>
+                    </div>
+                    <div class="story-content">
+                        <h3>El Primer Encuentro</h3>
+                        <p>Cruzamos miradas por primera vez en aquella tarde de otoño. Una conversación casual que se convirtió en el inicio de nuestra historia favorita.</p>
+                    </div>
+                </div>
+
+                <div class="story-item reveal-right">
+                    <div class="story-year-wrap">
+                        <div class="story-dot"></div>
+                        <span class="story-year">2023</span>
+                    </div>
+                    <div class="story-content">
+                        <h3>Incontables Aventuras</h3>
+                        <p>Viajes, risas compartidas, desafíos superados y el firme descubrimiento de que queríamos construir un futuro juntos, paso a paso.</p>
+                    </div>
+                </div>
+
+                <div class="story-item reveal-left">
+                    <div class="story-year-wrap">
+                        <div class="story-dot"></div>
+                        <span class="story-year">2025</span>
+                    </div>
+                    <div class="story-content">
+                        <h3>La Propuesta</h3>
+                        <p>Bajo la luz dorada del atardecer, frente al mar, prometimos dar el paso definitivo. Un "Sí, acepto" que cambió nuestras vidas para siempre.</p>
+                    </div>
+                </div>
             </div>
-            <div class="event-detail-row">
-              <svg viewBox="0 0 24 24" stroke-width="1.3" aria-hidden="true">
-                <path stroke-linecap="round" stroke-linejoin="round"
-                  d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-                <path stroke-linecap="round" stroke-linejoin="round"
-                  d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
-              </svg>
-              <span>Hacienda Los Olivos<br>Km 28 Carretera Cuernavaca, CDMX</span>
+        </div>
+    </section>
+
+
+    <!-- ============================================================
+       SECCIÓN: GALERÍA EDITORIAL
+       ============================================================ -->
+    <section id="editorial" class="section">
+        <div class="editorial-grid">
+            <div class="editorial-photo wide reveal">
+                <div class="photo-placeholder"><span class="photo-num">01</span></div>
+                <p class="photo-caption">Complicidad e instantes únicos.</p>
             </div>
-          </div>
+            <div class="editorial-photo tall reveal-left">
+                <div class="photo-placeholder"><span class="photo-num">02</span></div>
+                <p class="photo-caption">Promesas grabadas en el corazón.</p>
+            </div>
+            <div class="editorial-photo tall reveal-right">
+                <div class="photo-placeholder"><span class="photo-num">03</span></div>
+                <p class="photo-caption">Caminando juntos hacia el altar.</p>
+            </div>
         </div>
-
-      </div>
-    </div>
-  </section>
-  <!-- /ceremony -->
+    </section>
 
 
-  <!-- ══════════════════════════════════════════════════════════
-       DRESS CODE
-       ══════════════════════════════════════════════════════════ -->
-  <section class="section" id="dresscode" aria-labelledby="dresscode-title">
-    <div class="section-inner text-center">
+    <!-- ============================================================
+       SECCIÓN: DETALLES DEL EVENTO (Ceremonia & Recepción)
+       ============================================================ -->
+    <section id="ceremony" class="section section-decorated bg-splatter">
+        <div class="section-inner">
+            <div class="reveal text-center">
+                <p class="section-tag">Cuándo & Dónde</p>
+                <h2 class="section-title">Los detalles del <em>gran día</em></h2>
+                <!-- Separador de guirnalda de rosas de tu referencia -->
+                <div class="ornament-floral"></div>
+            </div>
 
-      <p class="section-tag reveal">Vestimenta</p>
+            <div class="event-cards">
+                <!-- Tarjeta de Ceremonia -->
+                <div class="event-card reveal-left">
+                    <div class="event-type">
+                        <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke-width="1.5" stroke-linecap="round"/></svg>
+                        <span>La Ceremonia</span>
+                    </div>
+                    <h3>Misa de Matrimonio</h3>
+                    <div class="event-details">
+                        <div class="event-detail-row">
+                            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                            <span>16:30 hrs — Por favor, llegar con puntualidad.</span>
+                        </div>
+                        <div class="event-detail-row">
+                            <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                            <span>Iglesia Matriz de la Ciudad<br>Av. Principal Centenario 450</span>
+                        </div>
+                    </div>
+                </div>
 
-      <h2 class="section-title reveal reveal-delay-1" id="dresscode-title">
-        Dress Code
-      </h2>
-
-      <p class="dresscode-subtitle reveal reveal-delay-2">
-        Formal elegante — Jardín de noche
-      </p>
-
-      <!-- Paleta de colores sugerida -->
-      <div class="dresscode-palette reveal reveal-delay-2" aria-label="Paleta de colores sugerida">
-
-        <div class="palette-item">
-          <div class="palette-swatch" style="background:#F9F5EE" title="Marfil"></div>
-          <span class="palette-name">Marfil</span>
+                <!-- Tarjeta de Recepción -->
+                <div class="event-card reveal-right">
+                    <div class="event-type">
+                        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" stroke-width="1.5"/></svg>
+                        <span>La Celebración</span>
+                    </div>
+                    <h3>Banquete & Fiesta</h3>
+                    <div class="event-details">
+                        <div class="event-detail-row">
+                            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                            <span>18:30 hrs — Hasta que salga el sol.</span>
+                        </div>
+                        <div class="event-detail-row">
+                            <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                            <span>Finca Los Olivos<br>Km 14.5 Vía Campestre</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+    </section>
 
-        <div class="palette-item">
-          <div class="palette-swatch" style="background:#EDE4D3" title="Beige"></div>
-          <span class="palette-name">Beige</span>
+
+    <!-- ============================================================
+       SECCIÓN: CÓDIGO DE VESTIMENTA
+       ============================================================ -->
+    <section id="dresscode" class="section bg-splatter">
+        <div class="section-inner reveal">
+            <p class="section-tag">Código de Vestimenta</p>
+            <h2 class="section-title">Elegancia <em>Formal</em></h2>
+            <p class="dresscode-subtitle">Inspirado en la calidez de nuestro atardecer</p>
+
+            <!-- Paleta de colores sugerida interactiva -->
+            <div class="dresscode-palette">
+                <div class="palette-item">
+                    <div class="palette-swatch" style="background: #C26D4D;"></div>
+                    <span class="palette-name">Terracota</span>
+                </div>
+                <div class="palette-item">
+                    <div class="palette-swatch" style="background: #D99B43;"></div>
+                    <span class="palette-name">Ocre</span>
+                </div>
+                <div class="palette-item">
+                    <div class="palette-swatch" style="background: #E6D5B8;"></div>
+                    <span class="palette-name">Beige</span>
+                </div>
+                <div class="palette-item">
+                    <div class="palette-swatch" style="background: #3D352E;"></div>
+                    <span class="palette-name">Marrón</span>
+                </div>
+            </div>
+
+            <p class="dresscode-note">Agradecemos evitar el uso de prendas de color blanco, marfil o crema para exclusividad de la novia.</p>
         </div>
+    </section>
 
-        <div class="palette-item">
-          <div class="palette-swatch" style="background:#5C6B47" title="Verde Oliva"></div>
-          <span class="palette-name">Oliva</span>
+
+    <!-- ============================================================
+       SECCIÓN: GALERÍA DE FOTOS INTERACTIVA (LIGHTBOX)
+       ============================================================ -->
+    <section id="gallery" class="section section-decorated">
+        <div class="section-inner">
+            <div class="reveal text-center">
+                <p class="section-tag">Nuestros Momentos</p>
+                <h2 class="section-title">Galería de <em>recuerdos</em></h2>
+                <!-- Separador de guirnalda de rosas de tu referencia -->
+                <div class="ornament-floral"></div>
+            </div>
+
+            <div class="gallery-grid reveal">
+                <!-- Se repiten marcadores de posición listos para imágenes -->
+                <div class="gallery-item" onclick="openLightbox('foto1.jpg')">
+                    <div class="g-placeholder"><span class="g-num">I</span></div>
+                    <div class="g-overlay"><div class="g-overlay-icon"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" stroke-width="1.5"/></svg></div></div>
+                </div>
+                <div class="gallery-item" onclick="openLightbox('foto2.jpg')">
+                    <div class="g-placeholder"><span class="g-num">II</span></div>
+                    <div class="g-overlay"><div class="g-overlay-icon"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" stroke-width="1.5"/></svg></div></div>
+                </div>
+                <div class="gallery-item" onclick="openLightbox('foto3.jpg')">
+                    <div class="g-placeholder"><span class="g-num">III</span></div>
+                    <div class="g-overlay"><div class="g-overlay-icon"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" stroke-width="1.5"/></svg></div></div>
+                </div>
+            </div>
         </div>
+    </section>
 
-        <div class="palette-item">
-          <div class="palette-swatch" style="background:#B89A5A" title="Dorado"></div>
-          <span class="palette-name">Dorado</span>
+    <!-- Ventana flotante (Lightbox) para fotos ampliadas -->
+    <div id="lightbox" onclick="closeLightbox()">
+        <div class="lightbox-inner" onclick="event.stopPropagation()">
+            <button class="lightbox-close" onclick="closeLightbox()">
+                <svg viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12" stroke-width="1.5" stroke-linecap="round"/></svg>
+            </button>
+            <img id="lightbox-img" src="" alt="Ampliación">
         </div>
-
-        <div class="palette-item">
-          <div class="palette-swatch" style="background:#8B7355" title="Topo"></div>
-          <span class="palette-name">Topo</span>
-        </div>
-
-        <div class="palette-item">
-          <div class="palette-swatch" style="background:#2E2E2A" title="Negro"></div>
-          <span class="palette-name">Negro</span>
-        </div>
-
-      </div>
-
-      <p class="dresscode-note reveal reveal-delay-3">
-        Te pedimos evitar el color blanco o tonos muy similares al vestido de novia.
-        Caballeros: traje o guayabera elegante. Damas: vestido largo o midi.
-        ¡Celebremos con toda la elegancia que merece este día!
-      </p>
-
-    </div>
-  </section>
-  <!-- /dresscode -->
-
-
-  <!-- ══════════════════════════════════════════════════════════
-       GALERÍA INTERACTIVA
-       ══════════════════════════════════════════════════════════ -->
-  <section class="section" id="gallery" aria-labelledby="gallery-title">
-    <div class="section-inner">
-
-      <p class="section-tag reveal">Momentos</p>
-
-      <h2 class="section-title reveal reveal-delay-1" id="gallery-title">
-        Nuestra <em>galería</em>
-      </h2>
-
-      <p class="section-subtitle reveal reveal-delay-2" style="margin-bottom:0">
-        Algunos de los instantes que guardaremos para siempre.
-      </p>
-
-    </div>
-
-    <!-- Grid de galería -->
-    <!-- Para usar con fotos reales: agrega data-src="url-de-tu-foto.jpg" a cada .gallery-item -->
-    <div class="gallery-grid reveal">
-
-      <div class="gallery-item">
-        <div class="g-placeholder"><span class="g-num">1</span></div>
-        <div class="g-overlay" aria-hidden="true">
-          <div class="g-overlay-icon">
-            <svg viewBox="0 0 24 24" stroke-width="1.5">
-              <path stroke-linecap="round" stroke-linejoin="round"
-                d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607ZM10.5 7.5v6m3-3h-6" />
-            </svg>
-          </div>
-        </div>
-      </div>
-
-      <div class="gallery-item">
-        <div class="g-placeholder"><span class="g-num">2</span></div>
-        <div class="g-overlay" aria-hidden="true">
-          <div class="g-overlay-icon">
-            <svg viewBox="0 0 24 24" stroke-width="1.5">
-              <path stroke-linecap="round" stroke-linejoin="round"
-                d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607ZM10.5 7.5v6m3-3h-6" />
-            </svg>
-          </div>
-        </div>
-      </div>
-
-      <div class="gallery-item">
-        <div class="g-placeholder"><span class="g-num">3</span></div>
-        <div class="g-overlay" aria-hidden="true">
-          <div class="g-overlay-icon">
-            <svg viewBox="0 0 24 24" stroke-width="1.5">
-              <path stroke-linecap="round" stroke-linejoin="round"
-                d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607ZM10.5 7.5v6m3-3h-6" />
-            </svg>
-          </div>
-        </div>
-      </div>
-
-      <div class="gallery-item">
-        <div class="g-placeholder"><span class="g-num">4</span></div>
-        <div class="g-overlay" aria-hidden="true">
-          <div class="g-overlay-icon">
-            <svg viewBox="0 0 24 24" stroke-width="1.5">
-              <path stroke-linecap="round" stroke-linejoin="round"
-                d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607ZM10.5 7.5v6m3-3h-6" />
-            </svg>
-          </div>
-        </div>
-      </div>
-
-      <div class="gallery-item">
-        <div class="g-placeholder"><span class="g-num">5</span></div>
-        <div class="g-overlay" aria-hidden="true">
-          <div class="g-overlay-icon">
-            <svg viewBox="0 0 24 24" stroke-width="1.5">
-              <path stroke-linecap="round" stroke-linejoin="round"
-                d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607ZM10.5 7.5v6m3-3h-6" />
-            </svg>
-          </div>
-        </div>
-      </div>
-
-      <div class="gallery-item">
-        <div class="g-placeholder"><span class="g-num">6</span></div>
-        <div class="g-overlay" aria-hidden="true">
-          <div class="g-overlay-icon">
-            <svg viewBox="0 0 24 24" stroke-width="1.5">
-              <path stroke-linecap="round" stroke-linejoin="round"
-                d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607ZM10.5 7.5v6m3-3h-6" />
-            </svg>
-          </div>
-        </div>
-      </div>
-
     </div>
 
-  </section>
 
-  <!-- Lightbox (modal de galería) -->
-  <div id="lightbox" role="dialog" aria-modal="true" aria-label="Foto ampliada">
-    <div class="lightbox-inner">
-      <!-- Botón cerrar -->
-      <button class="lightbox-close" id="lightbox-close" aria-label="Cerrar">
-        <svg viewBox="0 0 24 24" stroke-width="1.5">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
-        </svg>
-      </button>
-      <img id="lightbox-img" src="" alt="Foto de Brenda y Leo" />
-    </div>
-  </div>
-  <!-- /gallery -->
-
-
-  <!-- ══════════════════════════════════════════════════════════
-       UBICACIÓN / MAPA
-       ══════════════════════════════════════════════════════════ -->
-  <section class="section" id="location" aria-labelledby="location-title">
-    <div class="section-inner">
-
-      <p class="section-tag reveal">Cómo llegar</p>
-
-      <h2 class="section-title reveal reveal-delay-1" id="location-title">
-        El lugar de la<br>
-        <em>celebración</em>
-      </h2>
-
-      <div class="location-info reveal reveal-delay-2">
-        <p class="location-address">
-          <strong>Ceremonia:</strong><br>
-          Parroquia de Santa María<br>
-          Av. Reforma 450, Col. Juárez, CDMX, C.P. 06600<br><br>
-          <strong>Recepción:</strong><br>
-          Hacienda Los Olivos<br>
-          Km 28 Carretera Federal Cuernavaca, CDMX
-        </p>
-
-        <!-- Botón para abrir en Google Maps -->
-        <a
-          class="location-btn"
-          href="https://www.google.com/maps/search/Hacienda+Los+Olivos+CDMX"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="Ver recepción en Google Maps"
-        >
-          <svg viewBox="0 0 24 24" stroke-width="1.5" aria-hidden="true">
-            <path stroke-linecap="round" stroke-linejoin="round"
-              d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-            <path stroke-linecap="round" stroke-linejoin="round"
-              d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
-          </svg>
-          Ver en el mapa
-        </a>
-      </div>
-
-    </div>
-
-    <!-- Mapa de Google Maps incrustado -->
-    <div class="map-container reveal">
-      <div class="map-overlay-label" aria-hidden="true">
-        Hacienda Los Olivos · CDMX
-      </div>
-      <!-- Reemplaza el src del iframe con el embed URL de tu venue real -->
-      <!-- Para obtenerlo: Google Maps → Share → Embed a map → copia el src -->
-      <iframe
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.661071836573!2d-99.16869882394748!3d19.432607881880547!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1ff35f5bd1563%3A0x6c366f0e2de02ff7!2sCiudad%20de%20M%C3%A9xico%2C%20CDMX!5e0!3m2!1ses!2smx!4v1700000000000!5m2!1ses!2smx"
-        allowfullscreen=""
-        loading="lazy"
-        referrerpolicy="no-referrer-when-downgrade"
-        title="Ubicación de la boda en el mapa"
-      ></iframe>
-    </div>
-
-  </section>
-  <!-- /location -->
-
-
-  <!-- ══════════════════════════════════════════════════════════
-       RSVP — CONFIRMACIÓN DE ASISTENCIA
-       ══════════════════════════════════════════════════════════ -->
-  <section class="section" id="rsvp" aria-labelledby="rsvp-title">
-    <div class="section-inner">
-
-      <p class="section-tag reveal">Confirmación</p>
-
-      <h2 class="section-title reveal reveal-delay-1" id="rsvp-title">
-        Confirma tu<br>
-        <em>asistencia</em>
-      </h2>
-
-      <p class="section-subtitle reveal reveal-delay-2">
-        Por favor confirma antes del <strong>1 de octubre de 2025</strong>.
-        ¡Tu respuesta es muy importante para nosotros!
-      </p>
-
-      <div class="ornament reveal reveal-delay-3" aria-hidden="true">
-        <div class="ornament-line"></div>
-        <div class="ornament-diamond"></div>
-        <div class="ornament-line"></div>
-      </div>
-
-      <!-- Mensaje de error -->
-      <div id="rsvp-error" class="form-error" role="alert" aria-live="polite"></div>
-
-      <!-- Formulario RSVP -->
-      <form id="rsvp-form" class="rsvp-form reveal" novalidate aria-label="Formulario de confirmación de asistencia">
-
-        <!-- Nombre completo -->
-        <div class="form-field">
-          <label class="form-label" for="field-nombre">Nombre completo *</label>
-          <input
-            class="form-input"
-            type="text"
-            id="field-nombre"
-            name="nombre"
-            placeholder="Tu nombre y apellido"
-            required
-            autocomplete="name"
-            maxlength="120"
-          />
+    <!-- ============================================================
+       SECCIÓN: UBICACIÓN / MAPA INTERACTIVO
+       ============================================================ -->
+    <section id="location" class="section">
+        <div class="section-inner reveal text-center">
+            <p class="section-tag">Ubicación</p>
+            <h2 class="section-title">Cómo <em>llegar</em></h2>
+            <p class="location-address">Finca Los Olivos, Km 14.5 Vía Campestre, Lima, Perú</p>
+            
+            <a href="https://maps.google.com" target="_blank" class="location-btn">
+                <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke-width="1.5"/></svg>
+                Abrir en Google Maps
+            </a>
         </div>
 
-        <!-- Asistencia (Radio buttons) -->
-        <div class="form-field">
-          <p class="form-label" id="asistencia-label">¿Podrás asistir? *</p>
-          <div class="radio-group" role="radiogroup" aria-labelledby="asistencia-label">
-
-            <label class="radio-option">
-              <input type="radio" name="asistencia" value="si" required />
-              <span class="radio-custom" aria-hidden="true"></span>
-              <span class="radio-text">Con gusto asisto 🥂</span>
-            </label>
-
-            <label class="radio-option">
-              <input type="radio" name="asistencia" value="no" />
-              <span class="radio-custom" aria-hidden="true"></span>
-              <span class="radio-text">No podré asistir</span>
-            </label>
-
-          </div>
+        <div class="map-container reveal">
+            <div class="map-overlay-label">Lugar del Evento</div>
+            <!-- Mapa incrustado en sepia elegante con el estilo CSS -->
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15615.11659092495!2d-77.03759245!3d-11.884109!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9105d10d9ce0f073%3A0x6ec0c6007e03efb7!2sCarabayllo%2C%20Lima!5e0!3m2!1ses!2spe!4v1710000000000!5m2!1ses!2spe" allowfullscreen="" loading="lazy"></iframe>
         </div>
+    </section>
 
-        <!-- Número de acompañantes -->
-        <div class="form-field">
-          <label class="form-label" for="field-acompanantes">Número de acompañantes</label>
-          <div class="select-wrap">
-            <select
-              class="form-select"
-              id="field-acompanantes"
-              name="acompanantes"
-              aria-label="Número de acompañantes"
-            >
-              <option value="0">Solo yo (0 acompañantes)</option>
-              <option value="1">1 acompañante</option>
-              <option value="2">2 acompañantes</option>
-              <option value="3">3 acompañantes</option>
-              <option value="4">4 acompañantes</option>
-            </select>
-          </div>
+
+    <!-- ============================================================
+       SECCIÓN: RSVP / CONFIRMACIÓN DE ASISTENCIA
+       ============================================================ -->
+    <section id="rsvp" class="section section-decorated bg-splatter">
+        <div class="section-inner">
+            <div class="reveal text-center">
+                <p class="section-tag">Confirmación</p>
+                <h2 class="section-title">¿Nos <em>acompañas</em>?</h2>
+                <p class="section-subtitle">Por favor, confímanos tu asistencia antes del 15 de Septiembre.</p>
+                <!-- Separador de guirnalda de rosas de tu referencia -->
+                <div class="ornament-floral"></div>
+            </div>
+
+            <!-- Formulario Premium -->
+            <form id="wedding-rsvp-form" class="rsvp-form reveal" onsubmit="handleFormSubmit(event)">
+                <div class="form-field">
+                    <label class="form-label">Nombre Completo</label>
+                    <input type="text" class="form-input" placeholder="Ej. María García" required>
+                </div>
+
+                <div class="form-field">
+                    <label class="form-label">¿Asistirás a la celebración?</label>
+                    <div class="radio-group">
+                        <label class="radio-option">
+                            <input type="radio" name="attendance" value="yes" checked>
+                            <span class="radio-custom"></span>
+                            <span class="radio-text">Sí, asistiré</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="attendance" value="no">
+                            <span class="radio-custom"></span>
+                            <span class="radio-text">No podré ir</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-field">
+                    <label class="form-label">Número de Acompañantes</label>
+                    <div class="select-wrap">
+                        <select class="form-select" required>
+                            <option value="1">Solo yo (1)</option>
+                            <option value="2">Yo y un acompañante (2)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-field">
+                    <label class="form-label">Restricciones Alimenticias o Nota Adicional</label>
+                    <textarea class="form-textarea" placeholder="Ej. Menú vegetariano, alergias, o dedicatoria..."></textarea>
+                </div>
+
+                <div class="form-error" id="form-error-msg">Por favor, rellene todos los campos obligatorios.</div>
+
+                <button type="submit" class="submit-btn">
+                    <span class="btn-text">Confirmar Asistencia</span>
+                </button>
+            </form>
+
+            <!-- Pantalla de Éxito al Enviar -->
+            <div class="rsvp-success" id="form-success-screen">
+                <div class="rsvp-success-icon">
+                    <svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </div>
+                <h3>¡Muchas Gracias!</h3>
+                <p>Tu respuesta ha sido registrada correctamente. Nos hace muy felices compartir este momento contigo.</p>
+            </div>
         </div>
+    </section>
 
-        <!-- Mensaje / alergias -->
-        <div class="form-field">
-          <label class="form-label" for="field-mensaje">Mensaje para los novios (opcional)</label>
-          <textarea
-            class="form-textarea"
-            id="field-mensaje"
-            name="mensaje"
-            placeholder="Alergias alimentarias, restricciones dietéticas, o simplemente un mensaje de cariño..."
-            maxlength="500"
-            rows="4"
-          ></textarea>
+
+    <!-- ============================================================
+       SECCIÓN: MENSAJE FINAL
+       ============================================================ -->
+    <section id="final" class="section">
+        <div class="section-inner reveal text-center">
+            <p class="final-pre">Para Siempre</p>
+            <p class="final-quote">"El amor no consiste en mirarse el uno al otro, sino en mirar juntos en la misma dirección."</p>
+            <p class="final-author">— Antoine de Saint-Exupéry</p>
+            <h2 class="final-names">B <em>&</em> L</h2>
         </div>
+    </section>
 
-        <!-- Botón de envío -->
-        <button type="submit" class="submit-btn" id="rsvp-submit">
-          Confirmar Asistencia
-        </button>
 
-      </form>
-
-      <!-- Estado de éxito (se muestra después del envío) -->
-      <div id="rsvp-success" class="rsvp-success" role="status" aria-live="polite">
-        <div class="rsvp-success-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" stroke-width="1.5">
-            <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
-          </svg>
+    <!-- ============================================================
+       FOOTER (PIE DE PÁGINA)
+       ============================================================ -->
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-monogram">Brenda & Leo</div>
+            <div class="footer-date">30 . 10 . 2026</div>
         </div>
-        <h3>¡Gracias!</h3>
-        <p>
-          Tu confirmación ha sido recibida con mucho amor.<br>
-          ¡No podemos esperar para celebrar contigo!
-        </p>
-      </div>
-
-    </div>
-  </section>
-  <!-- /rsvp -->
+    </footer>
 
 
-  <!-- ══════════════════════════════════════════════════════════
-       MENSAJE FINAL
-       ══════════════════════════════════════════════════════════ -->
-  <section id="final" aria-label="Mensaje final de los novios">
+    <!-- ============================================================
+       SCRIPTS JAVASCRIPT (LÓGICA INTERACTIVA)
+       ============================================================ -->
+    <script>
+        // 1. Desbloqueo de animaciones y apertura de sobre
+        function openInvitation() {
+            const envelope = document.getElementById('envelope-screen');
+            envelope.classList.add('hide');
+            document.body.classList.add('invitation-open');
+            
+            // Forzar animación suave de reescala en la foto del Hero
+            setTimeout(() => {
+                document.querySelector('.hero-bg').classList.add('loaded');
+            }, 200);
+        }
 
-    <p class="final-pre reveal">Brenda &amp; Leo · 2025</p>
+        // 2. Sistema de Revelado al hacer scroll (Intersection Observer)
+        const revealElements = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1, rootMargin: "0px 0px -40px 0px" });
 
-    <blockquote class="final-quote reveal reveal-delay-1">
-      "El amor no se mira el uno al otro,<br>
-      el amor mira juntos en la misma dirección."
-    </blockquote>
+        revealElements.forEach(el => observer.observe(el));
 
-    <p class="final-author reveal reveal-delay-2">— Antoine de Saint-Exupéry</p>
+        // 3. Cuenta Regresiva Automática (Configurada para el 30 Octubre 2026)
+        const targetDate = new Date('October 30, 2026 16:30:00').getTime();
 
-    <div class="ornament reveal reveal-delay-3" aria-hidden="true" style="margin:40px auto">
-      <div class="ornament-line" style="background:linear-gradient(to right, transparent, rgba(184,154,90,0.4))"></div>
-      <div class="ornament-diamond"></div>
-      <div class="ornament-line" style="background:linear-gradient(to left, transparent, rgba(184,154,90,0.4))"></div>
-    </div>
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const difference = targetDate - now;
 
-    <p class="final-names reveal reveal-delay-4">
-      <em>Brenda</em> &amp; <em>Leo</em>
-    </p>
+            if (difference < 0) {
+                document.querySelector('.countdown-grid').innerHTML = "<p style='font-family: var(--font-display); font-size: 1.5rem; color: var(--gold-pale); grid-column: span 4;'>¡Llegó el gran día!</p>";
+                return;
+            }
 
-  </section>
-  <!-- /final -->
+            const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((difference % (1000 * 60)) / 1000);
 
+            document.getElementById('days').innerText = days < 10 ? '0' + days : days;
+            document.getElementById('hours').innerText = hours < 10 ? '0' + hours : hours;
+            document.getElementById('minutes').innerText = minutes < 10 ? '0' + minutes : minutes;
+            document.getElementById('seconds').innerText = seconds < 10 ? '0' + seconds : seconds;
+        }
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
 
-  <!-- ══════════════════════════════════════════════════════════
-       FOOTER PREMIUM
-       ══════════════════════════════════════════════════════════ -->
-  <footer>
-    <div class="footer-inner">
+        // 4. Control de la Galería Interactiva (Lightbox)
+        function openLightbox(imgSrc) {
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            // En un proyecto real cambiarías esto por rutas válidas de imágenes ampliativas
+            lightboxImg.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='600' fill='%233D352E'%3E%3Crect width='100%25' height='100%25' fill='%238E432A'/%3E%3Ctext x='50%25' y='50%25' fill='%23FAF6EE' font-size='24' text-anchor='middle'%3EFoto Ampliada%3C/text%3E%3C/svg%3E";
+            lightbox.classList.add('open');
+        }
 
-      <p class="footer-monogram" aria-label="Monograma B&L">B &amp; L</p>
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('open');
+        }
 
-      <p class="footer-date">15 · Noviembre · 2025 · Ciudad de México</p>
+        // 5. Gestión del Envío de Confirmaciones (RSVP)
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            const btn = document.querySelector('.submit-btn');
+            const errorMsg = document.getElementById('form-error-msg');
+            const form = document.getElementById('wedding-rsvp-form');
+            const successScreen = document.getElementById('form-success-screen');
 
-      <div class="ornament" style="margin:8px 0" aria-hidden="true">
-        <div class="ornament-line" style="width:30px;background:linear-gradient(to right,transparent,rgba(184,154,90,0.3))"></div>
-        <div class="ornament-diamond" style="width:4px;height:4px;background:rgba(184,154,90,0.4)"></div>
-        <div class="ornament-line" style="width:30px;background:linear-gradient(to left,transparent,rgba(184,154,90,0.3))"></div>
-      </div>
+            errorMsg.classList.remove('show');
+            btn.innerHTML = '<span class="spinner"></span>';
+            btn.style.pointerEvents = 'none';
 
-      <p class="footer-credit">Con amor, para siempre</p>
-
-    </div>
-  </footer>
-  <!-- /footer -->
-
-
-  <!-- Script principal -->
-  <script src="script.js"></script>
-
+            // Simulación premium de conexión con servidor de datos
+            setTimeout(() => {
+                form.style.display = 'none';
+                successScreen.classList.add('show');
+            }, 1800);
+        }
+    </script>
 </body>
 </html>
