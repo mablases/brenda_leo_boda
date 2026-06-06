@@ -1,165 +1,345 @@
-// CONFIGURACIÓN DE SUPABASE (REMPLAZAR CON TUS CREDENCIALES REALES)
-const SUPABASE_URL = "https://TU_PROYECTO.supabase.co";
-const SUPABASE_ANON_KEY = "TU_ANON_KEY_DE_SUPABASE";
+/* ============================================================
+   BRENDA & LEO — Invitación de Boda Premium
+   script.js — Lógica completa
+   ============================================================ */
 
-const supabase = window.supabase ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
+// ── Configuración Supabase ──────────────────────────────────
+const SUPABASE_URL = "MI_URL";   // Reemplaza con tu URL
+const SUPABASE_KEY = "MI_KEY";   // Reemplaza con tu anon key
 
-document.addEventListener("DOMContentLoaded", () => {
-    
-    // ELEMENTOS DEL DOM
-    const envelopeWrapper = document.getElementById("envelope-wrapper");
-    // ARREGLO DE CLIC: Seleccionar solo el sello, no el sobre
-    const waxSeal = document.getElementById("wax-seal");
-    const mainContent = document.getElementById("main-content");
-    const bgMusic = document.getElementById("bg-music");
-    const musicControl = document.getElementById("music-control");
-    const rsvpForm = document.getElementById("rsvp-form");
-    const formStatus = document.getElementById("form-status");
-    const asistenciaRadios = document.querySelectorAll('input[name="asistencia"]');
-    const wrapperAcompanantes = document.getElementById("wrapper-acompanantes");
+/**
+ * Cliente Supabase minimalista (sin SDK externo).
+ * Usa la API REST de Supabase directamente con fetch.
+ */
+const supabase = {
+  /**
+   * Inserta un registro en la tabla 'invitados'.
+   * @param {Object} data — { nombre, asistencia, acompanantes, mensaje }
+   * @returns {Promise<{data, error}>}
+   */
+  async insertInvitado(data) {
+    try {
+      const response = await fetch(`${SUPABASE_URL}/rest/v1/invitados`, {
+        method: 'POST',
+        headers: {
+          'apikey':        SUPABASE_KEY,
+          'Authorization': `Bearer ${SUPABASE_KEY}`,
+          'Content-Type':  'application/json',
+          'Prefer':        'return=representation',
+        },
+        body: JSON.stringify(data),
+      });
 
-    // 1. ANIMACIÓN DE APERTURA DEL SOBRE (SOLO AL TOCAR EL SELLO)
-    waxSeal.addEventListener("click", (e) => {
-        // Evitar comportamientos extraños del navegador en móviles
-        e.stopPropagation(); 
-        
-        if (!envelopeWrapper.classList.contains("open")) {
-            envelopeWrapper.classList.add("open");
-            
-            // Iniciar Audio Sutilmente (solo si el autoplay es exitoso)
-            bgMusic.volume = 0.2; // Volumen inicial bajo solicitado
-            const playPromise = bgMusic.play();
-            
-            if (playPromise !== undefined) {
-                playPromise.then(() => {
-                    musicControl.classList.remove("hidden");
-                    toggleMusicIcon(true);
-                }).catch(error => {
-                    console.log("Autoplay bloqueado por el navegador. Se activará tras interactuar.");
-                    musicControl.classList.remove("hidden");
-                });
-            }
+      if (!response.ok) {
+        const error = await response.json();
+        return { data: null, error };
+      }
 
-            // Transición fluida al contenido principal de la invitación
-            setTimeout(() => {
-                envelopeWrapper.classList.add("fade-out");
-                mainContent.classList.remove("hidden-content");
-                mainContent.classList.add("visible-content");
-                // Permitir scroll en la página una vez abierta la invitación
-                document.body.style.overflowY = "auto";
-            }, 2000); // Dar tiempo para ver la carta salir
+      const result = await response.json();
+      return { data: result, error: null };
+    } catch (err) {
+      return { data: null, error: err };
+    }
+  },
+};
+
+// ── DOM Ready ───────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+  initEnvelope();
+  initScrollReveal();
+  initCountdown();
+  initRSVP();
+  initGallery();
+  initParallax();
+  generateParticles();
+});
+
+/* ============================================================
+   PANTALLA DE APERTURA (SOBRE)
+   ============================================================ */
+function initEnvelope() {
+  const screen = document.getElementById('envelope-screen');
+  if (!screen) return;
+
+  // Al hacer click o tocar, abrir la invitación
+  screen.addEventListener('click', openInvitation);
+  screen.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') openInvitation();
+  });
+  screen.setAttribute('tabindex', '0');
+  screen.setAttribute('role', 'button');
+  screen.setAttribute('aria-label', 'Abrir invitación');
+}
+
+/**
+ * Anima el cierre del sobre y revela la invitación.
+ */
+function openInvitation() {
+  const screen = document.getElementById('envelope-screen');
+  const body   = document.body;
+
+  // Anima la tapa del sobre (SVG path #flap)
+  const flap = document.getElementById('envelope-flap');
+  if (flap) {
+    flap.style.transform     = 'rotateX(180deg)';
+    flap.style.transformOrigin = 'top center';
+    flap.style.transition    = 'transform 0.7s ease';
+  }
+
+  // Espera un poco y oculta el sobre
+  setTimeout(() => {
+    screen.classList.add('hide');
+    body.classList.add('invitation-open');
+
+    // Fuerza reflow para activar transiciones CSS del hero
+    document.getElementById('hero')?.offsetHeight;
+  }, 600);
+}
+
+/* ============================================================
+   GENERADOR DE PARTÍCULAS FLOTANTES
+   ============================================================ */
+function generateParticles() {
+  const container = document.querySelector('.envelope-particles');
+  if (!container) return;
+
+  for (let i = 0; i < 25; i++) {
+    const p = document.createElement('div');
+    p.className = 'particle';
+    p.style.cssText = `
+      left:     ${Math.random() * 100}%;
+      top:      ${Math.random() * 100}%;
+      width:    ${Math.random() * 3 + 1}px;
+      height:   ${Math.random() * 3 + 1}px;
+      opacity:  ${Math.random() * 0.3 + 0.05};
+      animation-duration:  ${Math.random() * 20 + 15}s;
+      animation-delay:     ${Math.random() * -20}s;
+    `;
+    container.appendChild(p);
+  }
+}
+
+/* ============================================================
+   REVEAL ON SCROLL
+   Utiliza IntersectionObserver para animar elementos al entrar
+   en viewport.
+   ============================================================ */
+function initScrollReveal() {
+  const targets = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+
+  const observer = new IntersectionObserver(
+    entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target); // Anima solo una vez
         }
-    });
+      });
+    },
+    { threshold: 0.15, rootMargin: '0px 0px -40px 0px' }
+  );
 
-    // Bloquear scroll inicial mientras el sobre está cerrado
-    document.body.style.overflowY = "hidden";
+  targets.forEach(el => observer.observe(el));
+}
 
-    // 2. SISTEMA DE AUDIO (PLAY / PAUSE)
-    musicControl.addEventListener("click", () => {
-        if (bgMusic.paused) {
-            bgMusic.play();
-            toggleMusicIcon(true);
-        } else {
-            bgMusic.pause();
-            toggleMusicIcon(false);
-        }
-    });
+/* ============================================================
+   CUENTA REGRESIVA
+   Actualiza cada segundo hasta la fecha de boda.
+   ============================================================ */
+function initCountdown() {
+  // ── Fecha de la boda ── (ajusta según sea necesario)
+  const WEDDING_DATE = new Date('2025-11-15T17:00:00');
 
-    function toggleMusicIcon(isPlaying) {
-        const iconPlay = musicControl.querySelector(".icon-play");
-        const iconPause = musicControl.querySelector(".icon-pause");
-        if (isPlaying) {
-            iconPlay.classList.add("hidden");
-            iconPause.classList.remove("hidden");
-        } else {
-            iconPlay.classList.remove("hidden");
-            iconPause.classList.add("hidden");
-        }
+  const elDays  = document.getElementById('cd-days');
+  const elHours = document.getElementById('cd-hours');
+  const elMins  = document.getElementById('cd-mins');
+  const elSecs  = document.getElementById('cd-secs');
+
+  if (!elDays) return;
+
+  function update() {
+    const now  = new Date();
+    const diff = WEDDING_DATE - now;
+
+    if (diff <= 0) {
+      // ¡Llegó el día!
+      elDays.textContent  = '00';
+      elHours.textContent = '00';
+      elMins.textContent  = '00';
+      elSecs.textContent  = '00';
+      return;
     }
 
-    // 3. CUENTA REGRESIVA ELEGANTE
-    const targetDate = new Date("October 10, 2026 16:30:00").getTime();
+    const days  = Math.floor(diff / 86400000);
+    const hours = Math.floor((diff % 86400000) / 3600000);
+    const mins  = Math.floor((diff % 3600000)  / 60000);
+    const secs  = Math.floor((diff % 60000)    / 1000);
 
-    const countdownInterval = setInterval(() => {
-        const now = new Date().getTime();
-        const difference = targetDate - now;
+    elDays.textContent  = String(days).padStart(2, '0');
+    elHours.textContent = String(hours).padStart(2, '0');
+    elMins.textContent  = String(mins).padStart(2, '0');
+    elSecs.textContent  = String(secs).padStart(2, '0');
+  }
 
-        if (difference < 0) {
-            clearInterval(countdownInterval);
-            document.querySelector(".countdown-container").innerHTML = "<p class='prose'>¡Hoy es el gran día!</p>";
-            return;
-        }
+  update();
+  setInterval(update, 1000);
+}
 
-        const days = Math.floor(difference / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+/* ============================================================
+   PARALAJE SUAVE
+   Mueve el fondo del hero ligeramente al hacer scroll.
+   ============================================================ */
+function initParallax() {
+  const heroBg = document.querySelector('.hero-bg');
+  if (!heroBg) return;
 
-        document.getElementById("days").innerText = String(days).padStart(2, '0');
-        document.getElementById("hours").innerText = String(hours).padStart(2, '0');
-        document.getElementById("minutes").innerText = String(minutes).padStart(2, '0');
-        document.getElementById("seconds").innerText = String(seconds).padStart(2, '0');
-    }, 1000);
+  let ticking = false;
 
-    // 4. LÓGICA DINÁMICA DEL FORMULARIO DE ASISTENCIA
-    asistenciaRadios.forEach(radio => {
-        radio.addEventListener("change", (e) => {
-            if (e.target.value === "false") {
-                wrapperAcompanantes.style.display = "none";
-                document.getElementById("acompanantes").value = "0";
-            } else {
-                wrapperAcompanantes.style.display = "block";
-            }
-        });
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      requestAnimationFrame(() => {
+        const scrollY = window.scrollY;
+        // Desplaza el fondo a la mitad de la velocidad del scroll
+        heroBg.style.transform = `translateY(${scrollY * 0.35}px) scale(1.05)`;
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }, { passive: true });
+}
+
+/* ============================================================
+   GALERÍA CON LIGHTBOX
+   ============================================================ */
+function initGallery() {
+  const items    = document.querySelectorAll('.gallery-item[data-src]');
+  const lightbox = document.getElementById('lightbox');
+  const lbImg    = document.getElementById('lightbox-img');
+  const lbClose  = document.getElementById('lightbox-close');
+
+  if (!lightbox) return;
+
+  // Abrir lightbox
+  items.forEach(item => {
+    item.addEventListener('click', () => {
+      const src = item.dataset.src;
+      if (!src) return;
+      lbImg.src = src;
+      lightbox.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    });
+  });
+
+  // Cerrar lightbox
+  function closeLightbox() {
+    lightbox.classList.remove('open');
+    document.body.style.overflow = '';
+    setTimeout(() => { lbImg.src = ''; }, 400);
+  }
+
+  lbClose?.addEventListener('click', closeLightbox);
+
+  lightbox.addEventListener('click', e => {
+    if (e.target === lightbox) closeLightbox();
+  });
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && lightbox.classList.contains('open')) closeLightbox();
+  });
+}
+
+/* ============================================================
+   RSVP — Formulario + Supabase
+   ============================================================ */
+function initRSVP() {
+  const form       = document.getElementById('rsvp-form');
+  const success    = document.getElementById('rsvp-success');
+  const errorBox   = document.getElementById('rsvp-error');
+  const submitBtn  = document.getElementById('rsvp-submit');
+
+  if (!form) return;
+
+  form.addEventListener('submit', async e => {
+    e.preventDefault();
+    clearErrors();
+
+    // ── Recoger datos del formulario ──
+    const nombre       = form.querySelector('#field-nombre')?.value.trim();
+    const asistencia   = form.querySelector('input[name="asistencia"]:checked')?.value;
+    const acompanantes = parseInt(form.querySelector('#field-acompanantes')?.value || '0', 10);
+    const mensaje      = form.querySelector('#field-mensaje')?.value.trim() || '';
+
+    // ── Validaciones básicas ──
+    if (!nombre) {
+      showError('Por favor, ingresa tu nombre completo.');
+      return;
+    }
+    if (!asistencia) {
+      showError('Por favor, indica si podrás asistir.');
+      return;
+    }
+
+    // ── Estado de carga ──
+    setSubmitLoading(true, submitBtn);
+
+    // ── Enviar a Supabase ──
+    const { error } = await supabase.insertInvitado({
+      nombre,
+      asistencia,
+      acompanantes,
+      mensaje,
     });
 
-    // 5. ENVÍO DE DATOS A SUPABASE (COMPATIBLE CON ESPECIFICACIÓN DE TABLA EXACTA)
-    rsvpForm.addEventListener("submit", async (e) => {
-        e.preventDefault();
-        
-        const submitBtn = document.getElementById("submit-btn");
-        submitBtn.innerText = "PROCESANDO...";
-        submitBtn.disabled = true;
+    setSubmitLoading(false, submitBtn);
 
-        const nombre = document.getElementById("nombre").value.trim();
-        const asistencia = document.querySelector('input[name="asistencia"]:checked').value === "true";
-        const acompanantes = parseInt(document.getElementById("acompanantes").value, 10) || 0;
-        const mensaje = document.getElementById("mensaje").value.trim();
+    if (error) {
+      console.error('Supabase error:', error);
+      showError('Hubo un problema al enviar tu confirmación. Por favor, inténtalo de nuevo.');
+      return;
+    }
 
-        if (!supabase) {
-            formStatus.style.color = "var(--terracota)";
-            formStatus.innerText = "Error: Configura las credenciales de Supabase en script.js.";
-            submitBtn.innerText = "ENVIAR CONFIRMACIÓN";
-            submitBtn.disabled = false;
-            return;
-        }
+    // ── Éxito ──
+    form.style.opacity    = '0';
+    form.style.transform  = 'translateY(-10px)';
+    form.style.transition = '0.5s ease';
 
-        try {
-            const { data, error } = await supabase
-                .from('invitados')
-                .insert([
-                    { 
-                        nombre: nombre, 
-                        asistencia: asistencia, 
-                        acompanantes: acompanantes, 
-                        mensaje: mensaje 
-                    }
-                ]);
+    setTimeout(() => {
+      form.style.display = 'none';
+      success.classList.add('show');
+    }, 500);
+  });
 
-            if (error) throw error;
+  // ── Helpers ──
+  function showError(msg) {
+    errorBox.textContent = msg;
+    errorBox.classList.add('show');
+    errorBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
 
-            formStatus.style.color = "var(--texto-light)";
-            formStatus.innerText = "Gracias. Tu confirmación ha sido recibida con éxito.";
-            rsvpForm.reset();
-            wrapperAcompanantes.style.display = "block";
-            
-        } catch (error) {
-            console.error("Error al guardar en Supabase:", error);
-            formStatus.style.color = "var(--terracota)";
-            formStatus.innerText = "Hubo un inconveniente. Por favor, inténtalo nuevamente.";
-        } finally {
-            submitBtn.innerText = "ENVIAR CONFIRMACIÓN";
-            submitBtn.disabled = false;
-        }
-    });
+  function clearErrors() {
+    errorBox.textContent = '';
+    errorBox.classList.remove('show');
+  }
+
+  function setSubmitLoading(isLoading, btn) {
+    if (isLoading) {
+      btn.disabled = true;
+      btn.innerHTML = '<span class="spinner"></span> Enviando...';
+    } else {
+      btn.disabled = false;
+      btn.innerHTML = 'Confirmar Asistencia';
+    }
+  }
+}
+
+/* ============================================================
+   SMOOTH SCROLL para anclas internas
+   ============================================================ */
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function(e) {
+    const target = document.querySelector(this.getAttribute('href'));
+    if (!target) return;
+    e.preventDefault();
+    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
 });
