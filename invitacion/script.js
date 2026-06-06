@@ -8,7 +8,8 @@ document.addEventListener("DOMContentLoaded", () => {
     
     // ELEMENTOS DEL DOM
     const envelopeWrapper = document.getElementById("envelope-wrapper");
-    const envelope = document.getElementById("envelope");
+    // ARREGLO DE CLIC: Seleccionar solo el sello, no el sobre
+    const waxSeal = document.getElementById("wax-seal");
     const mainContent = document.getElementById("main-content");
     const bgMusic = document.getElementById("bg-music");
     const musicControl = document.getElementById("music-control");
@@ -17,12 +18,15 @@ document.addEventListener("DOMContentLoaded", () => {
     const asistenciaRadios = document.querySelectorAll('input[name="asistencia"]');
     const wrapperAcompanantes = document.getElementById("wrapper-acompanantes");
 
-    // 1. ANIMACIÓN DE APERTURA DEL SOBRE
-    envelope.addEventListener("click", () => {
+    // 1. ANIMACIÓN DE APERTURA DEL SOBRE (SOLO AL TOCAR EL SELLO)
+    waxSeal.addEventListener("click", (e) => {
+        // Evitar comportamientos extraños del navegador en móviles
+        e.stopPropagation(); 
+        
         if (!envelopeWrapper.classList.contains("open")) {
             envelopeWrapper.classList.add("open");
             
-            // Iniciar Audio Sutilmente
+            // Iniciar Audio Sutilmente (solo si el autoplay es exitoso)
             bgMusic.volume = 0.2; // Volumen inicial bajo solicitado
             const playPromise = bgMusic.play();
             
@@ -32,7 +36,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     toggleMusicIcon(true);
                 }).catch(error => {
                     console.log("Autoplay bloqueado por el navegador. Se activará tras interactuar.");
-                    // Forzar aparición del botón por si acaso
                     musicControl.classList.remove("hidden");
                 });
             }
@@ -44,7 +47,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 mainContent.classList.add("visible-content");
                 // Permitir scroll en la página una vez abierta la invitación
                 document.body.style.overflowY = "auto";
-            }, 2000);
+            }, 2000); // Dar tiempo para ver la carta salir
         }
     });
 
