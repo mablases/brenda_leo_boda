@@ -1,1095 +1,736 @@
-/* 
-   Brenda & Leo - Invitación de Boda Premium
-   Estilos inspirados en Maison Olive (Diseño Editorial, Minimalista y de Lujo)
-*/
-
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Montserrat:wght@200;300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap');
-
-/* Variables de Diseño */
-:root {
-    --color-ivory: #FAF9F6;
-    --color-beige: #F5EFE6;
-    --color-beige-dark: #E8DFD0;
-    --color-olive: #4A5D4E;
-    --color-olive-dark: #37463A;
-    --color-olive-light: #8C9C8E;
-    --color-gold: #C5A880;
-    --color-gold-dark: #A4865E;
-    --color-charcoal: #1E1E1E;
-    --color-white: #FFFFFF;
-    
-    --font-serif-title: 'Cormorant Garamond', serif;
-    --font-serif-sub: 'Playfair Display', serif;
-    --font-sans: 'Montserrat', sans-serif;
-    
-    --transition-slow: all 1.2s cubic-bezier(0.25, 1, 0.5, 1);
-    --transition-medium: all 0.6s cubic-bezier(0.25, 1, 0.5, 1);
-    --transition-fast: all 0.3s ease;
-}
-
-/* Reset y Estilos Generales */
-* {
+/* RESETEO EDITORIAL */
+*, *::before, *::after {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
-    -webkit-tap-highlight-color: transparent;
 }
 
-html {
-    scroll-behavior: smooth;
-    font-size: 16px;
-    background-color: var(--color-ivory);
-    color: var(--color-charcoal);
-    font-family: var(--font-sans);
-    overflow-x: hidden;
+:root {
+    --terracota: #b95d38;
+    --terracota-dark: #a34f2e;
+    --ocre: #cca464;
+    --beige: #f3e9dc;
+    --marfil: #fbf8f3;
+    --crema: #fffdfa;
+    --dorado: #d4a373;
+    --texto: #4a3b32;
+    --texto-light: #7a6a5d;
+    
+    --font-serif: 'Cormorant Garamond', serif;
+    --font-display: 'Playfair Display', serif;
+    --font-sans: 'Montserrat', sans-serif;
+    
+    --transition-smooth: all 0.8s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 body {
-    min-height: 100vh;
-    line-height: 1.6;
+    background-color: var(--marfil);
+    color: var(--texto);
+    font-family: var(--font-serif);
     overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
 }
 
-/* Scrollbar Personalizado */
-::-webkit-scrollbar {
-    width: 6px;
-}
-::-webkit-scrollbar-track {
-    background: var(--color-ivory);
-}
-::-webkit-scrollbar-thumb {
-    background: var(--color-olive-light);
-    border-radius: 3px;
-}
-::-webkit-scrollbar-thumb:hover {
-    background: var(--color-olive);
-}
-
-/* Tipografía Editorial */
-h1, h2, h3, h4 {
-    font-family: var(--font-serif-title);
-    font-weight: 400;
-    letter-spacing: 0.05em;
-    line-height: 1.2;
-}
-
-p {
-    font-size: 0.95rem;
-    font-weight: 300;
-    letter-spacing: 0.03em;
-    color: #444444;
-}
-
-.serif-italic {
-    font-family: var(--font-serif-title);
-    font-style: italic;
-    font-weight: 300;
-}
-
-/* Animaciones y Clases de Revelación */
-.reveal {
-    opacity: 0;
-    transform: translateY(40px);
-    transition: var(--transition-slow);
-}
-
-.reveal.active {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.reveal-fade {
-    opacity: 0;
-    transition: opacity 1.5s ease;
-}
-
-.reveal-fade.active {
-    opacity: 1;
-}
-
-.delay-1 { transition-delay: 0.2s; }
-.delay-2 { transition-delay: 0.4s; }
-.delay-3 { transition-delay: 0.6s; }
-.delay-4 { transition-delay: 0.8s; }
-
-/* Botones Premium */
-.btn-premium {
-    display: inline-block;
-    padding: 12px 36px;
-    font-family: var(--font-sans);
-    font-size: 0.75rem;
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 0.2em;
-    color: var(--color-white);
-    background-color: var(--color-olive);
-    border: 1px solid var(--color-olive);
-    border-radius: 0;
-    cursor: pointer;
-    transition: var(--transition-medium);
-    text-decoration: none;
-    position: relative;
-    overflow: hidden;
-    z-index: 1;
-}
-
-.btn-premium::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: var(--color-gold);
-    transform: scaleX(0);
-    transform-origin: right;
-    transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
-    z-index: -1;
-}
-
-.btn-premium:hover::before {
-    transform: scaleX(1);
-    transform-origin: left;
-}
-
-.btn-premium:hover {
-    color: var(--color-white);
-    border-color: var(--color-gold);
-    box-shadow: 0 4px 15px rgba(197, 168, 128, 0.2);
-}
-
-.btn-outline {
-    background-color: transparent;
-    color: var(--color-olive);
-    border: 1px solid var(--color-olive-light);
-}
-
-.btn-outline:hover {
-    color: var(--color-white);
-    border-color: var(--color-olive);
-}
-
-/* 1. PANTALLA INICIAL / COVER (OVERLAY) */
-#invitation-cover {
+/* CAPA DE TEXTURA DE PAPEL ORGÁNICO */
+.paper-overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: var(--color-ivory);
+    pointer-events: none;
     z-index: 9999;
+    opacity: 0.04;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+/* BOTÓN DE MÚSICA FLOTANTE */
+.music-btn {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background-color: var(--crema);
+    border: 1px solid var(--dorado);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    cursor: pointer;
+    z-index: 1000;
     display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition-smooth);
+}
+
+.music-btn:hover {
+    transform: scale(1.05);
+    background-color: var(--beige);
+}
+
+.music-btn svg {
+    width: 18px;
+    height: 18px;
+    fill: var(--terracota);
+}
+
+.hidden { display: none !important; }
+
+/* CONTENEDOR DEL SOBRE ARTESANAL */
+.envelope-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--marfil);
+    display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+    z-index: 2000;
     transition: transform 1.2s cubic-bezier(0.76, 0, 0.24, 1), opacity 1.2s ease;
 }
 
-#invitation-cover.opened {
-    transform: translateY(-100%);
-    opacity: 0;
-    pointer-events: none;
-}
-
-.cover-card {
-    text-align: center;
-    padding: 40px;
-    max-width: 450px;
-    width: 90%;
-    background: var(--color-white);
-    border: 1px solid var(--color-beige-dark);
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.03);
+.envelope {
     position: relative;
-}
-
-.cover-card::after {
-    content: '';
-    position: absolute;
-    top: 8px;
-    left: 8px;
-    right: 8px;
-    bottom: 8px;
-    border: 1px solid var(--color-beige);
-    pointer-events: none;
-}
-
-.cover-crest {
-    font-family: var(--font-serif-title);
-    font-size: 2.8rem;
-    color: var(--color-gold);
-    margin-bottom: 20px;
-    position: relative;
-    display: inline-block;
-    padding: 0 15px;
-}
-
-.cover-crest::before, .cover-crest::after {
-    content: '';
-    position: absolute;
-    width: 40px;
-    height: 1px;
-    background-color: var(--color-beige-dark);
-    top: 50%;
-}
-
-.cover-crest::before { left: -40px; }
-.cover-crest::after { right: -40px; }
-
-.cover-names {
-    font-family: var(--font-serif-title);
-    font-size: 2.2rem;
-    letter-spacing: 0.1em;
-    margin-bottom: 15px;
-    color: var(--color-olive);
-}
-
-.cover-sub {
-    font-family: var(--font-sans);
-    font-size: 0.7rem;
-    text-transform: uppercase;
-    letter-spacing: 0.25em;
-    color: var(--color-olive-light);
-    margin-bottom: 35px;
-}
-
-/* Música Control */
-.music-toggle {
-    position: fixed;
-    bottom: 25px;
-    right: 25px;
-    width: 45px;
-    height: 45px;
-    border-radius: 50%;
-    background-color: var(--color-white);
-    border: 1px solid var(--color-beige-dark);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    width: 340px;
+    height: 230px;
+    background-color: var(--beige);
+    box-shadow: 0 20px 40px rgba(74, 59, 50, 0.15);
+    border-radius: 4px;
     cursor: pointer;
-    z-index: 999;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-    transition: var(--transition-fast);
+    transform-style: preserve-3d;
+    transition: transform 0.5s ease;
 }
 
-.music-toggle:hover {
-    transform: scale(1.05);
-    border-color: var(--color-gold);
+.envelope:hover {
+    transform: translateY(-5px);
 }
 
-.music-toggle svg {
-    width: 18px;
-    height: 18px;
-    fill: var(--color-olive);
-}
-
-/* 2. HERO PRINCIPAL */
-.hero {
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    padding: 20px;
-    background-color: var(--color-ivory);
-    text-align: center;
-}
-
-/* Líneas finas decorativas inspiradas en diseño editorial */
-.editorial-lines {
+/* CARAS DEL SOBRE REALISTA */
+.envelope-front {
     position: absolute;
-    top: 4%;
-    left: 4%;
-    right: 4%;
-    bottom: 4%;
-    border: 1px solid rgba(74, 93, 78, 0.1);
-    pointer-events: none;
+    width: 0; height: 0;
+    top: 0; left: 0;
+    border-right: 170px solid transparent;
+    border-left: 170px solid transparent;
+    border-bottom: 115px solid #ebdccb;
+    border-top: 115px solid transparent;
+    z-index: 3;
 }
 
-.hero-subtitle {
-    font-family: var(--font-sans);
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 0.3em;
-    color: var(--color-olive-light);
-    margin-bottom: 20px;
-}
-
-.hero-names {
-    font-size: 4.5rem;
-    color: var(--color-olive);
-    margin-bottom: 10px;
-    line-height: 1.1;
-    font-weight: 300;
-}
-
-.hero-ampersand {
-    font-family: var(--font-serif-title);
-    font-style: italic;
-    color: var(--color-gold);
-    font-size: 3rem;
-    display: block;
-    margin: 5px 0;
-}
-
-.hero-date {
-    font-family: var(--font-serif-sub);
-    font-size: 1.3rem;
-    letter-spacing: 0.15em;
-    color: var(--color-charcoal);
-    margin-top: 25px;
-    margin-bottom: 10px;
-}
-
-.hero-location {
-    font-family: var(--font-sans);
-    font-size: 0.7rem;
-    text-transform: uppercase;
-    letter-spacing: 0.2em;
-    color: var(--color-olive-light);
-}
-
-.scroll-indicator {
+.envelope-back {
     position: absolute;
-    bottom: 5%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    font-family: var(--font-sans);
-    font-size: 0.6rem;
-    text-transform: uppercase;
-    letter-spacing: 0.15em;
-    color: var(--color-olive-light);
+    width: 0; height: 0;
+    top: 0; left: 0;
+    border-right: 170px solid #e3d2be;
+    border-left: 170px solid #e3d2be;
+    border-bottom: 230px solid transparent;
+    border-top: 0 solid transparent;
+    z-index: 1;
 }
 
-.scroll-indicator::after {
-    content: '';
-    width: 1px;
-    height: 40px;
-    background: linear-gradient(to bottom, var(--color-olive-light), transparent);
-    margin-top: 10px;
-    animation: scrollLine 2s infinite ease-in-out;
+.envelope-top {
+    position: absolute;
+    top: 0; left: 0;
+    width: 0; height: 0;
+    border-right: 170px solid transparent;
+    border-left: 170px solid transparent;
+    border-top: 120px solid #dfceb9;
+    transform-origin: top center;
+    z-index: 4;
+    transition: transform 0.6s ease-in-out;
 }
 
-@keyframes scrollLine {
-    0% { transform: scaleY(0); transform-origin: top; }
-    50% { transform: scaleY(1); transform-origin: top; }
-    50.1% { transform: scaleY(1); transform-origin: bottom; }
-    100% { transform: scaleY(0); transform-origin: bottom; }
-}
-
-/* 3. SECCIÓN FOTOGRAFÍA EDITORIAL (INTRO) */
-.section-editorial-img {
-    padding: 100px 20px;
-    background-color: var(--color-white);
-    display: flex;
-    justify-content: center;
-}
-
-.editorial-frame {
-    position: relative;
-    max-width: 600px;
-    width: 100%;
-    padding: 20px;
-    border: 1px solid var(--color-beige-dark);
-}
-
-.editorial-frame img {
-    width: 100%;
-    height: auto;
-    display: block;
-    filter: sepia(10%) contrast(95%);
-    transition: var(--transition-slow);
-}
-
-.editorial-frame:hover img {
-    transform: scale(1.02);
-}
-
-.editorial-caption {
-    font-family: var(--font-serif-title);
-    font-size: 1.5rem;
-    text-align: center;
-    margin-top: 25px;
-    color: var(--color-olive);
-}
-
-/* 4. CUENTA REGRESIVA PREMIUM */
-.countdown-section {
-    padding: 80px 20px;
-    background-color: var(--color-beige);
-    text-align: center;
-}
-
-.countdown-title {
-    font-family: var(--font-sans);
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 0.2em;
-    color: var(--color-olive);
-    margin-bottom: 40px;
-}
-
-.countdown-container {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    max-width: 600px;
-    margin: 0 auto;
-}
-
-.countdown-item {
-    flex: 1;
-    background: var(--color-white);
-    padding: 20px 10px;
-    border: 1px solid rgba(74, 93, 78, 0.1);
-    min-width: 80px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.02);
-}
-
-.countdown-number {
-    font-family: var(--font-serif-sub);
-    font-size: 2.2rem;
-    color: var(--color-olive);
-    font-weight: 400;
-    line-height: 1;
-    margin-bottom: 5px;
-}
-
-.countdown-label {
-    font-family: var(--font-sans);
-    font-size: 0.65rem;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--color-olive-light);
-}
-
-/* 5. HISTORIA DE AMOR */
-.story-section {
-    padding: 120px 20px;
-    background-color: var(--color-white);
-}
-
-.section-header {
-    text-align: center;
-    margin-bottom: 80px;
-}
-
-.section-subtitle {
-    font-family: var(--font-sans);
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 0.25em;
-    color: var(--color-gold-dark);
-    margin-bottom: 15px;
-}
-
-.section-title {
-    font-size: 3rem;
-    color: var(--color-olive);
-}
-
-.story-grid {
-    max-width: 1000px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 80px;
-}
-
-.story-row {
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
-}
-
-@media (min-width: 768px) {
-    .story-row {
-        flex-direction: row;
-        align-items: center;
-    }
-    .story-row.reverse {
-        flex-direction: row-reverse;
-    }
-    .story-col-img, .story-col-text {
-        flex: 1;
-    }
-}
-
-.story-img-container {
-    position: relative;
-    overflow: hidden;
-    border: 1px solid var(--color-beige-dark);
-    padding: 10px;
-    background: var(--color-white);
-}
-
-.story-img-container img {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-    aspect-ratio: 4/5;
-    filter: grayscale(15%);
-    transition: var(--transition-slow);
-}
-
-.story-img-container:hover img {
-    transform: scale(1.05);
-}
-
-.story-date {
-    font-family: var(--font-serif-sub), 'Playfair Display', serif;
-    font-size: 1.1rem;
-    color: var(--color-gold);
-    margin-bottom: 15px;
-    display: inline-block;
-    border-bottom: 1px solid var(--color-beige-dark);
-    padding-bottom: 5px;
-}
-
-.story-text h3 {
-    font-size: 2rem;
-    color: var(--color-olive);
-    margin-bottom: 15px;
-}
-
-.story-text p {
-    color: #555555;
-    line-height: 1.8;
-}
-
-/* 6. DETALLES DE EVENTOS (CEREMONIA Y RECEPCIÓN) */
-.details-section {
-    padding: 120px 20px;
-    background-color: var(--color-ivory);
-}
-
-.details-grid {
-    max-width: 900px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 40px;
-}
-
-@media (min-width: 768px) {
-    .details-grid {
-        grid-template-columns: 1fr 1fr;
-    }
-}
-
-.detail-card {
-    background: var(--color-white);
-    border: 1px solid var(--color-beige-dark);
-    padding: 50px 40px;
-    text-align: center;
-    position: relative;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.02);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-
-.detail-card::before {
-    content: '';
+/* CARTA CONTENIDA (PULL OUT EFFECT) */
+.envelope-paper {
     position: absolute;
     top: 10px;
-    left: 10px;
-    right: 10px;
-    bottom: 10px;
-    border: 1px solid rgba(197, 168, 128, 0.2);
+    left: 15px;
+    width: 310px;
+    height: 210px;
+    background-color: var(--crema);
+    z-index: 2;
+    padding: 20px;
+    box-shadow: inset 0 0 15px rgba(0,0,0,0.02);
+    border: 1px solid rgba(212, 163, 115, 0.3);
+    transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.paper-preview-content {
+    text-align: center;
+}
+
+.envelope-brand {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: var(--dorado);
+    font-family: var(--font-sans);
+    margin-bottom: 10px;
+}
+
+.envelope-names {
+    font-family: var(--font-display);
+    font-size: 1.8rem;
+    font-weight: 400;
+    color: var(--terracota);
+}
+
+.envelope-date {
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+    margin-top: 10px;
+    color: var(--texto-light);
+}
+
+/* SELLO DE CERA PREMIUM */
+.wax-seal {
+    position: absolute;
+    top: 95px;
+    left: 145px;
+    width: 50px;
+    height: 50px;
+    z-index: 5;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+    filter: drop-shadow(0 4px 6px rgba(0,0,0,0.15));
+}
+
+.seal-svg {
+    width: 100%;
+    height: 100%;
+}
+
+.envelope-instruction {
+    margin-top: 30px;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--texto-light);
+    font-family: var(--font-sans);
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { opacity: 0.4; }
+    50% { opacity: 1; }
+    100% { opacity: 0.4; }
+}
+
+/* ESTADOS DE ANIMACIÓN DEL SOBRE VIA JS */
+.envelope-wrapper.open .envelope-top {
+    transform: rotateX(180deg);
+    z-index: 1;
+}
+
+.envelope-wrapper.open .wax-seal {
+    transform: translate(-50%, -50%) scale(0) rotate(45deg);
+    opacity: 0;
+}
+
+.envelope-wrapper.open .envelope-paper {
+    transform: translateY(-120px);
+    z-index: 4;
+}
+
+.envelope-wrapper.fade-out {
+    opacity: 0;
+    transform: translateY(-100%);
     pointer-events: none;
 }
 
-.detail-icon {
+/* LÓGICA DE CONTENIDO PRINCIPAL */
+.main-content {
+    opacity: 0;
+    transition: opacity 1.5s ease-in-out;
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: var(--crema);
+    box-shadow: 0 0 50px rgba(74, 59, 50, 0.05);
+    position: relative;
+    border-left: 1px solid rgba(212, 163, 115, 0.15);
+    border-right: 1px solid rgba(212, 163, 115, 0.15);
+}
+
+.main-content.visible-content {
+    opacity: 1;
+}
+
+/* DISEÑO DE SECCIONES EDITORIALES */
+.section {
+    padding: 80px 30px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+/* ADORNOS BOTÁNICOS */
+.botanical-left {
+    position: absolute;
+    left: -20px;
+    top: 10%;
+    width: 120px;
+    height: 240px;
+    opacity: 0.3;
+    pointer-events: none;
+}
+
+.section-hero {
+    min-height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 120px;
+}
+
+.editorial-subtitle {
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--dorado);
+    display: block;
     margin-bottom: 25px;
 }
 
-.detail-icon svg {
-    width: 45px;
-    height: 45px;
-    fill: var(--color-gold);
-}
-
-.detail-card h3 {
-    font-size: 2.2rem;
-    color: var(--color-olive);
-    margin-bottom: 20px;
-}
-
-.detail-info {
+.editorial-title {
+    font-family: var(--font-display);
+    font-size: 3.5rem;
+    font-weight: 400;
+    line-height: 1.1;
+    color: var(--terracota);
     margin-bottom: 30px;
 }
 
-.detail-info p {
-    margin-bottom: 10px;
-    font-size: 0.9rem;
+.ampersand {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 2.8rem;
+    color: var(--ocre);
 }
 
-.detail-info strong {
-    font-weight: 500;
-    color: var(--color-charcoal);
-}
-
-.detail-info .time {
-    font-family: var(--font-serif-sub);
-    font-size: 1.2rem;
-    color: var(--color-gold-dark);
-    margin: 15px 0;
-}
-
-/* 7. CÓDIGO DE VESTIMENTA (DRESS CODE) */
-.dress-code-section {
-    padding: 100px 20px;
-    background-color: var(--color-beige);
-    text-align: center;
-}
-
-.dress-code-box {
-    max-width: 600px;
-    margin: 0 auto;
-    background: var(--color-white);
-    border: 1px solid var(--color-beige-dark);
-    padding: 60px 40px;
-    position: relative;
-}
-
-.dress-code-box::before {
-    content: '';
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    right: 10px;
-    bottom: 10px;
-    border: 1px solid rgba(74, 93, 78, 0.1);
-    pointer-events: none;
-}
-
-.dress-code-title {
-    font-size: 2.5rem;
-    color: var(--color-olive);
-    margin-bottom: 15px;
-}
-
-.dress-code-type {
+.editorial-date-location {
     font-family: var(--font-sans);
-    font-size: 0.9rem;
-    text-transform: uppercase;
-    letter-spacing: 0.2em;
-    color: var(--color-gold-dark);
-    font-weight: 600;
-    margin-bottom: 20px;
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    line-height: 1.8;
+    color: var(--texto-light);
 }
 
-.dress-code-text {
-    font-size: 0.95rem;
-    color: #555555;
-    margin-bottom: 35px;
-}
-
-.palette-container {
+/* INDICADOR SCROLL */
+.scroll-indicator {
+    margin-top: 60px;
     display: flex;
     justify-content: center;
-    gap: 15px;
-    flex-wrap: wrap;
 }
 
-.palette-color {
-    width: 35px;
-    height: 35px;
-    border-radius: 50%;
-    box-shadow: inset 0 2px 4px rgba(0,0,0,0.1), 0 2px 5px rgba(0,0,0,0.05);
-    transition: transform 0.3s ease;
-}
-
-.palette-color:hover {
-    transform: scale(1.15);
-}
-
-/* Colores sugeridos */
-.c1 { background-color: #E6DFD3; } /* Beige arena */
-.c2 { background-color: #A3B19B; } /* Verde salvia */
-.c3 { background-color: #5C6E58; } /* Verde oliva */
-.c4 { background-color: #C89D7C; } /* Terracota suave */
-.c5 { background-color: #43506C; } /* Azul marino elegante */
-.c6 { background-color: #D2C4B1; } /* Champaña */
-
-/* 8. GALERÍA DE FOTOS INTERACTIVA */
-.gallery-section {
-    padding: 120px 20px;
-    background-color: var(--color-white);
-}
-
-.gallery-grid {
-    max-width: 1000px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-}
-
-@media (min-width: 768px) {
-    .gallery-grid {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 30px;
-    }
-}
-
-.gallery-item {
-    position: relative;
-    overflow: hidden;
-    border: 1px solid var(--color-beige-dark);
-    padding: 8px;
-    background: var(--color-white);
-    cursor: pointer;
-}
-
-.gallery-item img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    aspect-ratio: 1/1;
-    filter: grayscale(20%);
-    transition: var(--transition-slow);
+.scroll-indicator .line {
+    width: 1px;
+    height: 50px;
+    background: linear-gradient(to bottom, var(--dorado), transparent);
     display: block;
 }
 
-.gallery-item::after {
-    content: '+';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(0.5);
-    font-size: 2rem;
-    color: var(--color-white);
-    background: rgba(74, 93, 78, 0.7);
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    opacity: 0;
-    transition: var(--transition-medium);
-}
-
-.gallery-item:hover img {
-    transform: scale(1.05);
-    filter: grayscale(0%);
-}
-
-.gallery-item:hover::after {
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(1);
-}
-
-/* Lightbox Vanilla */
-.lightbox {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(30, 30, 30, 0.95);
-    z-index: 10000;
-    display: none;
-    justify-content: center;
-    align-items: center;
-    opacity: 0;
-    transition: opacity 0.5s ease;
-}
-
-.lightbox.active {
-    display: flex;
-    opacity: 1;
-}
-
-.lightbox-content {
-    max-width: 90%;
-    max-height: 80%;
-    position: relative;
-}
-
-.lightbox-content img {
-    max-width: 100%;
-    max-height: 80vh;
-    object-fit: contain;
-    border: 3px solid var(--color-white);
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
-}
-
-.lightbox-close {
-    position: absolute;
-    top: -40px;
-    right: 0;
-    color: var(--color-white);
-    font-size: 2rem;
-    cursor: pointer;
-    background: none;
+.editorial-divider {
     border: none;
-    font-family: var(--font-sans);
-    transition: var(--transition-fast);
-}
-
-.lightbox-close:hover {
-    color: var(--color-gold);
-}
-
-.lightbox-nav {
-    position: absolute;
-    top: 50%;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    transform: translateY(-50%);
-    pointer-events: none;
-}
-
-.lightbox-btn {
-    pointer-events: auto;
-    background: rgba(255, 255, 255, 0.1);
-    color: var(--color-white);
-    border: none;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    cursor: pointer;
-    font-size: 1.5rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: var(--transition-fast);
-}
-
-.lightbox-btn:hover {
-    background: var(--color-olive);
-    color: var(--color-white);
-}
-
-/* 9. UBICACIÓN / GOOGLE MAPS */
-.map-section {
-    padding: 0;
-    background-color: var(--color-white);
-    position: relative;
-    height: 450px;
-}
-
-.map-container {
-    width: 100%;
-    height: 100%;
-}
-
-.map-container iframe {
-    width: 100%;
-    height: 100%;
-    border: none;
-    filter: grayscale(10%) contrast(95%);
-}
-
-/* 10. RSVP FORMULARIO (CONECTADO A SUPABASE) */
-.rsvp-section {
-    padding: 120px 20px;
-    background-color: var(--color-beige);
-}
-
-.rsvp-container {
-    max-width: 650px;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--dorado), transparent);
+    width: 60%;
     margin: 0 auto;
-    background: var(--color-white);
-    border: 1px solid var(--color-beige-dark);
-    padding: 60px 45px;
+    opacity: 0.4;
+}
+
+/* HISTORIA CARD ARTESANAL */
+.card-artesanal {
+    background-color: var(--marfil);
+    padding: 40px 25px;
+    border-radius: 2px;
+    border: 1px solid rgba(212, 163, 115, 0.2);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.02);
+}
+
+.quote {
+    font-style: italic;
+    font-size: 1.3rem;
+    color: var(--terracota);
+    line-height: 1.6;
+    margin-bottom: 25px;
+}
+
+.editorial-accent {
+    color: var(--ocre);
+    font-size: 0.8rem;
+    margin-bottom: 20px;
+}
+
+.section-subtitle {
+    font-family: var(--font-display);
+    font-size: 1.8rem;
+    color: var(--texto);
+    margin-bottom: 20px;
+    font-weight: 400;
+}
+
+.prose {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: var(--texto-light);
+    max-width: 450px;
+    margin: 0 auto;
+}
+
+/* CUENTA REGRESIVA */
+.countdown-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+}
+
+.countdown-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 60px;
+}
+
+.time-num {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    color: var(--terracota);
+}
+
+.time-label {
+    font-family: var(--font-sans);
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--texto-light);
+    margin-top: 5px;
+}
+
+.countdown-sep {
+    color: var(--dorado);
+    margin: 0 15px;
+    opacity: 0.6;
+}
+
+/* DETALLES DE LOGÍSTICA */
+.details-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.detail-block {
+    padding: 20px;
+}
+
+.detail-title {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    color: var(--terracota);
+    margin-bottom: 10px;
+}
+
+.detail-time {
+    font-family: var(--font-sans);
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    color: var(--ocre);
+    margin-bottom: 15px;
+}
+
+.detail-venue {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.detail-address {
+    font-size: 1rem;
+    color: var(--texto-light);
+    margin-bottom: 20px;
+    font-style: italic;
+}
+
+.btn-editorial {
+    display: inline-block;
+    font-family: var(--font-sans);
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--texto);
+    text-decoration: none;
+    border-bottom: 1px solid var(--dorado);
+    padding-bottom: 4px;
+    transition: var(--transition-smooth);
+}
+
+.btn-editorial:hover {
+    color: var(--terracota);
+    border-color: var(--terracota);
+}
+
+.detail-block-separator {
+    width: 30px;
+    height: 1px;
+    background-color: var(--dorado);
+    margin: 0 auto;
+    opacity: 0.3;
+}
+
+/* GALERÍA ARISTOCRÁTICA STACK */
+.gallery-stack {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.gallery-item {
+    background-color: white;
+    padding: 10px 10px 30px 10px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+    border: 1px solid rgba(0,0,0,0.03);
+}
+
+.gallery-item img {
+    width: 180px;
+    height: 240px;
+    object-fit: cover;
+    filter: sepia(0.15) contrast(0.95);
+}
+
+.item-rotate-l { transform: rotate(-4deg); }
+.item-rotate-r { transform: rotate(3deg); }
+
+/* DRESS CODE PALETTE */
+.dress-type {
+    font-size: 1.4rem;
+    color: var(--terracota);
+    margin-bottom: 10px;
+}
+
+.color-palette-inspiration {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 25px;
+}
+
+.color-dot {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 1px solid rgba(0,0,0,0.05);
+}
+
+.color-terracota { background-color: var(--terracota); }
+.color-ocre { background-color: var(--ocre); }
+.color-gold { background-color: var(--dorado); }
+
+/* FORMULARIO RSVP DE ALTA GAMA (NO CUADRADO, NO CORPORATIVO) */
+.rsvp-card {
+    background-color: var(--marfil);
+    padding: 40px 30px;
+    border: 1px solid rgba(212, 163, 115, 0.25);
     position: relative;
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.03);
 }
 
-.rsvp-container::before {
-    content: '';
-    position: absolute;
-    top: 12px;
-    left: 12px;
-    right: 12px;
-    bottom: 12px;
-    border: 1px solid rgba(74, 93, 78, 0.15);
-    pointer-events: none;
-}
-
-.rsvp-form {
-    margin-top: 40px;
+.editorial-form {
+    margin-top: 30px;
+    text-align: left;
 }
 
 .form-group {
     margin-bottom: 25px;
-    text-align: left;
 }
 
-.form-label {
+.editorial-form label {
     display: block;
     font-family: var(--font-sans);
-    font-size: 0.75rem;
-    font-weight: 500;
+    font-size: 0.7rem;
+    letter-spacing: 2px;
     text-transform: uppercase;
-    letter-spacing: 0.15em;
-    color: var(--color-olive);
-    margin-bottom: 10px;
+    color: var(--texto);
+    margin-bottom: 8px;
 }
 
-.form-control {
+.editorial-form input[type="text"],
+.editorial-form input[type="number"],
+.editorial-form textarea {
     width: 100%;
-    padding: 12px 15px;
-    font-family: var(--font-sans);
-    font-size: 0.85rem;
-    background-color: var(--color-ivory);
-    border: 1px solid var(--color-beige-dark);
-    border-radius: 0;
-    color: var(--color-charcoal);
-    transition: var(--transition-fast);
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--dorado);
+    font-family: var(--font-serif);
+    font-size: 1.1rem;
+    padding: 8px 0;
+    color: var(--texto);
+    transition: border-color 0.4s ease;
 }
 
-.form-control:focus {
+.editorial-form input:focus,
+.editorial-form textarea:focus {
     outline: none;
-    border-color: var(--color-olive);
-    background-color: var(--color-white);
-    box-shadow: 0 4px 12px rgba(74, 93, 78, 0.05);
+    border-bottom-color: var(--terracota);
 }
 
+/* CUSTOM RADIOS ORGÁNICOS */
 .radio-group {
     display: flex;
     gap: 20px;
-    margin-top: 5px;
+    margin-top: 10px;
 }
 
-.radio-option {
+.radio-label {
     display: flex;
     align-items: center;
     cursor: pointer;
-    font-family: var(--font-sans);
-    font-size: 0.85rem;
+    font-family: var(--font-serif) !important;
+    font-size: 1.05rem !important;
+    text-transform: none !important;
+    letter-spacing: 0 !important;
+    color: var(--texto-light) !important;
 }
 
-.radio-option input {
+.radio-label input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.custom-radio {
+    width: 16px;
+    height: 16px;
+    border: 1px solid var(--dorado);
+    border-radius: 50%;
     margin-right: 8px;
-    accent-color: var(--color-olive);
-    width: 18px;
-    height: 18px;
-}
-
-textarea.form-control {
-    resize: none;
-    height: 100px;
-}
-
-.rsvp-btn-container {
-    text-align: center;
-    margin-top: 35px;
-}
-
-/* Mensajes de feedback RSVP */
-.rsvp-message {
-    margin-top: 20px;
-    padding: 15px;
-    font-family: var(--font-sans);
-    font-size: 0.85rem;
-    text-align: center;
-    display: none;
-}
-
-.rsvp-message.success {
-    display: block;
-    background-color: #E8F0E9;
-    color: var(--color-olive-dark);
-    border: 1px solid var(--color-olive-light);
-}
-
-.rsvp-message.error {
-    display: block;
-    background-color: #FDF2F2;
-    color: #9B2C2C;
-    border: 1px solid #F8B4B4;
-}
-
-/* 11. MENSAJE FINAL Y FOOTER */
-.final-message-section {
-    padding: 140px 20px;
-    background-color: var(--color-white);
-    text-align: center;
+    display: inline-block;
     position: relative;
 }
 
-.final-quote {
-    font-family: var(--font-serif-title);
-    font-size: 2.2rem;
-    font-style: italic;
-    color: var(--color-olive);
-    max-width: 700px;
-    margin: 0 auto 30px auto;
-    line-height: 1.4;
+.radio-label input:checked ~ .custom-radio {
+    background-color: var(--terracota);
+    border-color: var(--terracota);
 }
 
-.final-signature {
+.radio-label input:checked ~ .custom-radio::after {
+    content: '';
+    position: absolute;
+    top: 5px; left: 5px;
+    width: 4px; height: 4px;
+    border-radius: 50%;
+    background: var(--crema);
+}
+
+.btn-submit {
+    width: 100%;
+    background-color: var(--terracota);
+    color: var(--crema);
+    border: none;
     font-family: var(--font-sans);
-    font-size: 0.75rem;
+    font-size: 0.8rem;
+    letter-spacing: 3px;
     text-transform: uppercase;
-    letter-spacing: 0.25em;
-    color: var(--color-gold-dark);
+    padding: 15px;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+    margin-top: 15px;
 }
 
-.footer {
-    padding: 60px 20px;
-    background-color: var(--color-ivory);
-    border-top: 1px solid var(--color-beige-dark);
+.btn-submit:hover {
+    background-color: var(--terracota-dark);
+}
+
+.form-status {
+    margin-top: 15px;
+    font-size: 0.95rem;
     text-align: center;
+    font-style: italic;
 }
 
-.footer-crest {
-    font-family: var(--font-serif-title);
-    font-size: 2rem;
-    color: var(--color-gold);
+/* FOOTER */
+.section-footer {
+    padding-bottom: 100px;
+}
+
+.footer-bless {
+    font-style: italic;
+    color: var(--texto-light);
     margin-bottom: 20px;
 }
 
-.footer p {
-    font-family: var(--font-sans);
-    font-size: 0.65rem;
-    text-transform: uppercase;
-    letter-spacing: 0.2em;
-    color: var(--color-olive-light);
+.footer-names {
+    font-family: var(--font-display);
+    font-size: 2.2rem;
+    color: var(--terracota);
+    font-weight: 400;
 }
 
-/* Ajustes Responsive Especiales para Celulares (Mobile First) */
-@media (max-width: 768px) {
-    h2.section-title {
-        font-size: 2.3rem;
+.footer-copyright {
+    font-family: var(--font-sans);
+    font-size: 0.6rem;
+    letter-spacing: 1px;
+    color: var(--dorado);
+    margin-top: 40px;
+}
+
+/* RESPONSIVE OPTIMIZATIONS (MOBILE FIRST DIRECTIVE) */
+@media (min-width: 768px) {
+    .main-content {
+        margin: 40px auto;
+        border-radius: 4px;
     }
-    
-    .hero-names {
-        font-size: 3.2rem;
+    .envelope {
+        width: 460px;
+        height: 310px;
     }
-    
-    .cover-card {
-        padding: 30px 20px;
+    .envelope-front {
+        border-right: 230px solid transparent;
+        border-left: 230px solid transparent;
+        border-bottom: 155px solid #ebdccb;
+        border-top: 155px solid transparent;
     }
-    
-    .countdown-container {
-        gap: 10px;
+    .envelope-back {
+        border-right: 230px solid #e3d2be;
+        border-left: 230px solid #e3d2be;
     }
-    
-    .countdown-item {
-        padding: 15px 5px;
-        min-width: 65px;
+    .envelope-top {
+        border-right: 230px solid transparent;
+        border-left: 230px solid transparent;
+        border-top: 160px solid #dfceb9;
     }
-    
-    .countdown-number {
-        font-size: 1.6rem;
+    .envelope-paper {
+        width: 430px;
+        height: 290px;
     }
-    
-    .countdown-label {
-        font-size: 0.55rem;
+    .wax-seal {
+        top: 135px;
+        left: 205px;
     }
-    
-    .detail-card {
-        padding: 40px 20px;
+    .envelope-wrapper.open .envelope-paper {
+        transform: translateY(-160px);
     }
-    
-    .rsvp-container {
-        padding: 40px 20px;
+    .details-grid {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+    .detail-block {
+        width: 45%;
+    }
+    .detail-block-separator {
+        width: 1px;
+        height: 120px;
+    }
+    .gallery-item img {
+        width: 220px;
+        height: 300px;
     }
 }
