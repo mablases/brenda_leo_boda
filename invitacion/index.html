@@ -10,37 +10,31 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<!-- 1. PANTALLA DE BIENVENIDA / SOBRE INTERACTIVO CERRADO -->
+    <!-- 1. PANTALLA DE BIENVENIDA / COVER -->
     <div id="invitation-cover">
-        <div class="envelope-container">
-            <!-- Cuerpo/atrás del sobre (Color Verde Oliva) -->
-            <div class="envelope-back"></div>
-            
-            <!-- Tarjeta interna (Oculta al principio, se revela al abrir) -->
-            <div class="envelope-card">
-                <div class="card-inner-border">
-                    <div class="cover-crest">B & L</div>
-                    <h1 class="cover-names">Brenda <br>& Leo</h1>
-                    <p class="cover-date">17 . 10 . 2026</p>
-                    <p class="cover-location">Valle de Guadalupe, México</p>
-                </div>
-            </div>
-
-            <!-- Solapa inferior y laterales del sobre -->
-            <div class="envelope-front-body"></div>
-
-            <!-- Solapa superior que SE ABRE (Animada con CSS) -->
-            <div class="envelope-flap-top"></div>
-            
-            <!-- Sello de Lacre (Terracota con letras Ocre) -->
-            <div class="wax-seal-click">
-                <div class="wax-seal-body">
-                    <span class="wax-initials">B&L</span>
-                </div>
-                <p class="click-instruction">Toca el sello para abrir</p>
-            </div>
+        <div class="cover-card">
+            <div class="cover-crest">B & L</div>
+            <h1 class="cover-names">Brenda & Leo</h1>
+            <p class="cover-sub">Estás invitado a nuestra boda</p>
+            <button id="btn-open-invitation" class="btn-premium">Abrir Invitación</button>
         </div>
     </div>
+    <!-- Reproductor de Música Oculto -->
+    <audio id="background-music" loop>
+        <source src="https://assets.mixkit.co/music/preview/mixkit-love-and-tenderness-585.mp3" type="audio/mp3">
+        Tu navegador no soporta el elemento de audio.
+    </audio>
+    <!-- Botón Flotante de Música -->
+    <button class="music-toggle" id="btn-music-toggle" aria-label="Control de Música" style="display: none;">
+        <!-- Icono de Música Sonando -->
+        <svg id="icon-music-on" viewBox="0 0 24 24">
+            <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
+        </svg>
+        <!-- Icono de Música Silenciada -->
+        <svg id="icon-music-off" viewBox="0 0 24 24" style="display: none;">
+            <path d="M4.27 3L3 4.27l9 9v.28c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4v-1.73l6 6L21 20 4.27 3zM14 7h4V3h-6v5.18l2 2V7z"/>
+        </svg>
+    </button>
     <!-- 2. HERO PRINCIPAL -->
     <header class="hero">
         <div class="editorial-lines"></div>
