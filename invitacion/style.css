@@ -21,6 +21,7 @@
     --font-sans: 'Montserrat', sans-serif;
     
     --transition-smooth: all 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+    --z-index-envelope: 2000;
 }
 
 body {
@@ -76,7 +77,7 @@ body {
 
 .hidden { display: none !important; }
 
-/* CONTENEDOR DEL SOBRE ARTESANAL */
+/* CONTENEDOR DEL SOBRE ARTESANAL - MOBILE FIRST */
 .envelope-wrapper {
     position: fixed;
     top: 0;
@@ -88,71 +89,72 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    z-index: 2000;
+    z-index: var(--z-index-envelope);
     transition: transform 1.2s cubic-bezier(0.76, 0, 0.24, 1), opacity 1.2s ease;
 }
 
 .envelope {
     position: relative;
-    width: 340px;
-    height: 230px;
+    /* Ajuste móvil para parecerse a la captura */
+    width: 90%; 
+    max-width: 420px;
+    height: 0;
+    padding-bottom: 60%; /* Ratio 3:2 aproximado */
     background-color: var(--beige);
     box-shadow: 0 20px 40px rgba(74, 59, 50, 0.15);
     border-radius: 4px;
-    cursor: pointer;
     transform-style: preserve-3d;
     transition: transform 0.5s ease;
 }
 
-.envelope:hover {
-    transform: translateY(-5px);
-}
-
-/* CARAS DEL SOBRE REALISTA */
+/* CARAS DEL SOBRE REALISTA (Siguen ratio de padding-bottom) */
 .envelope-front {
     position: absolute;
     width: 0; height: 0;
-    top: 0; left: 0;
-    border-right: 170px solid transparent;
-    border-left: 170px solid transparent;
-    border-bottom: 115px solid #ebdccb;
-    border-top: 115px solid transparent;
+    bottom: 0; left: 0;
+    border-right: calc(100% * 0.5) solid transparent;
+    border-left: calc(100% * 0.5) solid transparent;
+    border-bottom: calc(100% * 0.6) solid #ebdccb;
+    border-top: calc(100% * 0.6) solid transparent;
     z-index: 3;
+    pointer-events: none; /* Dejar pasar el clic al sello */
 }
 
 .envelope-back {
     position: absolute;
     width: 0; height: 0;
     top: 0; left: 0;
-    border-right: 170px solid #e3d2be;
-    border-left: 170px solid #e3d2be;
-    border-bottom: 230px solid transparent;
+    border-right: calc(100% * 0.5) solid #e3d2be;
+    border-left: calc(100% * 0.5) solid #e3d2be;
+    border-bottom: calc(100% * 1.2) solid transparent;
     border-top: 0 solid transparent;
     z-index: 1;
+    pointer-events: none;
 }
 
 .envelope-top {
     position: absolute;
     top: 0; left: 0;
     width: 0; height: 0;
-    border-right: 170px solid transparent;
-    border-left: 170px solid transparent;
-    border-top: 120px solid #dfceb9;
+    border-right: calc(100% * 0.5) solid transparent;
+    border-left: calc(100% * 0.5) solid transparent;
+    border-top: calc(100% * 0.63) solid #dfceb9;
     transform-origin: top center;
     z-index: 4;
     transition: transform 0.6s ease-in-out;
+    pointer-events: none;
 }
 
-/* CARTA CONTENIDA (PULL OUT EFFECT) */
+/* CARTA CONTENIDA (Ajustes para evitar superposición) */
 .envelope-paper {
     position: absolute;
-    top: 10px;
-    left: 15px;
-    width: 310px;
-    height: 210px;
+    top: 8%;
+    left: 8%;
+    width: 84%;
+    height: 84%;
     background-color: var(--crema);
     z-index: 2;
-    padding: 20px;
+    padding: 10%; /* Padding relativo para móvil */
     box-shadow: inset 0 0 15px rgba(0,0,0,0.02);
     border: 1px solid rgba(212, 163, 115, 0.3);
     transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
@@ -163,38 +165,43 @@ body {
 
 .paper-preview-content {
     text-align: center;
+    pointer-events: none;
 }
 
 .envelope-brand {
-    font-size: 0.7rem;
+    font-size: 0.6rem;
     text-transform: uppercase;
-    letter-spacing: 3px;
+    letter-spacing: 2px;
     color: var(--dorado);
     font-family: var(--font-sans);
-    margin-bottom: 10px;
+    margin-bottom: 5px;
 }
 
 .envelope-names {
-    font-family: var(--font-display);
-    font-size: 1.8rem;
+    font-family: var(--font-serif); /* Usar la serif elegante solicitada */
+    font-size: 1.6rem;
     font-weight: 400;
     color: var(--terracota);
 }
 
 .envelope-date {
-    font-size: 0.9rem;
-    letter-spacing: 2px;
-    margin-top: 10px;
+    font-size: 0.8rem;
+    letter-spacing: 1.5px;
+    margin-top: 5px;
     color: var(--texto-light);
 }
 
-/* SELLO DE CERA PREMIUM */
+/* SELLO DE CERA PREMIUM (ARREGLO DE CLIC) */
 .wax-seal {
     position: absolute;
-    top: 95px;
-    left: 145px;
-    width: 50px;
-    height: 50px;
+    /* Centrado absoluto */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 14%; /* Tamaño relativo al sobre */
+    min-width: 45px;
+    height: 14%;
+    min-height: 45px;
     z-index: 5;
     cursor: pointer;
     transition: var(--transition-smooth);
@@ -204,13 +211,14 @@ body {
 .seal-svg {
     width: 100%;
     height: 100%;
+    pointer-events: auto; /* Asegurar que el SVG reciba el clic */
 }
 
 .envelope-instruction {
-    margin-top: 30px;
-    font-size: 0.85rem;
+    margin-top: 20px;
+    font-size: 0.75rem;
     text-transform: uppercase;
-    letter-spacing: 2px;
+    letter-spacing: 1.5px;
     color: var(--texto-light);
     font-family: var(--font-sans);
     animation: pulse 2s infinite;
@@ -231,10 +239,11 @@ body {
 .envelope-wrapper.open .wax-seal {
     transform: translate(-50%, -50%) scale(0) rotate(45deg);
     opacity: 0;
+    pointer-events: none; /* Desactivar clics tras abrir */
 }
 
 .envelope-wrapper.open .envelope-paper {
-    transform: translateY(-120px);
+    transform: translateY(-85%); /* Ajuste móvil de salida */
     z-index: 4;
 }
 
@@ -263,7 +272,7 @@ body {
 
 /* DISEÑO DE SECCIONES EDITORIALES */
 .section {
-    padding: 80px 30px;
+    padding: 60px 20px;
     text-align: center;
     position: relative;
     overflow: hidden;
@@ -281,57 +290,57 @@ body {
 }
 
 .section-hero {
-    min-height: 90vh;
+    min-height: 85vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding-top: 120px;
+    padding-top: 100px;
 }
 
 .editorial-subtitle {
     font-family: var(--font-sans);
-    font-size: 0.75rem;
-    letter-spacing: 4px;
+    font-size: 0.7rem;
+    letter-spacing: 3px;
     text-transform: uppercase;
     color: var(--dorado);
     display: block;
-    margin-bottom: 25px;
+    margin-bottom: 20px;
 }
 
 .editorial-title {
     font-family: var(--font-display);
-    font-size: 3.5rem;
+    font-size: 3rem;
     font-weight: 400;
-    line-height: 1.1;
+    line-height: 1;
     color: var(--terracota);
-    margin-bottom: 30px;
+    margin-bottom: 20px;
 }
 
 .ampersand {
     font-family: var(--font-serif);
     font-style: italic;
-    font-size: 2.8rem;
+    font-size: 2.4rem;
     color: var(--ocre);
 }
 
 .editorial-date-location {
     font-family: var(--font-sans);
-    font-size: 0.8rem;
-    letter-spacing: 2px;
-    line-height: 1.8;
+    font-size: 0.75rem;
+    letter-spacing: 1.5px;
+    line-height: 1.6;
     color: var(--texto-light);
 }
 
 /* INDICADOR SCROLL */
 .scroll-indicator {
-    margin-top: 60px;
+    margin-top: 40px;
     display: flex;
     justify-content: center;
 }
 
 .scroll-indicator .line {
     width: 1px;
-    height: 50px;
+    height: 40px;
     background: linear-gradient(to bottom, var(--dorado), transparent);
     display: block;
 }
@@ -348,7 +357,7 @@ body {
 /* HISTORIA CARD ARTESANAL */
 .card-artesanal {
     background-color: var(--marfil);
-    padding: 40px 25px;
+    padding: 30px 20px;
     border-radius: 2px;
     border: 1px solid rgba(212, 163, 115, 0.2);
     box-shadow: 0 10px 30px rgba(0,0,0,0.02);
@@ -356,29 +365,29 @@ body {
 
 .quote {
     font-style: italic;
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     color: var(--terracota);
-    line-height: 1.6;
-    margin-bottom: 25px;
+    line-height: 1.5;
+    margin-bottom: 20px;
 }
 
 .editorial-accent {
     color: var(--ocre);
     font-size: 0.8rem;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
 }
 
 .section-subtitle {
     font-family: var(--font-display);
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     color: var(--texto);
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     font-weight: 400;
 }
 
 .prose {
-    font-size: 1.05rem;
-    line-height: 1.8;
+    font-size: 1rem;
+    line-height: 1.7;
     color: var(--texto-light);
     max-width: 450px;
     margin: 0 auto;
@@ -389,34 +398,34 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 30px;
+    margin-top: 25px;
 }
 
 .countdown-item {
     display: flex;
     flex-direction: column;
     align-items: center;
-    min-width: 60px;
+    min-width: 50px;
 }
 
 .time-num {
     font-family: var(--font-display);
-    font-size: 2rem;
+    font-size: 1.8rem;
     color: var(--terracota);
 }
 
 .time-label {
     font-family: var(--font-sans);
-    font-size: 0.65rem;
+    font-size: 0.6rem;
     text-transform: uppercase;
     letter-spacing: 1px;
     color: var(--texto-light);
-    margin-top: 5px;
+    margin-top: 4px;
 }
 
 .countdown-sep {
     color: var(--dorado);
-    margin: 0 15px;
+    margin: 0 10px;
     opacity: 0.6;
 }
 
@@ -424,51 +433,51 @@ body {
 .details-grid {
     display: flex;
     flex-direction: column;
-    gap: 40px;
+    gap: 30px;
 }
 
 .detail-block {
-    padding: 20px;
+    padding: 15px;
 }
 
 .detail-title {
     font-family: var(--font-display);
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     color: var(--terracota);
-    margin-bottom: 10px;
+    margin-bottom: 8px;
 }
 
 .detail-time {
     font-family: var(--font-sans);
-    font-size: 0.8rem;
-    letter-spacing: 2px;
+    font-size: 0.75rem;
+    letter-spacing: 1.5px;
     color: var(--ocre);
-    margin-bottom: 15px;
+    margin-bottom: 12px;
 }
 
 .detail-venue {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     font-weight: 600;
-    margin-bottom: 5px;
+    margin-bottom: 4px;
 }
 
 .detail-address {
-    font-size: 1rem;
+    font-size: 0.95rem;
     color: var(--texto-light);
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     font-style: italic;
 }
 
 .btn-editorial {
     display: inline-block;
     font-family: var(--font-sans);
-    font-size: 0.7rem;
-    letter-spacing: 2px;
+    font-size: 0.65rem;
+    letter-spacing: 1.5px;
     text-transform: uppercase;
     color: var(--texto);
     text-decoration: none;
     border-bottom: 1px solid var(--dorado);
-    padding-bottom: 4px;
+    padding-bottom: 3px;
     transition: var(--transition-smooth);
 }
 
@@ -478,7 +487,7 @@ body {
 }
 
 .detail-block-separator {
-    width: 30px;
+    width: 25px;
     height: 1px;
     background-color: var(--dorado);
     margin: 0 auto;
@@ -489,20 +498,20 @@ body {
 .gallery-stack {
     display: flex;
     justify-content: center;
-    gap: 20px;
-    margin-top: 20px;
+    gap: 15px;
+    margin-top: 15px;
 }
 
 .gallery-item {
     background-color: white;
-    padding: 10px 10px 30px 10px;
+    padding: 8px 8px 25px 8px;
     box-shadow: 0 10px 25px rgba(0,0,0,0.05);
     border: 1px solid rgba(0,0,0,0.03);
 }
 
 .gallery-item img {
-    width: 180px;
-    height: 240px;
+    width: 150px;
+    height: 200px;
     object-fit: cover;
     filter: sepia(0.15) contrast(0.95);
 }
@@ -512,21 +521,21 @@ body {
 
 /* DRESS CODE PALETTE */
 .dress-type {
-    font-size: 1.4rem;
+    font-size: 1.3rem;
     color: var(--terracota);
-    margin-bottom: 10px;
+    margin-bottom: 8px;
 }
 
 .color-palette-inspiration {
     display: flex;
     justify-content: center;
-    gap: 15px;
-    margin-top: 25px;
+    gap: 12px;
+    margin-top: 20px;
 }
 
 .color-dot {
-    width: 24px;
-    height: 24px;
+    width: 20px;
+    height: 20px;
     border-radius: 50%;
     border: 1px solid rgba(0,0,0,0.05);
 }
@@ -538,28 +547,28 @@ body {
 /* FORMULARIO RSVP DE ALTA GAMA (NO CUADRADO, NO CORPORATIVO) */
 .rsvp-card {
     background-color: var(--marfil);
-    padding: 40px 30px;
+    padding: 30px 20px;
     border: 1px solid rgba(212, 163, 115, 0.25);
     position: relative;
 }
 
 .editorial-form {
-    margin-top: 30px;
+    margin-top: 25px;
     text-align: left;
 }
 
 .form-group {
-    margin-bottom: 25px;
+    margin-bottom: 20px;
 }
 
 .editorial-form label {
     display: block;
     font-family: var(--font-sans);
-    font-size: 0.7rem;
-    letter-spacing: 2px;
+    font-size: 0.65rem;
+    letter-spacing: 1.5px;
     text-transform: uppercase;
     color: var(--texto);
-    margin-bottom: 8px;
+    margin-bottom: 6px;
 }
 
 .editorial-form input[type="text"],
@@ -570,8 +579,8 @@ body {
     border: none;
     border-bottom: 1px solid var(--dorado);
     font-family: var(--font-serif);
-    font-size: 1.1rem;
-    padding: 8px 0;
+    font-size: 1.05rem;
+    padding: 6px 0;
     color: var(--texto);
     transition: border-color 0.4s ease;
 }
@@ -585,8 +594,8 @@ body {
 /* CUSTOM RADIOS ORGÁNICOS */
 .radio-group {
     display: flex;
-    gap: 20px;
-    margin-top: 10px;
+    gap: 15px;
+    margin-top: 8px;
 }
 
 .radio-label {
@@ -594,7 +603,7 @@ body {
     align-items: center;
     cursor: pointer;
     font-family: var(--font-serif) !important;
-    font-size: 1.05rem !important;
+    font-size: 1rem !important;
     text-transform: none !important;
     letter-spacing: 0 !important;
     color: var(--texto-light) !important;
@@ -607,11 +616,11 @@ body {
 }
 
 .custom-radio {
-    width: 16px;
-    height: 16px;
+    width: 14px;
+    height: 14px;
     border: 1px solid var(--dorado);
     border-radius: 50%;
-    margin-right: 8px;
+    margin-right: 6px;
     display: inline-block;
     position: relative;
 }
@@ -624,7 +633,7 @@ body {
 .radio-label input:checked ~ .custom-radio::after {
     content: '';
     position: absolute;
-    top: 5px; left: 5px;
+    top: 4px; left: 4px;
     width: 4px; height: 4px;
     border-radius: 50%;
     background: var(--crema);
@@ -636,13 +645,13 @@ body {
     color: var(--crema);
     border: none;
     font-family: var(--font-sans);
-    font-size: 0.8rem;
-    letter-spacing: 3px;
+    font-size: 0.75rem;
+    letter-spacing: 2px;
     text-transform: uppercase;
-    padding: 15px;
+    padding: 12px;
     cursor: pointer;
     transition: var(--transition-smooth);
-    margin-top: 15px;
+    margin-top: 10px;
 }
 
 .btn-submit:hover {
@@ -650,48 +659,49 @@ body {
 }
 
 .form-status {
-    margin-top: 15px;
-    font-size: 0.95rem;
+    margin-top: 12px;
+    font-size: 0.9rem;
     text-align: center;
     font-style: italic;
 }
 
 /* FOOTER */
 .section-footer {
-    padding-bottom: 100px;
+    padding-bottom: 80px;
 }
 
 .footer-bless {
     font-style: italic;
     color: var(--texto-light);
-    margin-bottom: 20px;
+    margin-bottom: 15px;
 }
 
 .footer-names {
     font-family: var(--font-display);
-    font-size: 2.2rem;
+    font-size: 2rem;
     color: var(--terracota);
     font-weight: 400;
 }
 
 .footer-copyright {
     font-family: var(--font-sans);
-    font-size: 0.6rem;
+    font-size: 0.55rem;
     letter-spacing: 1px;
     color: var(--dorado);
-    margin-top: 40px;
+    margin-top: 35px;
 }
 
-/* RESPONSIVE OPTIMIZATIONS (MOBILE FIRST DIRECTIVE) */
+/* RESPONSIVE OPTIMIZATIONS */
 @media (min-width: 768px) {
-    .main-content {
-        margin: 40px auto;
-        border-radius: 4px;
+    .section {
+        padding: 80px 30px;
     }
-    .envelope {
+    .envelope-wrapper .envelope {
         width: 460px;
         height: 310px;
+        padding-bottom: 0;
     }
+    /* Volver a borders fijos en desktop */
     .envelope-front {
         border-right: 230px solid transparent;
         border-left: 230px solid transparent;
@@ -708,16 +718,27 @@ body {
         border-top: 160px solid #dfceb9;
     }
     .envelope-paper {
-        width: 430px;
-        height: 290px;
+        top: 10px; left: 15px;
+        width: 430px; height: 290px;
+        padding: 20px;
     }
+    .envelope-names { font-size: 1.8rem; }
     .wax-seal {
-        top: 135px;
-        left: 205px;
+        width: 50px; height: 50px;
+        top: 135px; left: 205px;
+        transform: none; /* Centrado específico en desktop */
+    }
+    .envelope-wrapper.open .wax-seal {
+        transform: translate(0, 0) scale(0);
     }
     .envelope-wrapper.open .envelope-paper {
         transform: translateY(-160px);
     }
+    .main-content {
+        margin: 40px auto;
+        border-radius: 4px;
+    }
+    .editorial-title { font-size: 3.5rem; }
     .details-grid {
         flex-direction: row;
         justify-content: space-between;
