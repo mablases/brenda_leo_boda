@@ -169,190 +169,86 @@ p {
     border-color: var(--color-olive);
 }
 
-/* ==========================================================================
-   1. PANTALLA INICIAL / SOBRE INTERACTIVO (INSPIRADO EN TU REFERENCIA)
-   ========================================================================== */
+/* 1. PANTALLA INICIAL / COVER (OVERLAY) */
 #invitation-cover {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: #F5EFE6; /* Fondo beige elegante de fondo */
+    background-color: var(--color-ivory);
     z-index: 9999;
     display: flex;
     justify-content: center;
     align-items: center;
     transition: transform 1.2s cubic-bezier(0.76, 0, 0.24, 1), opacity 1.2s ease;
-    padding: 20px;
-    box-sizing: border-box;
-    cursor: pointer;
 }
 
-/* Contenedor responsivo del sobre */
-.envelope-wrapper {
-    position: relative;
-    width: 100%;
-    max-width: 420px;    /* Tamaño ideal en móviles y escritorio */
-    aspect-ratio: 3 / 4;  /* Proporción vertical de un sobre elegante */
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
-}
-
-/* 1. FONDO DEL SOBRE (Verde Oliva con forro Oro) */
-.envelope-back {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: #37463A; /* Verde oliva oscuro */
-    border-radius: 4px;
-    overflow: hidden;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-    z-index: 1;
-}
-
-/* El forro dorado interno del sobre */
-.envelope-gold-lining {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 50%;
-    background: linear-gradient(135deg, #C5A880 0%, #A4865E 100%);
-    clip-path: polygon(0 0, 100% 0, 50% 75%); /* Corte triangular hacia abajo */
-}
-
-/* 2. LA TARJETA INTERIOR (Donde van los nombres) */
-.envelope-card {
-    position: absolute;
-    top: 8%; /* Sobresale un poco del fondo para que se note la capa */
-    width: 88%;
-    height: 82%;
-    background-color: #FFFFFF;
-    z-index: 2;
-    box-shadow: 0 -5px 15px rgba(0,0,0,0.08);
-    padding: 8px;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-}
-
-.card-inner-border {
-    border: 1px solid #E8DFD0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-    box-sizing: border-box;
-    text-align: center;
-}
-
-/* Tipografías de la tarjeta del sobre */
-.cover-crest {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 2.2rem;
-    color: #C5A880;
-    margin-bottom: 10px;
-    font-weight: 300;
-}
-
-.cover-names {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 2rem;
-    color: #37463A;
-    margin-bottom: 15px;
-    font-weight: 400;
-    line-height: 1.2;
-}
-
-.cover-date {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 0.2em;
-    color: #8C9C8E;
-    margin-bottom: 4px;
-}
-
-.cover-location {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 0.6rem;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: #A4865E;
-}
-
-.click-instruction {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 0.55rem;
-    text-transform: uppercase;
-    letter-spacing: 0.15em;
-    color: #B0B0B0;
-    margin-top: auto; /* La manda al fondo de la tarjeta */
-    animation: pulseGlow 2s infinite ease-in-out;
-}
-
-/* 3. CAPA FRONTAL DEL SOBRE (Los dobleces en V de abajo hacia arriba) */
-.envelope-front-body {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 55%; /* Cubre un poco más de la mitad de la tarjeta */
-    background-color: #2F3C32; /* Un oliva ligeramente más oscuro para dar sombra */
-    clip-path: polygon(0 40%, 50% 0, 100% 40%, 100% 100%, 0 100%); /* Forma de sobre clásico */
-    z-index: 3;
-    box-shadow: 0 -4px 15px rgba(0,0,0,0.1);
-}
-
-/* 4. SELLO DE LACRE DORADO */
-.wax-seal-center {
-    position: absolute;
-    bottom: 50%; /* Justo en la punta de la V del frente */
-    left: 50%;
-    transform: translate(-50%, 40%);
-    z-index: 4;
-}
-
-.wax-seal-body {
-    width: 54px;
-    height: 54px;
-    background: radial-gradient(circle, #D4AF37 0%, #AA7C11 100%);
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.3), inset 0 2px 4px rgba(255,255,255,0.4);
-    border: 2px solid #996515;
-}
-
-.wax-initials {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.1rem;
-    color: #FFFFFF;
-    font-weight: bold;
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
-    letter-spacing: -0.05em;
-}
-
-/* Animación sutil de parpadeo para el texto de ayuda */
-@keyframes pulseGlow {
-    0% { opacity: 0.4; }
-    50% { opacity: 1; }
-    100% { opacity: 0.4; }
-}
-
-/* Cuando se abre, todo el sobre se desliza con suavidad */
 #invitation-cover.opened {
     transform: translateY(-100%);
     opacity: 0;
     pointer-events: none;
+}
+
+.cover-card {
+    text-align: center;
+    padding: 40px;
+    max-width: 450px;
+    width: 90%;
+    background: var(--color-white);
+    border: 1px solid var(--color-beige-dark);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.03);
+    position: relative;
+}
+
+.cover-card::after {
+    content: '';
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    right: 8px;
+    bottom: 8px;
+    border: 1px solid var(--color-beige);
+    pointer-events: none;
+}
+
+.cover-crest {
+    font-family: var(--font-serif-title);
+    font-size: 2.8rem;
+    color: var(--color-gold);
+    margin-bottom: 20px;
+    position: relative;
+    display: inline-block;
+    padding: 0 15px;
+}
+
+.cover-crest::before, .cover-crest::after {
+    content: '';
+    position: absolute;
+    width: 40px;
+    height: 1px;
+    background-color: var(--color-beige-dark);
+    top: 50%;
+}
+
+.cover-crest::before { left: -40px; }
+.cover-crest::after { right: -40px; }
+
+.cover-names {
+    font-family: var(--font-serif-title);
+    font-size: 2.2rem;
+    letter-spacing: 0.1em;
+    margin-bottom: 15px;
+    color: var(--color-olive);
+}
+
+.cover-sub {
+    font-family: var(--font-sans);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+    color: var(--color-olive-light);
+    margin-bottom: 35px;
 }
 
 /* Música Control */
@@ -1196,179 +1092,4 @@ textarea.form-control {
     .rsvp-container {
         padding: 40px 20px;
     }
-}
-/* ==========================================================================
-   AGREGADO: SOBRE INTERACTIVO (TERRACOTA, OCRE Y OLIVA)
-   ========================================================================== */
-:root {
-    --color-olive-envelope: #4A5D4E;
-    --color-olive-dark-envelope: #323F35;
-    --color-terracota-envelope: #A64B2A;
-    --color-terracota-dark-envelope: #82351B;
-    --color-ocre-envelope: #D49B45;
-    --color-ocre-light-envelope: #EAD0A8;
-}
-
-#invitation-cover {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: #EFEBE4;
-    z-index: 99999; /* Por encima de todo */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: transform 1s cubic-bezier(0.76, 0, 0.24, 1), opacity 1s ease;
-    perspective: 1000px;
-}
-
-.envelope-container {
-    position: relative;
-    width: 90%;
-    max-width: 400px;
-    aspect-ratio: 3 / 4;
-}
-
-.envelope-back {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background-color: var(--color-olive-dark-envelope);
-    border-radius: 4px;
-    box-shadow: 0 15px 35px rgba(0,0,0,0.15);
-    z-index: 1;
-}
-
-.envelope-flap-top {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 50%;
-    background-color: var(--color-olive-envelope);
-    clip-path: polygon(0 0, 100% 0, 50% 100%);
-    z-index: 4;
-    transform-origin: top center;
-    transition: transform 0.8s ease-in-out, z-index 0.2s 0.4s;
-}
-
-.envelope-front-body {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 60%;
-    background-color: var(--color-olive-dark-envelope);
-    clip-path: polygon(0 30%, 50% 0, 100% 30%, 100% 100%, 0 100%);
-    z-index: 3;
-}
-
-.envelope-card {
-    position: absolute;
-    bottom: 4%;
-    left: 5%;
-    width: 90%;
-    height: 90%;
-    background-color: #FFFFFF;
-    z-index: 2;
-    padding: 15px;
-    transition: transform 0.8s 0.6s cubic-bezier(0.25, 1, 0.5, 1);
-}
-
-.card-inner-border {
-    border: 1px solid var(--color-ocre-light-envelope);
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 20px;
-}
-
-.cover-crest {
-    font-family: serif;
-    font-size: 2.5rem;
-    color: var(--color-ocre-envelope);
-}
-.cover-names {
-    font-family: serif;
-    font-size: 2.2rem;
-    color: var(--color-terracota-envelope);
-    margin: 15px 0;
-    line-height: 1.2;
-}
-.cover-date {
-    font-size: 0.8rem;
-    letter-spacing: 0.2em;
-    color: var(--color-olive-envelope);
-}
-.cover-location {
-    font-size: 0.65rem;
-    letter-spacing: 0.1em;
-    color: var(--color-ocre-envelope);
-    margin-top: 5px;
-}
-
-.wax-seal-click {
-    position: absolute;
-    bottom: 35%;
-    left: 50%;
-    transform: translate(-50%, 0);
-    z-index: 5;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    cursor: pointer;
-    transition: opacity 0.4s ease;
-}
-
-.wax-seal-body {
-    width: 60px;
-    height: 60px;
-    background: radial-gradient(circle, var(--color-terracota-envelope) 0%, var(--color-terracota-dark-envelope) 100%);
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-    border: 2px solid var(--color-ocre-envelope);
-}
-
-.wax-initials {
-    font-family: serif;
-    font-size: 1.2rem;
-    color: var(--color-ocre-light-envelope);
-    font-weight: bold;
-}
-
-.click-instruction {
-    font-size: 0.6rem;
-    text-transform: uppercase;
-    letter-spacing: 0.15em;
-    color: #ffffff;
-    margin-top: 10px;
-    white-space: nowrap;
-    text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
-}
-
-/* Clases de animación aplicadas por JS */
-#invitation-cover.step-1 .envelope-flap-top {
-    transform: rotateX(180deg);
-    z-index: 1;
-}
-#invitation-cover.step-1 .wax-seal-click {
-    opacity: 0;
-    pointer-events: none;
-}
-#invitation-cover.step-2 .envelope-card {
-    transform: translateY(-50%);
-}
-#invitation-cover.finalized {
-    transform: translateY(-100%);
-    opacity: 0;
-    pointer-events: none;
 }
