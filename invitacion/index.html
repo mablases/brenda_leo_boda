@@ -12,33 +12,31 @@
 <body>
    <!-- 1. PANTALLA DE BIENVENIDA / COVER -->
     <!-- El sobre completo ahora actúa como un gran botón clicable -->
-    <div id="invitation-cover" class="clickable-envelope" aria-label="Haga clic en el sobre para abrir la invitación">
-        
-        <!-- Esta es la estructura visual del sobre abierto inspirado en image_0.png -->
-        <div class="envelope-outer">
-            <!-- Solapa superior abierta, color oro -->
-            <div class="envelope-flap-gold"></div>
+<div id="invitation-cover" class="clickable-envelope" aria-label="Haga clic en el sobre para abrir la invitación">
+        <div class="envelope-wrapper">
             
-            <!-- Cuerpo del sobre, color verde oliva oscuro -->
-            <div class="envelope-body-green">
-                
-                <!-- Contenido dentro del sobre abierto, como en image_0.png -->
-                <div class="envelope-card-content">
+            <div class="envelope-back">
+                <div class="envelope-gold-lining"></div>
+            </div>
+            
+            <div class="envelope-card">
+                <div class="card-inner-border">
                     <div class="cover-crest">B & L</div>
                     <h1 class="cover-names">Brenda & Leo</h1>
-                    <p class="cover-date">17.10.2026</p>
+                    <p class="cover-date">17 . 10 . 2026</p>
                     <p class="cover-location">Valle de Guadalupe, México</p>
-                    
-                    <!-- Pequeña instrucción debajo de la tarjeta -->
-                    <p class="click-instruction">Toque el sobre para abrir</p>
+                    <p class="click-instruction">Toque para abrir</p>
                 </div>
-                
-                <!-- Sello de lacre dorado con iniciales -->
-                <div class="wax-seal">
-                    <div class="wax-initials">B & L</div>
-                </div>
-                
             </div>
+            
+            <div class="envelope-front-body"></div>
+            
+            <div class="wax-seal-center">
+                <div class="wax-seal-body">
+                    <span class="wax-initials">B&L</span>
+                </div>
+            </div>
+
         </div>
     </div>
     <!-- 2. HERO PRINCIPAL -->
