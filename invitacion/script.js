@@ -4,8 +4,8 @@
    ============================================================ */
 
 // ── Configuración Supabase ──────────────────────────────────
-const SUPABASE_URL = "MI_URL";   // Reemplaza con tu URL
-const SUPABASE_KEY = "MI_KEY";   // Reemplaza con tu anon key
+const SUPABASE_URL = "https://wqzavjzfoxzjrijccteh.supabase.co";   // Reemplaza con tu URL
+const SUPABASE_KEY = "sb_publishable_fTYkp41FOfaaVFRI1dSZRQ_dXjPstB7";   // Reemplaza con tu anon key
 
 /**
  * Cliente Supabase minimalista (sin SDK externo).
