@@ -1,91 +1,116 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <!-- ============================================================
-       BRENDA & LEO — Invitación de Boda Premium
-       index.html
-       ============================================================ -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <meta name="theme-color" content="#3E4E30" />
   <meta name="description" content="Brenda & Leo — Los invitamos a celebrar el inicio de nuestra historia juntos." />
 
-  <!-- Open Graph (para compartir en redes) -->
   <meta property="og:title"       content="Brenda & Leo — Nuestra Boda" />
   <meta property="og:description" content="Acompáñanos a celebrar este momento especial." />
   <meta property="og:type"        content="website" />
 
   <title>Brenda &amp; Leo — Nuestra Boda</title>
 
-  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&display=swap" rel="stylesheet" />
 
   <link rel="stylesheet" href="style.css" />
+
+  <style>
+    .envelope-wrap {
+      perspective: 1200px; /* Necesario para el efecto 3D */
+    }
+    .envelope-svg {
+      width: 100%;
+      height: auto;
+      filter: drop-shadow(0px 15px 25px rgba(0,0,0,0.15));
+    }
+    #envelope-flap {
+      transform-origin: center 0;
+      transition: transform 1.2s cubic-bezier(0.4, 0.0, 0.2, 1);
+      transform-style: preserve-3d;
+    }
+    #wax-seal {
+      transition: opacity 0.4s ease, transform 0.6s ease;
+      transform-origin: center;
+    }
+    /* Clases que activan la animación */
+    .is-open #envelope-flap {
+      transform: rotateX(180deg) !important;
+    }
+    .is-open #wax-seal {
+      opacity: 0 !important;
+      transform: scale(1.5) !important;
+    }
+  </style>
 </head>
 
 <body>
 
-  <!-- ══════════════════════════════════════════════════════════
-       PANTALLA DE APERTURA — SOBRE ANIMADO
-       ══════════════════════════════════════════════════════════ -->
   <div id="envelope-screen" aria-label="Toca para abrir la invitación">
 
-    <!-- Partículas flotantes decorativas -->
     <div class="envelope-particles"></div>
 
-    <div class="envelope-wrap">
+    <div class="envelope-wrap" id="envelope-container">
 
-      <!-- SVG del sobre con animación de tapa -->
-      <svg class="envelope-svg" viewBox="0 0 340 240" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <!-- Sombra -->
+      <svg class="envelope-svg" viewBox="0 0 800 530" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
         <defs>
-          <filter id="drop-shadow" x="-10%" y="-10%" width="120%" height="140%">
-            <feDropShadow dx="0" dy="12" stdDeviation="16" flood-color="rgba(0,0,0,0.35)" />
+          <linearGradient id="paperGrad" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#F2EBE1" />
+            <stop offset="100%" stop-color="#E5D8C5" />
+          </linearGradient>
+
+          <filter id="shadow-flap" x="-10%" y="-10%" width="120%" height="120%">
+            <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="rgba(0,0,0,0.15)" />
           </filter>
-          <linearGradient id="envGrad" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%"   stop-color="#EDE4D3" />
-            <stop offset="100%" stop-color="#D6C9B0" />
-          </linearGradient>
-          <linearGradient id="goldGrad" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0%"   stop-color="#B89A5A" />
-            <stop offset="50%"  stop-color="#EDD9A3" />
-            <stop offset="100%" stop-color="#B89A5A" />
-          </linearGradient>
+          
+          <filter id="shadow-seal" x="-20%" y="-20%" width="140%" height="140%">
+            <feDropShadow dx="0" dy="5" stdDeviation="4" flood-color="rgba(0,0,0,0.3)" />
+          </filter>
         </defs>
 
-        <!-- Cuerpo del sobre -->
-        <rect x="0" y="40" width="340" height="200" rx="4" fill="url(#envGrad)" filter="url(#drop-shadow)" />
+        <rect x="0" y="0" width="800" height="530" fill="#D4C5B0" />
+        <path d="M 0 0 L 400 280 L 800 0 L 800 530 L 0 530 Z" fill="url(#paperGrad)" stroke="#D8C9B4" stroke-width="2"/>
+        
+        <g id="decorations">
+          <text x="210" y="275" font-family="'Alex Brush', cursive" font-size="65" fill="#6B543D" text-anchor="middle">Brenda</text>
+          <text x="590" y="275" font-family="'Alex Brush', cursive" font-size="65" fill="#6B543D" text-anchor="middle">&amp; Leo</text>
 
-        <!-- Borde dorado del sobre -->
-        <rect x="1" y="41" width="338" height="198" rx="3" fill="none" stroke="url(#goldGrad)" stroke-width="0.8" opacity="0.7" />
-
-        <!-- Pliegues laterales inferiores (triángulos) -->
-        <path d="M 0 80 L 170 165 L 340 80 L 340 240 L 0 240 Z" fill="#C8B89A" opacity="0.35" />
-
-        <!-- Tapa del sobre (se animará con JS/CSS) -->
-        <g id="envelope-flap" style="transform-origin: 170px 40px; transform: rotateX(0deg);">
-          <path d="M 0 40 L 170 145 L 340 40 Z" fill="#D6C9B0" />
-          <path d="M 0 40 L 170 145 L 340 40" fill="none" stroke="url(#goldGrad)" stroke-width="0.8" opacity="0.6" />
+          <circle cx="100" cy="150" r="2.5" fill="#C5A47E"/>
+          <circle cx="150" cy="180" r="1.5" fill="#C5A47E"/>
+          <circle cx="280" cy="380" r="2" fill="#C5A47E"/>
+          <circle cx="680" cy="120" r="2.5" fill="#C5A47E"/>
+          <circle cx="720" cy="350" r="2" fill="#C5A47E"/>
+          <circle cx="500" cy="420" r="1.5" fill="#C5A47E"/>
+          
+          <path d="M 50 480 Q 150 400 250 480" fill="none" stroke="#9FA68A" stroke-width="3" stroke-linecap="round"/>
+          <path d="M 750 480 Q 650 400 550 480" fill="none" stroke="#9FA68A" stroke-width="3" stroke-linecap="round"/>
+          <path d="M 50 50 Q 150 150 250 50" fill="none" stroke="#D19E92" stroke-width="2" stroke-linecap="round"/>
+          <path d="M 750 50 Q 650 150 550 50" fill="none" stroke="#D19E92" stroke-width="2" stroke-linecap="round"/>
         </g>
 
-        <!-- Sello central con monograma -->
-        <circle cx="170" cy="155" r="28" fill="#3E4E30" />
-        <circle cx="170" cy="155" r="25" fill="none" stroke="url(#goldGrad)" stroke-width="0.8" />
-        <text x="170" y="161" font-family="'Playfair Display', serif" font-size="14" font-style="italic"
-              fill="#EDD9A3" text-anchor="middle" letter-spacing="2">B&amp;L</text>
+        <g id="envelope-flap">
+          <path d="M 0 0 L 400 280 L 800 0 Z" fill="url(#paperGrad)" filter="url(#shadow-flap)"/>
+          <path d="M 20 15 L 400 265 L 780 15" fill="none" stroke="#D8C9B4" stroke-width="1.5"/>
+        </g>
+
+        <g id="wax-seal" transform="translate(400, 275)">
+          <path d="M 0 -45 C 25 -45 45 -25 45 0 C 45 25 25 45 0 45 C -25 45 -45 25 -45 0 C -45 -25 -25 -45 0 -45 Z" fill="#A6432D" filter="url(#shadow-seal)"/>
+          <path d="M -2 -42 C 20 -43 38 -25 42 -5 C 44 15 32 35 15 42 C -5 50 -30 35 -40 15 C -48 -5 -25 -40 -2 -42 Z" fill="#B84F38"/>
+          <circle cx="0" cy="0" r="30" fill="#913621" />
+          <circle cx="0" cy="0" r="28" fill="#A6432D" />
+          <text x="0" y="8" font-family="'Playfair Display', serif" font-size="24" font-weight="600" font-style="italic" fill="#E39485" text-anchor="middle" letter-spacing="1">B&amp;L</text>
+        </g>
       </svg>
 
-      <!-- Tagline superior -->
-      <p class="envelope-tagline">Una invitación especial</p>
+      <p class="envelope-tagline" style="margin-top: 15px;">Una invitación especial</p>
 
-      <!-- Botón de apertura -->
-      <div class="envelope-open-btn">
+      <div class="envelope-open-btn" onclick="document.getElementById('envelope-container').classList.add('is-open')" style="z-index: 20; position: relative;">
         <span>Toca para abrir</span>
         <div class="pulse-ring" aria-hidden="true">
-          <!-- Icono de dedo / toque -->
-          <svg viewBox="0 0 24 24" stroke-width="1.5">
+          <svg viewBox="0 0 24 24" stroke-width="1.5" style="width: 24px; height: 24px; fill: none; stroke: currentColor;">
             <path stroke-linecap="round" stroke-linejoin="round"
               d="M15.042 21.672 13.684 16.6m0 0-2.51 2.225.569-9.47 5.227 7.917-3.286-.672ZM12 2.25V4.5m5.834.166-1.591 1.591M20.25 10.5H18M7.757 14.743l-1.59 1.59M6 10.5H3.75m4.007-4.243-1.59-1.59" />
           </svg>
@@ -94,28 +119,15 @@
 
     </div>
   </div>
-  <!-- /envelope-screen -->
-
-
-  <!-- ══════════════════════════════════════════════════════════
-       HERO PRINCIPAL
-       ══════════════════════════════════════════════════════════ -->
   <section id="hero" aria-label="Portada de la invitación">
 
-    <!-- Fondo con efecto parallax -->
     <div class="hero-bg loaded" aria-hidden="true">
-      <!-- Imagen de fondo: agrega aquí la URL de tu foto de pareja -->
-      <!-- Ejemplo: style="background-image: url('fotos/hero.jpg')" -->
-      <!-- Si no tienes imagen, se usará el color de fondo verde oliva -->
     </div>
 
-    <!-- Overlay con gradiente -->
     <div class="hero-overlay" aria-hidden="true"></div>
 
-    <!-- Marco decorativo dorado -->
     <div class="hero-frame" aria-hidden="true"></div>
 
-    <!-- Contenido principal del hero -->
     <div class="hero-content">
       <p class="hero-pre">Con amor &amp; alegría</p>
 
@@ -132,19 +144,12 @@
       <p class="hero-location"></p>
     </div>
 
-    <!-- Indicador de scroll -->
     <div class="scroll-indicator" aria-hidden="true">
       <span>Descubre</span>
       <div class="scroll-line"></div>
     </div>
 
   </section>
-  <!-- /hero -->
-
-
-  <!-- ══════════════════════════════════════════════════════════
-       INTRODUCCIÓN / INVITACIÓN
-       ══════════════════════════════════════════════════════════ -->
   <section class="section" id="intro" aria-labelledby="intro-title">
     <div class="section-inner text-center">
 
@@ -171,12 +176,6 @@
 
     </div>
   </section>
-  <!-- /intro -->
-
-
-  <!-- ══════════════════════════════════════════════════════════
-       CUENTA REGRESIVA
-       ══════════════════════════════════════════════════════════ -->
   <section class="section" id="countdown" aria-labelledby="countdown-title">
     <div class="section-inner text-center">
 
@@ -186,7 +185,6 @@
         El gran día se <em>acerca</em>
       </h2>
 
-      <!-- Grid de la cuenta regresiva (valores inyectados por script.js) -->
       <div class="countdown-grid" role="timer" aria-label="Cuenta regresiva para la boda">
 
         <div class="countdown-item reveal reveal-delay-1">
@@ -212,17 +210,9 @@
       </div>
     </div>
   </section>
-  <!-- /countdown -->
-
-
-  <!-- ══════════════════════════════════════════════════════════
-       FOTOGRAFÍA EDITORIAL
-       ══════════════════════════════════════════════════════════ -->
   <section id="editorial" aria-label="Galería editorial">
     <div class="editorial-grid">
 
-      <!-- Foto grande superior (ocupa 2 columnas) -->
-      <!-- Reemplaza .photo-placeholder con una etiqueta <img> real -->
       <div class="editorial-photo wide">
         <div class="photo-placeholder">
           <span class="photo-num">01</span>
@@ -230,7 +220,6 @@
         <p class="photo-caption">El momento en que todo cambió</p>
       </div>
 
-      <!-- Foto secundaria izquierda -->
       <div class="editorial-photo tall">
         <div class="photo-placeholder">
           <span class="photo-num">02</span>
@@ -238,7 +227,6 @@
         <p class="photo-caption">Nuestra primera foto juntos</p>
       </div>
 
-      <!-- Foto secundaria derecha -->
       <div class="editorial-photo tall">
         <div class="photo-placeholder">
           <span class="photo-num">03</span>
@@ -248,12 +236,6 @@
 
     </div>
   </section>
-  <!-- /editorial -->
-
-
-  <!-- ══════════════════════════════════════════════════════════
-       HISTORIA DE AMOR
-       ══════════════════════════════════════════════════════════ -->
   <section class="section" id="story" aria-labelledby="story-title">
     <div class="section-inner">
 
@@ -270,7 +252,6 @@
         <div class="ornament-line"></div>
       </div>
 
-      <!-- Línea de tiempo de la historia -->
       <div class="story-timeline">
 
         <div class="story-item reveal">
@@ -351,12 +332,6 @@
       </div>
     </div>
   </section>
-  <!-- /story -->
-
-
-  <!-- ══════════════════════════════════════════════════════════
-       CEREMONIA & RECEPCIÓN
-       ══════════════════════════════════════════════════════════ -->
   <section class="section" id="ceremony" aria-labelledby="ceremony-title">
     <div class="section-inner">
 
@@ -375,10 +350,8 @@
 
       <div class="event-cards">
 
-        <!-- Ceremonia -->
         <div class="event-card reveal reveal-delay-2">
           <p class="event-type">
-            <!-- Icono flor/iglesia -->
             <svg viewBox="0 0 24 24" stroke-width="1.2" aria-hidden="true">
               <path stroke-linecap="round" stroke-linejoin="round"
                 d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446A9 9 0 1 1 12 3Z" />
@@ -388,15 +361,13 @@
           <h3>Ceremonia Religiosa</h3>
           <div class="event-details">
             <div class="event-detail-row">
-              <!-- Icono calendario -->
               <svg viewBox="0 0 24 24" stroke-width="1.3" aria-hidden="true">
                 <path stroke-linecap="round" stroke-linejoin="round"
                   d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5" />
               </svg>
               <span>Sábado 12 de Septiembre, 2026</span>
-            </div>
+             </div>
             <div class="event-detail-row">
-              <!-- Icono reloj -->
               <svg viewBox="0 0 24 24" stroke-width="1.3" aria-hidden="true">
                 <path stroke-linecap="round" stroke-linejoin="round"
                   d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
@@ -404,23 +375,20 @@
               <span>4:00 PM</span>
             </div>
             <div class="event-detail-row">
-              <!-- Icono ubicación -->
               <svg viewBox="0 0 24 24" stroke-width="1.3" aria-hidden="true">
-                <path stroke-linecap="round" stroke-linejoin="round"
+                 <path stroke-linecap="round" stroke-linejoin="round"
                   d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
                 <path stroke-linecap="round" stroke-linejoin="round"
                   d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
-              </svg>
+               </svg>
               <span>Parroquia San Pedro Nolasco<br>Calle 13 - Ciudad Satélite, Callao - Ventanilla</span>
             </div>
           </div>
         </div>
 
-        <!-- Recepción -->
         <div class="event-card reveal reveal-delay-3">
           <p class="event-type">
-            <!-- Icono copa/celebración -->
-            <svg viewBox="0 0 24 24" stroke-width="1.2" aria-hidden="true">
+             <svg viewBox="0 0 24 24" stroke-width="1.2" aria-hidden="true">
               <path stroke-linecap="round" stroke-linejoin="round"
                 d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09Z" />
             </svg>
@@ -447,7 +415,7 @@
                 <path stroke-linecap="round" stroke-linejoin="round"
                   d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
                 <path stroke-linecap="round" stroke-linejoin="round"
-                  d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
+                   d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
               </svg>
               <span>BM PRODUCCIONES<br>Mz C16 Lote 3 - Ex Zona Comercial Ventanilla</span>
             </div>
@@ -457,12 +425,6 @@
       </div>
     </div>
   </section>
-  <!-- /ceremony -->
-
-
-  <!-- ══════════════════════════════════════════════════════════
-       DRESS CODE
-       ══════════════════════════════════════════════════════════ -->
   <section class="section" id="dresscode" aria-labelledby="dresscode-title">
     <div class="section-inner text-center">
 
@@ -476,22 +438,14 @@
         Formal elegante
       </p>
 
-
-      </div>
+    </div>
 
       <p class="dresscode-note reveal reveal-delay-3">
         Con mucho cariño, el color blanco y sus tonalidades están reservados para la novia. Asimismo, les pedimos amablemente evitar el uso de prendas de color rojo. Apreciamos mucho su detalle al respetar esta elección.
-    
       </p>
 
     </div>
   </section>
-  <!-- /dresscode -->
-
-
-  <!-- ══════════════════════════════════════════════════════════
-       GALERÍA INTERACTIVA
-       ══════════════════════════════════════════════════════════ -->
   <section class="section" id="gallery" aria-labelledby="gallery-title">
     <div class="section-inner">
 
@@ -507,34 +461,29 @@
 
     </div>
 
-    <!-- Grid de galería -->
-    <!-- Para usar con fotos reales: agrega data-src="url-de-tu-foto.jpg" a cada .gallery-item -->
     <div class="gallery-grid reveal">
-
       <div class="gallery-item">
         <div class="g-placeholder"><span class="g-num">1</span></div>
         <div class="g-overlay" aria-hidden="true">
           <div class="g-overlay-icon">
             <svg viewBox="0 0 24 24" stroke-width="1.5">
-              <path stroke-linecap="round" stroke-linejoin="round"
+               <path stroke-linecap="round" stroke-linejoin="round"
                 d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607ZM10.5 7.5v6m3-3h-6" />
             </svg>
           </div>
         </div>
       </div>
-
       <div class="gallery-item">
         <div class="g-placeholder"><span class="g-num">2</span></div>
         <div class="g-overlay" aria-hidden="true">
-          <div class="g-overlay-icon">
+           <div class="g-overlay-icon">
             <svg viewBox="0 0 24 24" stroke-width="1.5">
               <path stroke-linecap="round" stroke-linejoin="round"
                 d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607ZM10.5 7.5v6m3-3h-6" />
             </svg>
           </div>
-        </div>
+       </div>
       </div>
-
       <div class="gallery-item">
         <div class="g-placeholder"><span class="g-num">3</span></div>
         <div class="g-overlay" aria-hidden="true">
@@ -546,7 +495,6 @@
           </div>
         </div>
       </div>
-
       <div class="gallery-item">
         <div class="g-placeholder"><span class="g-num">4</span></div>
         <div class="g-overlay" aria-hidden="true">
@@ -558,39 +506,33 @@
           </div>
         </div>
       </div>
-
       <div class="gallery-item">
-        <div class="g-placeholder"><span class="g-num">5</span></div>
+         <div class="g-placeholder"><span class="g-num">5</span></div>
         <div class="g-overlay" aria-hidden="true">
           <div class="g-overlay-icon">
             <svg viewBox="0 0 24 24" stroke-width="1.5">
               <path stroke-linecap="round" stroke-linejoin="round"
                 d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607ZM10.5 7.5v6m3-3h-6" />
-            </svg>
+             </svg>
           </div>
         </div>
       </div>
-
       <div class="gallery-item">
         <div class="g-placeholder"><span class="g-num">6</span></div>
         <div class="g-overlay" aria-hidden="true">
           <div class="g-overlay-icon">
             <svg viewBox="0 0 24 24" stroke-width="1.5">
               <path stroke-linecap="round" stroke-linejoin="round"
-                d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607ZM10.5 7.5v6m3-3h-6" />
+                 d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607ZM10.5 7.5v6m3-3h-6" />
             </svg>
           </div>
         </div>
       </div>
-
     </div>
-
   </section>
 
-  <!-- Lightbox (modal de galería) -->
   <div id="lightbox" role="dialog" aria-modal="true" aria-label="Foto ampliada">
     <div class="lightbox-inner">
-      <!-- Botón cerrar -->
       <button class="lightbox-close" id="lightbox-close" aria-label="Cerrar">
         <svg viewBox="0 0 24 24" stroke-width="1.5">
           <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
@@ -599,12 +541,6 @@
       <img id="lightbox-img" src="" alt="Foto de Brenda y Leo" />
     </div>
   </div>
-  <!-- /gallery -->
-
-
-  <!-- ══════════════════════════════════════════════════════════
-       UBICACIÓN / MAPA
-       ══════════════════════════════════════════════════════════ -->
   <section class="section" id="location" aria-labelledby="location-title">
     <div class="section-inner">
 
@@ -619,13 +555,12 @@
         <p class="location-address">
           <strong>Ceremonia:</strong><br>
           Parroquia San Pedro Nolasco<br>
-          Parroquia San Pedro Nolasco Calle 13 - Ciudad Satélite, Callao - Ventanilla <br><br>
+           Parroquia San Pedro Nolasco Calle 13 - Ciudad Satélite, Callao - Ventanilla <br><br>
           <strong>Recepción:</strong><br>
           BM PRODUCCIONES<br>
           Mz C16 Lote 3 - Ex Zona Comercial Ventanilla
         </p>
 
-        <!-- Botón para abrir en Google Maps -->
         <a
           class="location-btn"
           href="https://maps.app.goo.gl/XEB6nxpQnGJhGUWHA"
@@ -645,8 +580,7 @@
 
     </div>
 
-    <!-- Mapa de Google Maps incrustado -->
-<div class="map-container reveal">
+    <div class="map-container reveal">
       <div class="map-overlay-label" aria-hidden="true">
         C. 11, Ventanilla 07061
       </div>
@@ -659,10 +593,7 @@
         style="border:0; width: 100%; height: 400px;"
       ></iframe>
     </div>
-  <!-- /location -->
-<!-- ══════════════════════════════════════════════════════════
-       MESA DE REGALOS
-       ══════════════════════════════════════════════════════════ -->
+  </section>
   <section class="section" id="gifts" aria-labelledby="gifts-title">
     <div class="section-inner text-center">
 
@@ -684,7 +615,6 @@
 
       <div class="gifts-grid">
         
-        <!-- Opción 1: Lluvia de sobres / Transferencia -->
         <div class="gift-card reveal reveal-delay-4">
           <div class="gift-icon">
             <svg viewBox="0 0 24 24" stroke-width="1.2" aria-hidden="true">
@@ -693,22 +623,22 @@
           </div>
           <h3>Lluvia de Sobres</h3>
           <p>El mejor regalo es que nos acompañen en nuestro gran día, sus muestras de cariño nos ayudan a construir nuestro nuevo comienzo. Si desean hacernos un obsequio ponemos a su disposición los siguientes datos</p>
-<div class="bank-details">
-  <p><strong>Banco:</strong> BBVA</p>
-  <p><strong>Titular:</strong> Leonardo & Brenda</p>
-  <div class="clabe-row">
-    <p><strong>CLABE:</strong> 012 345 67890123456 7</p>
-    
-    <!-- Icono de copiar sutil -->
-    <button class="icon-copy-btn" onclick="copyToClipboard('012345678901234567', this)" aria-label="Copiar CLABE" title="Copiar CLABE">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-      </svg>
-    </button>
-  </div>
-</div>
-        <!-- Opción 2: Tienda departamental -->
+          <div class="bank-details">
+            <p><strong>Banco:</strong> BBVA</p>
+            <p><strong>Titular:</strong> Leonardo &amp; Brenda</p>
+            <div class="clabe-row">
+              <p><strong>CLABE:</strong> 012 345 67890123456 7</p>
+              
+              <button class="icon-copy-btn" onclick="copyToClipboard('012345678901234567', this)" aria-label="Copiar CLABE" title="Copiar CLABE">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
         <div class="gift-card reveal reveal-delay-5">
           <div class="gift-icon">
             <svg viewBox="0 0 24 24" stroke-width="1.2" aria-hidden="true">
@@ -724,28 +654,21 @@
         </div>
 
       </div>
-
     </div>
   </section>
-  <!-- /gifts -->
-
-  <!-- ══════════════════════════════════════════════════════════
-       RSVP — CONFIRMACIÓN DE ASISTENCIA
-       ══════════════════════════════════════════════════════════ -->
   <section class="section" id="rsvp" aria-labelledby="rsvp-title">
     <div class="section-inner">
 
       <p class="section-tag reveal">Confirmación</p>
 
       <h2 class="section-title reveal reveal-delay-1" id="rsvp-title">
-        Confirma tu<br>
+         Confirma tu<br>
         <em>asistencia</em>
       </h2>
 
       <p class="section-subtitle reveal reveal-delay-2">
         Amamos a los pequeños de la familia, pero en esta ocasión hemos soñado con una celebración exclusivamente para adultos. Agradecemos de corazón su comprensión.
-        Por favor confirma antes del <strong>11 de agosto de 2026</strong>.
-        ¡Tu respuesta es muy importante para nosotros!
+        Por favor confirma antes del <strong>11 de agosto de 2026</strong>. ¡Tu respuesta es muy importante para nosotros!
       </p>
 
       <div class="ornament reveal reveal-delay-3" aria-hidden="true">
@@ -754,13 +677,10 @@
         <div class="ornament-line"></div>
       </div>
 
-      <!-- Mensaje de error -->
       <div id="rsvp-error" class="form-error" role="alert" aria-live="polite"></div>
 
-      <!-- Formulario RSVP -->
       <form id="rsvp-form" class="rsvp-form reveal" novalidate aria-label="Formulario de confirmación de asistencia">
 
-        <!-- Nombre completo -->
         <div class="form-field">
           <label class="form-label" for="field-nombre">Nombre completo *</label>
           <input
@@ -775,27 +695,22 @@
           />
         </div>
 
-        <!-- Asistencia (Radio buttons) -->
         <div class="form-field">
           <p class="form-label" id="asistencia-label">¿Podrás asistir? *</p>
           <div class="radio-group" role="radiogroup" aria-labelledby="asistencia-label">
-
             <label class="radio-option">
               <input type="radio" name="asistencia" value="si" required />
               <span class="radio-custom" aria-hidden="true"></span>
               <span class="radio-text">Con gusto asisto 🥂</span>
             </label>
-
-            <label class="radio-option">
+             <label class="radio-option">
               <input type="radio" name="asistencia" value="no" />
               <span class="radio-custom" aria-hidden="true"></span>
               <span class="radio-text">No podré asistir</span>
             </label>
-
           </div>
         </div>
 
-        <!-- Mensaje / alergias -->
         <div class="form-field">
           <label class="form-label" for="field-mensaje">Mensaje para los novios (opcional)</label>
           <textarea
@@ -808,14 +723,12 @@
           ></textarea>
         </div>
 
-        <!-- Botón de envío -->
         <button type="submit" class="submit-btn" id="rsvp-submit">
           Confirmar Asistencia
         </button>
 
       </form>
 
-      <!-- Estado de éxito (se muestra después del envío) -->
       <div id="rsvp-success" class="rsvp-success" role="status" aria-live="polite">
         <div class="rsvp-success-icon" aria-hidden="true">
           <svg viewBox="0 0 24 24" stroke-width="1.5">
@@ -825,18 +738,12 @@
         <h3>¡Gracias!</h3>
         <p>
           Tu confirmación ha sido recibida con mucho amor.<br>
-          ¡No podemos esperar para celebrar contigo!
+           ¡No podemos esperar para celebrar contigo!
         </p>
       </div>
 
     </div>
   </section>
-  <!-- /rsvp -->
-
-
-  <!-- ══════════════════════════════════════════════════════════
-       MENSAJE FINAL
-       ══════════════════════════════════════════════════════════ -->
   <section id="final" aria-label="Mensaje final de los novios">
 
     <p class="final-pre reveal">Brenda &amp; Leo · 2026</p>
@@ -859,12 +766,6 @@
     </p>
 
   </section>
-  <!-- /final -->
-
-
-  <!-- ══════════════════════════════════════════════════════════
-       FOOTER PREMIUM
-       ══════════════════════════════════════════════════════════ -->
   <footer>
     <div class="footer-inner">
 
@@ -882,10 +783,6 @@
 
     </div>
   </footer>
-  <!-- /footer -->
-
-
-  <!-- Script principal -->
   <script src="script.js"></script>
 
 </body>
