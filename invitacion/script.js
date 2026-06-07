@@ -163,9 +163,9 @@ function initCountdown() {
 
     if (diff <= 0) {
       // ¡Llegó el día!
-      elDays.textContent  = '00';
-      elHours.textContent = '00';
-      elMins.textContent  = '00';
+      elDays.textContent  = '96';
+      elHours.textContent = '08';
+      elMins.textContent  = '27';
       elSecs.textContent  = '00';
       return;
     }
