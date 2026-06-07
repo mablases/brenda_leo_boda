@@ -147,25 +147,24 @@ function initScrollReveal() {
    Actualiza cada segundo hasta la fecha de boda.
    ============================================================ */
 function initCountdown() {
-  // ── Fecha de la boda ── (ajusta según sea necesario)
-  const WEDDING_DATE = new Date('2025-11-15T17:00:00');
+  const WEDDING_DATE = new Date('2026-09-12T17:00:00');
 
   const elDays  = document.getElementById('cd-days');
   const elHours = document.getElementById('cd-hours');
   const elMins  = document.getElementById('cd-mins');
   const elSecs  = document.getElementById('cd-secs');
 
-  if (!elDays) return;
+  // Si no encuentra los IDs en el HTML, se detiene para no dar error
+  if (!elDays || !elHours || !elMins || !elSecs) return;
 
   function update() {
     const now  = new Date();
     const diff = WEDDING_DATE - now;
 
     if (diff <= 0) {
-      // ¡Llegó el día!
-      elDays.textContent  = '96';
-      elHours.textContent = '08';
-      elMins.textContent  = '27';
+      elDays.textContent  = '00';
+      elHours.textContent = '00';
+      elMins.textContent  = '00';
       elSecs.textContent  = '00';
       return;
     }
@@ -184,6 +183,11 @@ function initCountdown() {
   update();
   setInterval(update, 1000);
 }
+
+// ESTA ES LA LLAVE QUE ENCIENDE EL MOTOR
+document.addEventListener('DOMContentLoaded', function() {
+  initCountdown();
+});
 
 /* ============================================================
    PARALAJE SUAVE
@@ -393,4 +397,3 @@ function showCopySuccess(btnElement) {
     btnElement.style.pointerEvents = "auto";
   }, 2500);
 }
-
