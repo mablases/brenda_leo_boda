@@ -1,213 +1,41 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <meta name="theme-color" content="#EBE3D8" />
-  <title>Brenda & Leo — Nuestra Boda</title>
+        <!-- Borde dorado del sobre -->
+        <rect x="1" y="41" width="338" height="198" rx="3" fill="none" stroke="url(#goldGrad)" stroke-width="0.8" opacity="0.7" />
 
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
+        <!-- Pliegues laterales inferiores (triángulos) -->
+        <path d="M 0 80 L 170 165 L 340 80 L 340 240 L 0 240 Z" fill="#C8B89A" opacity="0.35" />
 
-  <style>
-    /* =========================================
-       ESTILOS BASE
-       ========================================= */
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      background-color: #f7f4ef; /* Fondo general de la página */
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      font-family: 'Playfair Display', serif;
-      overflow: hidden;
-    }
-
-    /* =========================================
-       CONTENEDOR DEL SOBRE
-       ========================================= */
-    #envelope-screen {
-      position: relative;
-      width: 100%;
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      cursor: pointer;
-    }
-
-    .envelope-wrap {
-      position: relative;
-      width: 90%;
-      max-width: 700px;
-      perspective: 1200px; /* Importante para el efecto 3D de la tapa */
-      z-index: 10;
-    }
-
-    .envelope-svg {
-      width: 100%;
-      height: auto;
-      filter: drop-shadow(0px 15px 25px rgba(0,0,0,0.15));
-    }
-
-    /* =========================================
-       ANIMACIONES
-       ========================================= */
-    /* La tapa del sobre */
-    #envelope-flap {
-      transform-origin: center 0; /* Gira desde la parte superior */
-      transition: transform 1.2s cubic-bezier(0.4, 0.0, 0.2, 1);
-      transform-style: preserve-3d;
-    }
-
-    /* El sello de lacre */
-    #wax-seal {
-      transition: opacity 0.4s ease, transform 0.6s ease;
-      transform-origin: center;
-    }
-
-    /* Clases que se añaden al hacer clic */
-    .is-open #envelope-flap {
-      transform: rotateX(180deg);
-    }
-
-    .is-open #wax-seal {
-      opacity: 0;
-      transform: scale(1.5);
-    }
-
-    /* =========================================
-       TEXTOS Y BOTONES
-       ========================================= */
-    .envelope-tagline {
-      text-align: center;
-      margin-top: 30px;
-      color: #8c735d;
-      font-size: 1.1rem;
-      letter-spacing: 2px;
-      opacity: 0.8;
-      transition: opacity 0.5s ease;
-    }
-
-    .is-open ~ .envelope-tagline {
-      opacity: 0;
-    }
-    
-    /* Pequeña animación de latido para invitar al clic */
-    @keyframes pulse {
-      0% { transform: scale(1); opacity: 1; }
-      50% { transform: scale(1.03); opacity: 0.9; }
-      100% { transform: scale(1); opacity: 1; }
-    }
-    .envelope-wrap {
-      animation: pulse 3s infinite;
-    }
-    .is-open.envelope-wrap {
-      animation: none;
-    }
-
-  </style>
-</head>
-<body>
-
-  <div id="envelope-screen" onclick="openEnvelope()" aria-label="Toca para abrir la invitación">
-    <div class="envelope-wrap" id="envelope-container">
-
-      <svg class="envelope-svg" viewBox="0 0 800 530" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <defs>
-          <linearGradient id="paperGrad" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stop-color="#F2EBE1" />
-            <stop offset="100%" stop-color="#E5D8C5" />
-          </linearGradient>
-
-          <filter id="shadow-flap" x="-10%" y="-10%" width="120%" height="120%">
-            <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="rgba(0,0,0,0.15)" />
-          </filter>
-          <filter id="shadow-seal" x="-20%" y="-20%" width="140%" height="140%">
-            <feDropShadow dx="2" dy="4" stdDeviation="4" flood-color="rgba(0,0,0,0.4)" />
-          </filter>
-          <filter id="inner-shadow-seal">
-            <feOffset dx="0" dy="2"/>
-            <feGaussianBlur stdDeviation="2" result="offset-blur"/>
-            <feComposite operator="out" in="SourceGraphic" in2="offset-blur" result="inverse"/>
-            <feFlood flood-color="black" flood-opacity="0.3" result="color"/>
-            <feComposite operator="in" in="color" in2="inverse" result="shadow"/>
-            <feComposite operator="over" in="shadow" in2="SourceGraphic"/>
-          </filter>
-        </defs>
-
-        <rect x="0" y="0" width="800" height="530" fill="#D4C5B0" />
-
-        <path d="M 0 0 L 400 280 L 800 0 L 800 530 L 0 530 Z" fill="url(#paperGrad)" stroke="#D8C9B4" stroke-width="2"/>
-        
-        <g id="decorations">
-          <text x="210" y="275" font-family="'Alex Brush', cursive" font-size="65" fill="#6B543D" text-anchor="middle">Brenda</text>
-          <text x="590" y="275" font-family="'Alex Brush', cursive" font-size="65" fill="#6B543D" text-anchor="middle">&amp; Leo</text>
-
-          <circle cx="100" cy="150" r="2.5" fill="#C5A47E"/>
-          <circle cx="150" cy="180" r="1.5" fill="#C5A47E"/>
-          <circle cx="280" cy="380" r="2" fill="#C5A47E"/>
-          <circle cx="680" cy="120" r="2.5" fill="#C5A47E"/>
-          <circle cx="720" cy="350" r="2" fill="#C5A47E"/>
-          <circle cx="500" cy="420" r="1.5" fill="#C5A47E"/>
-          
-          <path d="M 50 480 Q 150 400 250 480" fill="none" stroke="#9FA68A" stroke-width="3" stroke-linecap="round"/>
-          <path d="M 750 480 Q 650 400 550 480" fill="none" stroke="#9FA68A" stroke-width="3" stroke-linecap="round"/>
-          <path d="M 50 50 Q 150 150 250 50" fill="none" stroke="#D19E92" stroke-width="2" stroke-linecap="round"/>
-          <path d="M 750 50 Q 650 150 550 50" fill="none" stroke="#D19E92" stroke-width="2" stroke-linecap="round"/>
+        <!-- Tapa del sobre (se animará con JS/CSS) -->
+        <g id="envelope-flap" style="transform-origin: 170px 40px; transform: rotateX(0deg);">
+          <path d="M 0 40 L 170 145 L 340 40 Z" fill="#D6C9B0" />
+          <path d="M 0 40 L 170 145 L 340 40" fill="none" stroke="url(#goldGrad)" stroke-width="0.8" opacity="0.6" />
         </g>
 
-        <g id="envelope-flap">
-          <path d="M 0 0 L 400 280 L 800 0 Z" fill="url(#paperGrad)" filter="url(#shadow-flap)"/>
-          
-          <path d="M 20 15 L 400 265 L 780 15" fill="none" stroke="#D8C9B4" stroke-width="1.5"/>
-        </g>
-
-        <g id="wax-seal" transform="translate(400, 275)">
-          <path d="M 0 -45 C 25 -45 45 -25 45 0 C 45 25 25 45 0 45 C -25 45 -45 25 -45 0 C -45 -25 -25 -45 0 -45 Z" 
-                fill="#A6432D" filter="url(#shadow-seal)"/>
-          
-          <path d="M -2 -42 C 20 -43 38 -25 42 -5 C 44 15 32 35 15 42 C -5 50 -30 35 -40 15 C -48 -5 -25 -40 -2 -42 Z" 
-                fill="#B84F38"/>
-                
-          <circle cx="0" cy="0" r="30" fill="#A6432D" filter="url(#inner-shadow-seal)"/>
-          
-          <text x="0" y="8" font-family="'Playfair Display', serif" font-size="24" font-weight="600" font-style="italic" fill="#E39485" text-anchor="middle" letter-spacing="1">B&amp;L</text>
-        </g>
+        <!-- Sello central con monograma -->
+        <circle cx="170" cy="155" r="28" fill="#3E4E30" />
+        <circle cx="170" cy="155" r="25" fill="none" stroke="url(#goldGrad)" stroke-width="0.8" />
+        <text x="170" y="161" font-family="'Playfair Display', serif" font-size="14" font-style="italic"
+              fill="#EDD9A3" text-anchor="middle" letter-spacing="2">B&amp;L</text>
       </svg>
 
-    </div>
-    
-    <p class="envelope-tagline">Toca el sobre para abrir</p>
-  </div>
+      <!-- Tagline superior -->
+      <p class="envelope-tagline">Una invitación especial</p>
 
-  <script>
-    // Función simple para activar la animación
-    function openEnvelope() {
-      const envelope = document.getElementById('envelope-container');
-      
-      // Evita que se reinicie si ya está abierto
-      if (!envelope.classList.contains('is-open')) {
-        envelope.classList.add('is-open');
-        
-        // Aquí podrías añadir un temporizador para redirigir 
-        // a la invitación principal después de la animación:
-        // setTimeout(() => {
-        //   window.location.href = 'invitacion.html';
-        // }, 1500); 
-      }
-    }
-  </script>
-</body>
-</html>
+      <!-- Botón de apertura -->
+      <div class="envelope-open-btn">
+        <span>Toca para abrir</span>
+        <div class="pulse-ring" aria-hidden="true">
+          <!-- Icono de dedo / toque -->
+          <svg viewBox="0 0 24 24" stroke-width="1.5">
+            <path stroke-linecap="round" stroke-linejoin="round"
+              d="M15.042 21.672 13.684 16.6m0 0-2.51 2.225.569-9.47 5.227 7.917-3.286-.672ZM12 2.25V4.5m5.834.166-1.591 1.591M20.25 10.5H18M7.757 14.743l-1.59 1.59M6 10.5H3.75m4.007-4.243-1.59-1.59" />
+          </svg>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <!-- /envelope-screen -->
+
 
   <!-- ══════════════════════════════════════════════════════════
        HERO PRINCIPAL
