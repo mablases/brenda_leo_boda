@@ -1,23 +1,30 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+  <!-- ============================================================
+       BRENDA & LEO — Invitación de Boda Premium
+       index.html
+       ============================================================ -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <meta name="theme-color" content="#3E4E30" />
   <meta name="description" content="Brenda & Leo — Los invitamos a celebrar el inicio de nuestra historia juntos." />
 
+  <!-- Open Graph (para compartir en redes) -->
   <meta property="og:title"       content="Brenda & Leo — Nuestra Boda" />
   <meta property="og:description" content="Acompáñanos a celebrar este momento especial." />
   <meta property="og:type"        content="website" />
 
-  <title>Brenda  Leo — Nuestra Boda</title>
+  <title>Brenda &amp; Leo — Nuestra Boda</title>
 
+  <!-- Google Fonts (Añadida la fuente Alex Brush para los nombres del sobre) -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&display=swap" rel="stylesheet" />
 
   <link rel="stylesheet" href="style.css" />
 
+  <!-- Estilos inyectados específicamente para asegurar la animación del nuevo sobre -->
   <style>
     .envelope-wrap {
       perspective: 1200px; /* Necesario para el efecto 3D */
@@ -49,12 +56,17 @@
 
 <body>
 
+  <!-- ══════════════════════════════════════════════════════════
+       PANTALLA DE APERTURA — SOBRE ANIMADO
+       ══════════════════════════════════════════════════════════ -->
   <div id="envelope-screen" aria-label="Toca para abrir la invitación">
 
+    <!-- Partículas flotantes decorativas -->
     <div class="envelope-particles"></div>
 
     <div class="envelope-wrap" id="envelope-container">
 
+      <!-- SVG DEL SOBRE SEGURO (Sin filtros complejos) -->
       <svg class="envelope-svg" viewBox="0 0 800 530" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
         <defs>
           <linearGradient id="paperGrad" x1="0" y1="0" x2="1" y2="1">
@@ -76,7 +88,8 @@
         
         <g id="decorations">
           <text x="210" y="275" font-family="'Alex Brush', cursive" font-size="65" fill="#6B543D" text-anchor="middle">Brenda</text>
-          <text x="590" y="275" font-family="'Alex Brush', cursive" font-size="65" fill="#6B543D" text-anchor="middle">&amp; Leo</text>
+          <!-- Se eliminó el "&" aquí a petición del usuario -->
+          <text x="590" y="275" font-family="'Alex Brush', cursive" font-size="65" fill="#6B543D" text-anchor="middle">Leo</text>
 
           <circle cx="100" cy="150" r="2.5" fill="#C5A47E"/>
           <circle cx="150" cy="180" r="1.5" fill="#C5A47E"/>
@@ -91,11 +104,13 @@
           <path d="M 750 50 Q 650 150 550 50" fill="none" stroke="#D19E92" stroke-width="2" stroke-linecap="round"/>
         </g>
 
+        <!-- TAPA DEL SOBRE -->
         <g id="envelope-flap">
           <path d="M 0 0 L 400 280 L 800 0 Z" fill="url(#paperGrad)" filter="url(#shadow-flap)"/>
           <path d="M 20 15 L 400 265 L 780 15" fill="none" stroke="#D8C9B4" stroke-width="1.5"/>
         </g>
 
+        <!-- SELLO DE LACRE -->
         <g id="wax-seal" transform="translate(400, 275)">
           <path d="M 0 -45 C 25 -45 45 -25 45 0 C 45 25 25 45 0 45 C -25 45 -45 25 -45 0 C -45 -25 -25 -45 0 -45 Z" fill="#A6432D" filter="url(#shadow-seal)"/>
           <path d="M -2 -42 C 20 -43 38 -25 42 -5 C 44 15 32 35 15 42 C -5 50 -30 35 -40 15 C -48 -5 -25 -40 -2 -42 Z" fill="#B84F38"/>
@@ -105,11 +120,14 @@
         </g>
       </svg>
 
+      <!-- Tagline superior -->
       <p class="envelope-tagline" style="margin-top: 15px;">Una invitación especial</p>
 
+      <!-- Botón de apertura -->
       <div class="envelope-open-btn" onclick="document.getElementById('envelope-container').classList.add('is-open')" style="z-index: 20; position: relative;">
         <span>Toca para abrir</span>
         <div class="pulse-ring" aria-hidden="true">
+          <!-- Icono de dedo / toque -->
           <svg viewBox="0 0 24 24" stroke-width="1.5" style="width: 24px; height: 24px; fill: none; stroke: currentColor;">
             <path stroke-linecap="round" stroke-linejoin="round"
               d="M15.042 21.672 13.684 16.6m0 0-2.51 2.225.569-9.47 5.227 7.917-3.286-.672ZM12 2.25V4.5m5.834.166-1.591 1.591M20.25 10.5H18M7.757 14.743l-1.59 1.59M6 10.5H3.75m4.007-4.243-1.59-1.59" />
@@ -119,15 +137,25 @@
 
     </div>
   </div>
+  <!-- /envelope-screen -->
+
+
+  <!-- ══════════════════════════════════════════════════════════
+       HERO PRINCIPAL
+       ══════════════════════════════════════════════════════════ -->
   <section id="hero" aria-label="Portada de la invitación">
 
+    <!-- Fondo con efecto parallax -->
     <div class="hero-bg loaded" aria-hidden="true">
     </div>
 
+    <!-- Overlay con gradiente -->
     <div class="hero-overlay" aria-hidden="true"></div>
 
+    <!-- Marco decorativo dorado -->
     <div class="hero-frame" aria-hidden="true"></div>
 
+    <!-- Contenido principal del hero -->
     <div class="hero-content">
       <p class="hero-pre">Con amor &amp; alegría</p>
 
@@ -144,12 +172,19 @@
       <p class="hero-location"></p>
     </div>
 
+    <!-- Indicador de scroll -->
     <div class="scroll-indicator" aria-hidden="true">
       <span>Descubre</span>
       <div class="scroll-line"></div>
     </div>
 
   </section>
+  <!-- /hero -->
+
+
+  <!-- ══════════════════════════════════════════════════════════
+       INTRODUCCIÓN / INVITACIÓN
+       ══════════════════════════════════════════════════════════ -->
   <section class="section" id="intro" aria-labelledby="intro-title">
     <div class="section-inner text-center">
 
@@ -176,6 +211,12 @@
 
     </div>
   </section>
+  <!-- /intro -->
+
+
+  <!-- ══════════════════════════════════════════════════════════
+       CUENTA REGRESIVA
+       ══════════════════════════════════════════════════════════ -->
   <section class="section" id="countdown" aria-labelledby="countdown-title">
     <div class="section-inner text-center">
 
@@ -185,6 +226,7 @@
         El gran día se <em>acerca</em>
       </h2>
 
+      <!-- Grid de la cuenta regresiva -->
       <div class="countdown-grid" role="timer" aria-label="Cuenta regresiva para la boda">
 
         <div class="countdown-item reveal reveal-delay-1">
@@ -210,6 +252,12 @@
       </div>
     </div>
   </section>
+  <!-- /countdown -->
+
+
+  <!-- ══════════════════════════════════════════════════════════
+       FOTOGRAFÍA EDITORIAL
+       ══════════════════════════════════════════════════════════ -->
   <section id="editorial" aria-label="Galería editorial">
     <div class="editorial-grid">
 
@@ -236,6 +284,12 @@
 
     </div>
   </section>
+  <!-- /editorial -->
+
+
+  <!-- ══════════════════════════════════════════════════════════
+       HISTORIA DE AMOR
+       ══════════════════════════════════════════════════════════ -->
   <section class="section" id="story" aria-labelledby="story-title">
     <div class="section-inner">
 
@@ -332,6 +386,12 @@
       </div>
     </div>
   </section>
+  <!-- /story -->
+
+
+  <!-- ══════════════════════════════════════════════════════════
+       CEREMONIA & RECEPCIÓN
+       ══════════════════════════════════════════════════════════ -->
   <section class="section" id="ceremony" aria-labelledby="ceremony-title">
     <div class="section-inner">
 
@@ -425,6 +485,12 @@
       </div>
     </div>
   </section>
+  <!-- /ceremony -->
+
+
+  <!-- ══════════════════════════════════════════════════════════
+       DRESS CODE
+       ══════════════════════════════════════════════════════════ -->
   <section class="section" id="dresscode" aria-labelledby="dresscode-title">
     <div class="section-inner text-center">
 
@@ -446,6 +512,12 @@
 
     </div>
   </section>
+  <!-- /dresscode -->
+
+
+  <!-- ══════════════════════════════════════════════════════════
+       GALERÍA INTERACTIVA
+       ══════════════════════════════════════════════════════════ -->
   <section class="section" id="gallery" aria-labelledby="gallery-title">
     <div class="section-inner">
 
@@ -531,6 +603,7 @@
     </div>
   </section>
 
+  <!-- Lightbox (modal de galería) -->
   <div id="lightbox" role="dialog" aria-modal="true" aria-label="Foto ampliada">
     <div class="lightbox-inner">
       <button class="lightbox-close" id="lightbox-close" aria-label="Cerrar">
@@ -541,6 +614,12 @@
       <img id="lightbox-img" src="" alt="Foto de Brenda y Leo" />
     </div>
   </div>
+  <!-- /gallery -->
+
+
+  <!-- ══════════════════════════════════════════════════════════
+       UBICACIÓN / MAPA
+       ══════════════════════════════════════════════════════════ -->
   <section class="section" id="location" aria-labelledby="location-title">
     <div class="section-inner">
 
@@ -580,6 +659,7 @@
 
     </div>
 
+    <!-- Mapa de Google Maps incrustado -->
     <div class="map-container reveal">
       <div class="map-overlay-label" aria-hidden="true">
         C. 11, Ventanilla 07061
@@ -594,6 +674,11 @@
       ></iframe>
     </div>
   </section>
+  <!-- /location -->
+
+  <!-- ══════════════════════════════════════════════════════════
+       MESA DE REGALOS
+       ══════════════════════════════════════════════════════════ -->
   <section class="section" id="gifts" aria-labelledby="gifts-title">
     <div class="section-inner text-center">
 
@@ -656,6 +741,11 @@
       </div>
     </div>
   </section>
+  <!-- /gifts -->
+
+  <!-- ══════════════════════════════════════════════════════════
+       RSVP — CONFIRMACIÓN DE ASISTENCIA
+       ══════════════════════════════════════════════════════════ -->
   <section class="section" id="rsvp" aria-labelledby="rsvp-title">
     <div class="section-inner">
 
@@ -744,6 +834,12 @@
 
     </div>
   </section>
+  <!-- /rsvp -->
+
+
+  <!-- ══════════════════════════════════════════════════════════
+       MENSAJE FINAL
+       ══════════════════════════════════════════════════════════ -->
   <section id="final" aria-label="Mensaje final de los novios">
 
     <p class="final-pre reveal">Brenda &amp; Leo · 2026</p>
@@ -766,6 +862,12 @@
     </p>
 
   </section>
+  <!-- /final -->
+
+
+  <!-- ══════════════════════════════════════════════════════════
+       FOOTER PREMIUM
+       ══════════════════════════════════════════════════════════ -->
   <footer>
     <div class="footer-inner">
 
@@ -783,6 +885,9 @@
 
     </div>
   </footer>
+  <!-- /footer -->
+
+  <!-- Script principal -->
   <script src="script.js"></script>
 
 </body>
