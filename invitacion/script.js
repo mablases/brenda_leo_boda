@@ -213,10 +213,11 @@ function initParallax() {
 }
 
 /* ============================================================
-   GALERÍA CON LIGHTBOX
+   GALERÍA CON LIGHTBOX (ACTUALIZADA PARA LEER ETIQUETAS IMG)
    ============================================================ */
 function initGallery() {
-  const items    = document.querySelectorAll('.gallery-item[data-src]');
+  // Ahora buscamos todos los elementos de la galería, sin importar si tienen data-src
+  const items    = document.querySelectorAll('.gallery-item');
   const lightbox = document.getElementById('lightbox');
   const lbImg    = document.getElementById('lightbox-img');
   const lbClose  = document.getElementById('lightbox-close');
@@ -226,9 +227,12 @@ function initGallery() {
   // Abrir lightbox
   items.forEach(item => {
     item.addEventListener('click', () => {
-      const src = item.dataset.src;
-      if (!src) return;
-      lbImg.src = src;
+      // Buscar la etiqueta <img ...> que está dentro de este cuadro
+      const img = item.querySelector('img');
+      // Si no hay imagen o no tiene 'src', no hacer nada
+      if (!img || !img.src) return;
+      
+      lbImg.src = img.src; // Pasar la foto real al lightbox
       lightbox.classList.add('open');
       document.body.style.overflow = 'hidden';
     });
@@ -347,10 +351,10 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     target.scrollIntoView({ behavior: 'smooth', block: 'start' });
   });
 });
+
 /* ============================================================
    FUNCIÓN: COPIAR PORTAPAPELES (MESA DE REGALOS)
    ============================================================ */
-
 function copyToClipboard(text, btnElement) {
   // Verifica si el navegador soporta la API moderna del portapapeles
   if (navigator.clipboard && window.isSecureContext) {
