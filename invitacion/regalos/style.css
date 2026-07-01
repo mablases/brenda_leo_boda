@@ -1,1 +1,251 @@
+/* Variables de color y tipografía (Estilo editorial y cálido) */
+:root {
+    --color-fondo: #FDFBF7;
+    --color-texto: #2C2A28;
+    --color-acento: #A89078;
+    --color-acento-hover: #8A735C;
+    --color-borde: #E5E0D8;
+    --color-reservado: #9E9E9E;
+    
+    --fuente-titulos: 'Playfair Display', serif;
+    --fuente-textos: 'Lato', sans-serif;
+}
 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--fuente-textos);
+    background-color: var(--color-fondo);
+    color: var(--color-texto);
+    line-height: 1.6;
+    padding-bottom: 4rem;
+}
+
+/* Encabezado */
+.header {
+    text-align: center;
+    padding: 4rem 1.5rem 3rem;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.header h1 {
+    font-family: var(--fuente-titulos);
+    font-size: 2.5rem;
+    font-weight: 400;
+    margin-bottom: 1rem;
+    color: var(--color-texto);
+}
+
+.header p {
+    color: #666;
+    font-weight: 300;
+}
+
+/* Contenedor Principal */
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+/* Lista de Regalos */
+.grid-regalos {
+    display: grid;
+    gap: 1.5rem;
+}
+
+.regalo-card {
+    background: #fff;
+    border: 1px solid var(--color-borde);
+    padding: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 4px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.regalo-card:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+}
+
+.regalo-info h3 {
+    font-family: var(--fuente-titulos);
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+}
+
+.regalo-categoria {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #888;
+}
+
+/* Botones y Estados */
+.btn-reservar {
+    background-color: var(--color-acento);
+    color: #fff;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    font-family: var(--fuente-textos);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    border-radius: 2px;
+}
+
+.btn-reservar:hover {
+    background-color: var(--color-acento-hover);
+}
+
+.badge-reservado {
+    color: var(--color-reservado);
+    font-style: italic;
+    font-family: var(--fuente-titulos);
+    font-size: 1.1rem;
+}
+
+.loading {
+    text-align: center;
+    font-style: italic;
+    color: #666;
+}
+
+/* Modal */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+    padding: 1.5rem;
+}
+
+.modal.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.modal-content {
+    background: #fff;
+    padding: 2.5rem;
+    width: 100%;
+    max-width: 450px;
+    position: relative;
+    border-radius: 4px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+.btn-close {
+    position: absolute;
+    top: 1rem;
+    right: 1.5rem;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #666;
+}
+
+.modal-content h2 {
+    font-family: var(--fuente-titulos);
+    font-weight: 400;
+    margin-bottom: 0.5rem;
+}
+
+.regalo-destacado {
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    color: var(--color-acento);
+}
+
+/* Formulario */
+.form-group {
+    margin-bottom: 1.25rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--color-borde);
+    font-family: var(--fuente-textos);
+    background-color: #FAFAFA;
+    border-radius: 2px;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--color-acento);
+    background-color: #fff;
+}
+
+.btn-submit {
+    width: 100%;
+    background-color: var(--color-texto);
+    color: #fff;
+    border: none;
+    padding: 1rem;
+    font-family: var(--fuente-textos);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    margin-top: 1rem;
+    transition: background-color 0.3s;
+}
+
+.btn-submit:hover {
+    background-color: #000;
+}
+
+.btn-submit:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.form-status {
+    margin-top: 1rem;
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+.status-error { color: #D32F2F; }
+.status-success { color: #388E3C; }
+
+/* Responsive */
+@media (max-width: 600px) {
+    .regalo-card {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+    
+    .btn-reservar {
+        width: 100%;
+    }
+}
