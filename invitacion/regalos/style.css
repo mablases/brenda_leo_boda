@@ -28,3 +28,13 @@ body { font-family: 'Lato', sans-serif; background-color: var(--color-fondo); co
 
 .regalo-card h3 { font-family: 'Playfair Display', serif; margin-bottom: 0.5rem; }
 .regalo-card p { font-size: 0.9rem; color: #666; font-style: italic; }
+
+.category-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    text-align: center;
+    margin: 3rem 0 2rem;
+    color: var(--color-texto);
+    border-bottom: 1px solid var(--color-borde);
+    padding-bottom: 0.5rem;
+}
