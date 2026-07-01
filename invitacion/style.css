@@ -1586,3 +1586,65 @@ body::after {
 .foto-editorial-wrap:hover .foto-principal {
   transform: scale(1.02);
 }
+/* ==========================================================================
+   ESTILOS ADICIONALES PARA MESA DE REGALOS
+   ========================================================================== */
+
+/* Estilo para el botón editorial del enlace a la lista */
+.btn-regalos-editorial {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 12px 30px;
+    background-color: transparent;
+    border: 1px solid var(--color-acento, #A89078);
+    color: var(--color-texto, #2C2A28);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 0.8rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border-radius: 2px;
+}
+
+.btn-regalos-editorial:hover {
+    background-color: var(--color-acento, #A89078);
+    color: #fff;
+    cursor: pointer;
+}
+
+/* Ajuste para las tarjetas de regalos para que sean simétricas */
+.gifts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.gift-card {
+    padding: 2rem;
+    border: 1px solid #E5E0D8;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.gift-icon {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 1.5rem;
+    color: var(--color-acento, #A89078);
+}
+
+.bank-details {
+    margin-top: 1.5rem;
+    font-size: 0.9rem;
+    line-height: 1.8;
+}
+
+/* Asegurar que los iconos de la mesa se vean bien */
+.gift-card svg {
+    width: 100%;
+    height: 100%;
+}
