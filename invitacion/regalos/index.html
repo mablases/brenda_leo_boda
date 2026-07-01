@@ -1,1 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mesa de Regalos</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Lato:wght@300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+    <header class="header">
+        <h1>Mesa de Regalos</h1>
+        <p>Agradecemos profundamente tu deseo de acompañarnos en esta nueva etapa.</p>
+    </header>
 
+    <main class="container">
+        <div id="lista-regalos" class="grid-regalos">
+            <p class="loading">Cargando la lista de regalos...</p>
+        </div>
+    </main>
+
+    <div id="modal-reserva" class="modal hidden">
+        <div class="modal-content">
+            <button id="cerrar-modal" class="btn-close">&times;</button>
+            <h2>Reservar Regalo</h2>
+            <p id="nombre-regalo-modal" class="regalo-destacado"></p>
+            
+            <form id="form-reserva">
+                <input type="hidden" id="regalo-id">
+                
+                <div class="form-group">
+                    <label for="nombre">Nombre completo *</label>
+                    <input type="text" id="nombre" required placeholder="Ej. María Pérez">
+                </div>
+                
+                <div class="form-group">
+                    <label for="telefono">Número de teléfono *</label>
+                    <input type="tel" id="telefono" required placeholder="Ej. +51 999 888 777">
+                </div>
+                
+                <div class="form-group">
+                    <label for="mensaje">Mensaje (opcional)</label>
+                    <textarea id="mensaje" rows="3" placeholder="Déjanos unas palabras..."></textarea>
+                </div>
+                
+                <button type="submit" class="btn-submit" id="btn-confirmar">Confirmar reserva</button>
+                <p id="form-mensaje" class="form-status"></p>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
