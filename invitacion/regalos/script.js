@@ -1,5 +1,5 @@
 // Configuración de Supabase
-const supabaseUrl = 'TU_URL_DE_SUPABASE';
+const supabaseUrl = 'https://wqzavjzfoxzjrijccteh.supabase.co';
 const supabaseKey = 'TU_ANON_KEY';
 const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
 
